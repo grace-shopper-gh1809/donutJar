@@ -1,5 +1,16 @@
+
+* {
+  box-sizing: border-box;
+  font-family: arial, sans-serif;
+}
+
 body {
   font-family: sans-serif;
+  background: linear-gradient(#e269ac, #d1aac9);
+  height: 100%;
+  margin: 0;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 a {
@@ -8,6 +19,20 @@ a {
 
 label {
   display: block;
+  color: rgba(59, 5, 46, 0.863);
+}
+
+nav {
+  align-items: center;
+  color: rgb(224, 131, 178);
+  background-color: rgba(59, 5, 46, 0.863);
+  display: flex;
+  height: 4em;
+  padding: 0.5px;
+  padding: 1em;
+  width: 100vw;
+  position: fixed;
+  z-index: 2
 }
 
 nav a {
@@ -15,7 +40,57 @@ nav a {
   margin: 1em;
 }
 
+h1 {
+  size: 20em;
+}
+
+nav .home {
+  flex: 0 0 3;
+  color: rgb(224, 131, 178);
+  float: left;
+  height: 1.5em;
+  margin: 0 1.5em 0 0;
+  text-decoration: none;
+  font-size: 1em;
+  padding: 1em;
+}
+
+nav .signin {
+  flex: 0 0 3;
+  float: right;
+  height: 1.5em;
+  margin: 0 1.5em 0 0;
+  color: rgb(224, 131, 178);
+  text-decoration: none;
+  font-size: 1em;
+  padding: 1em;
+}
+
 form div {
   margin: 1em;
   display: inline-block;
+}
+
+.email {
+  margin: 1em;
+  display: inline-block;
+  /* flex-direction: column; */
+  justify-content: center;
+  position: relative;
+  padding-top: 5em;
+}
+
+.password {
+  margin: 1em;
+  display: inline-block;
+  /* flex-direction: column; */
+  justify-content: center;
+  position: relative;
+  padding-top: 5em;
+}
+
+.google {
+  color: rgba(59, 5, 46, 0.863);
+  justify-content: center;
+  margin: 1em;
 }
