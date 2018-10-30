@@ -2,11 +2,12 @@ import React, {Component} from 'react'
 import {withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {fetchProducts} from '../store/product'
+import ProductList from './ProductList'
 
 
 
 
-export class ProductList extends Component {
+export class AllProducts extends Component {
 
   componentDidMount() {
     this.props.fetchProducts()
@@ -38,4 +39,4 @@ const mapDispatchToProps = (dispatch) => ({
 }
 )
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ProductList))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AllProducts))
