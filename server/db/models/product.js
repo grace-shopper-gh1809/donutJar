@@ -26,7 +26,7 @@ const Product = db.define('product', {
   category: {
     type: Sequelize.STRING,
     validate: {
-      isIn: [['Round', 'Square']],
+      isIn: [['Round', 'Holey-Donut']],
     }
   }
 })
