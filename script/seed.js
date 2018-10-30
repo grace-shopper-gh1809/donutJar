@@ -1,18 +1,152 @@
 'use strict'
 
-const db = require('../server/db')
-const {User} = require('../server/db/models')
+// const db = require('../server/db')
+const {db, User, Product, Order, Review} = require('../server/db/models')
+
+const users = [
+  {email: 'cody@email.com', password: '123'},
+  {email: 'murphy@email.com', password: '123'},
+  {email: 'david@email.com', password: 'hello'},
+  {email: 'karen@email.com', password: 'hungry'}
+]
+
+const products = [
+  {
+    title: 'Mini Sprinkles',
+    description: 'Mini donut with sprinkles',
+    price: 2,
+    inventory: 7,
+    imageUrl: '/MiniSprink.png',
+    category: 'Holey-Donut'
+  },
+  {
+    title: 'Birthday Batter',
+    description: 'Doughtnut cake batter and sprinkles',
+    price: 3,
+    inventory: 5,
+    imageUrl: '/Birthday-Batter.png',
+    category: 'Round'
+  },
+  {
+    title: 'Blueberry Cake',
+    description: 'Blueberry cake in doughnut form',
+    price: 3,
+    inventory: 5,
+    imageUrl: '/Blueberry-Cake.png',
+    category: 'Holey-Donut'
+  },
+  {
+    title: 'Chocolate Cake',
+    description: 'Chocolate cake doughnut',
+    price: 3,
+    inventory: 5,
+    imageUrl: '/Chocolate-Cake.png',
+    category: 'Holey-Donut'
+  },
+  {
+    title: 'Glazed Kreme',
+    description: 'Cream-filled doughnut',
+    price: 3,
+    inventory: 5,
+    imageUrl: '/Glazed-Kreme-Filled.png',
+    category: 'Round'
+  },
+  {
+    title: 'Chocolate Iced Ring',
+    description: 'Chocolate glazed donut',
+    price: 3,
+    inventory: 5,
+    imageUrl: '/Chocolate-Cake.png',
+    category: 'Holey-Donut'
+  },
+  {
+    title: 'New York Cheesecake',
+    description: 'World famous cheesecake in doughnut form',
+    price: 4,
+    inventory: 12,
+    imageUrl: '/New-York-Cheesecake.png',
+    category: 'Round'
+  },
+  {
+    title: 'Strawberry Iced Ring',
+    description: 'Strawberry glazed doughnut',
+    price: 2.5,
+    inventory: 10,
+    imageUrl: '/Strawberry-iced-Ring.png',
+    category: 'Round'
+  }
+]
+
+const orders = [
+  {
+    orderStatus: 'Processing',
+    quantity: 5,
+    price: 2,
+    productId: 1,
+    userId: 2
+  },
+  {
+    orderStatus: 'Completed',
+    quantity: 3,
+    price: 6,
+    productId: 3,
+    userId: 1
+  },
+  {
+    orderStatus: 'Cancelled',
+    quantity: 5,
+    price: 2,
+    productId: 4,
+    userId: 2
+  },
+  {
+    orderStatus: 'Created',
+    quantity: 3,
+    price: 2,
+    productId: 5,
+    userId: 3
+  }
+]
+
+const reviews = [
+  {
+    content: 'Delicious donuts!',
+    rating: 5,
+    productId: 1,
+    userId: 2
+  },
+  {
+    content: 'Amazing morning donuts!',
+    rating: 5,
+    productId: 3,
+    userId: 1
+  },
+  {
+    content: 'We were sad to see there were only a few donuts left.',
+    rating: 4,
+    productId: 4,
+    userId: 2
+  },
+  {
+    content: 'Very slow delivery.',
+    rating: 3,
+    productId: 7,
+    userId: 3
+  }
+]
 
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
-
-  const users = await Promise.all([
-    User.create({email: 'cody@email.com', password: '123'}),
-    User.create({email: 'murphy@email.com', password: '123'})
-  ])
-
-  console.log(`seeded ${users.length} users`)
+  await Promise.all(users.map(user => User.create(user)))
+  await Promise.all(products.map(product => Product.create(product)))
+  await Promise.all(orders.map(order => Order.create(order)))
+  await Promise.all(reviews.map(review => Review.create(review)))
+  console.log(
+    `seeded ${users.length} users, seeded ${orders.length} orders, seeded ${
+      products.length
+    } products, seeded ${reviews.length} reviews,`
+  )
   console.log(`seeded successfully`)
 }
 
