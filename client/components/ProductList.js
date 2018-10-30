@@ -1,59 +1,34 @@
-import React, {Component} from 'react'
-import {withRouter} from 'react-router-dom'
-import {connect} from 'react-redux'
+import React from 'react'
+import {Link} from 'react-router-dom'
 
 
+const ProductList = (props) => {
 
-
-export class ProductList extends Component {
-
-  constructor(props){
-    super(props)
-  }
-
-  componentDidMount() {
-    this.props.getStudents()
-  }
-
-  async removeStudent(studentId){
-    try {
-      await this.props.deleteStud(studentId)
-    } catch (err) {
-      console.log(err)
-    }
-  }
-
-  render() {
-    const students = this.props.students || []
-    console.log("STUD", students)
+    const products = props.products || []
+    console.log("STUD", products)
     return (
       <div>
-        <h2>All students</h2>
+        <h2>Donuts</h2>
         <div className="sides">
-
-          <div className="left-side">
-            {students.length ? <StudentList students={students} remove={this.removeStudent} />
-            : <div>There are no students registered in the database</div>}
-          </div>
-          <div className="right-side">
-            <AddStudent />
-          </div>
+        <ul className="wrap">
+         { products.map(product => {
+            return (
+                <div className="wrapper" key={product.id}>
+                  <Link to={`/products/${product.id}`} >
+                    <p>{product.title}</p>
+                    <p>{product.imageUrl}</p>
+                  </Link>
+                </div>
+            )
+          })
+        }
+        </ul>
         </div>
       </div>
       )
   }
-}
-const mapStateToProps = (state) => ({
-  students: state.students.students,
-  campuses: state.campuses
-})
 
-const mapDispatchToProps = (dispatch) => ({
-  // submitStudent: (student) => dispatch(newStudent(student)),
-  deleteStud: (studentId) => dispatch(deleteStudent(studentId)),
-  getStudents: () => dispatch(fetchStudents()),
-}
-)
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Students))
+
+export default ProductList
 
