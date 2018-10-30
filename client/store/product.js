@@ -23,14 +23,14 @@ const getProducts = products => ({
 
 const postProduct = product => ({
   type: POST_PRODUCT,
-  product: product
+  product
 })
-
 
 
 /**
  * THUNK CREATORS
  */
+
 export const fetchProducts = () => {
   return async dispatch => {
     try {
