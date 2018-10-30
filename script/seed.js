@@ -4,10 +4,30 @@
 const {db, User, Product, Order, Review} = require('../server/db/models')
 
 const users = [
-  {email: 'cody@email.com', password: '123'},
-  {email: 'murphy@email.com', password: '123'},
-  {email: 'david@email.com', password: 'hello'},
-  {email: 'karen@email.com', password: 'hungry'}
+  {
+    email: 'cody@email.com',
+    password: '123',
+    address: '5 Hanover Square, New York, NY 10004',
+    adminStatus: true
+  },
+  {
+    email: 'murphy@email.com',
+    password: '123',
+    address: '100 Donut Avenue, New York, NY 10004',
+    adminStatus: false
+  },
+  {
+    email: 'david@email.com',
+    password: 'hello',
+    address: '10 Sprinkle Boardwalk, New York, NY 10004',
+    adminStatus: true
+  },
+  {
+    email: 'karen@email.com',
+    password: 'hungry',
+    address: '5 Hanover Square, New York, NY 10004',
+    adminStatus: false
+  }
 ]
 
 const products = [
