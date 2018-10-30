@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Product, Review, User} = require('../db')
+const {Product, Review, User} = require('../db/models')
 
 
 /////For all to see
@@ -56,7 +56,6 @@ if (req.user.adminStatus) {
     res.send("not an admin")
   }
   });
-
 
 // router.delete('/:id', (req, res, next) => {
 //   if (req.user.adminStatus) {
