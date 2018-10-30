@@ -1,10 +1,12 @@
-const crypto = require('crypto')
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-const Reviews = db.define('reviews', {
+const Review = db.define('review', {
   content: {
-    type: Sequelize.TEXT
+    type: Sequelize.TEXT,
+    validate: {
+      notEmpty: true
+    }
   },
   rating: {
     type: Sequelize.FLOAT,
@@ -16,3 +18,5 @@ const Reviews = db.define('reviews', {
     }
   }
 })
+
+module.exports = Review
