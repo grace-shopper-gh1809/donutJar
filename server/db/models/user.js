@@ -6,7 +6,8 @@ const User = db.define('user', {
   email: {
     type: Sequelize.STRING,
     unique: true,
-    allowNull: false
+    allowNull: false,
+    isEmail:true
   },
   password: {
     type: Sequelize.STRING,
@@ -26,8 +27,30 @@ const User = db.define('user', {
   },
   googleId: {
     type: Sequelize.STRING
+  }, address:
+  {
+    type: Sequelize.STRING
+
+  },
+  adminStatus: {
+    type: Sequelize.BOOLEAN
+  },
+  passwordChangeDate : {
+    type: Sequelize.DATE
   }
-})
+},
+  {
+    hooks : {
+      afterValidate: (user) => {
+        if(user.changed('password')) {
+          user.passwordChangeDate = new Date();
+        }
+      }
+    }
+
+  }
+
+)
 
 module.exports = User
 
