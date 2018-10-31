@@ -31,8 +31,7 @@ const postProduct = product => ({
  * THUNK CREATORS
  */
 
-export const fetchProducts = () => {
-  return async dispatch => {
+export const fetchProducts = () => async (dispatch) => {
     try {
       const response = await axios.get('/api/products')
       const products = response.data
@@ -41,18 +40,16 @@ export const fetchProducts = () => {
     } catch (error) {
       console.log(error)
     }
-  }
 }
 
-export const addProduct = (product) => {
-  return async function(dispatch) {
+
+export const addProduct = (product) => async (dispatch) => {
     try {
-      const added = axios.post('/api/products', product);
+      const added = await axios.post('/api/products', product);
       dispatch(postProduct(added));
     } catch (error) {
-      next(error)
+      console.error(error)
     }
-  }
 }
 /**
  * REDUCER

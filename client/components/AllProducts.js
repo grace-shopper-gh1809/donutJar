@@ -15,6 +15,7 @@ export class AllProducts extends Component {
 
   render() {
     const products = this.props.products || []
+    console.log("PRODSL", products)
     return (
       <div>
         <h2>Donuts</h2>
@@ -31,7 +32,7 @@ export class AllProducts extends Component {
   }
 }
 const mapStateToProps = (state) => ({
-  products: state.products
+  products: state.products.products
 })
 
 const mapDispatchToProps = (dispatch) => ({

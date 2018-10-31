@@ -5,7 +5,6 @@ import {Link} from 'react-router-dom'
 const ProductList = (props) => {
 
     const products = props.products || []
-    console.log("STUD", products)
     return (
       <div>
         <h2>Donuts</h2>
@@ -15,8 +14,8 @@ const ProductList = (props) => {
             return (
                 <div className="wrapper" key={product.id}>
                   <Link to={`/products/${product.id}`} >
-                    <p>{product.title}</p>
-                    <p>{product.imageUrl}</p>
+                  <img className="product-image" src={product.imageUrl} />
+                  <div id="donut-title">{product.title} ${product.price}</div>
                   </Link>
                 </div>
             )
