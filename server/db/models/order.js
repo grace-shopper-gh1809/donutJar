@@ -14,7 +14,7 @@ const Order = db.define(
       type: Sequelize.INTEGER
     },
     price: {
-      type: Sequelize.DECIMAL
+      type: Sequelize.DECIMAL(10, 2)
     },
     creationDateAndTime: {
       type: Sequelize.DATE

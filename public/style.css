@@ -1,4 +1,3 @@
-
 * {
   box-sizing: border-box;
   font-family: arial, sans-serif;
@@ -32,7 +31,7 @@ nav {
   padding: 1em;
   width: 100vw;
   position: fixed;
-  z-index: 2
+  z-index: 2;
 }
 
 nav a {
@@ -95,7 +94,6 @@ form div {
   margin: 1em;
 }
 
-
 #donut-title {
   text-decoration: none;
   text-align: center;
@@ -123,4 +121,9 @@ form div {
   text-decoration: none;
   /* font-size: 1em;
   height: 15em; */
+}
+
+#donut-header {
+  padding-top: 1.5em;
+  justify-content: center;
 }

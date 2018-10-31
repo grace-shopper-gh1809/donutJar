@@ -10,7 +10,7 @@ const Product = db.define('product', {
     type: Sequelize.TEXT
   },
   price: {
-    type: Sequelize.DECIMAL,
+    type: Sequelize.DECIMAL(10, 2),
     allowNull: false
   },
   inventory: {
@@ -26,7 +26,7 @@ const Product = db.define('product', {
   category: {
     type: Sequelize.STRING,
     validate: {
-      isIn: [['Round', 'Holey-Donut']],
+      isIn: [['Round', 'Holey-Donut']]
     }
   }
 })
