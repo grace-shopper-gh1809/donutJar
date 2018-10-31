@@ -14,6 +14,8 @@ class AddProduct extends React.Component {
       category: ''
     }
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+
   }
   handleSubmit(e) {
     e.preventDefault()
@@ -27,21 +29,26 @@ class AddProduct extends React.Component {
   }
   render() {
     return (
+
+
+      <div >
+        {'\n\n\n\n\n\n\n'}
       <form onSubmit={this.props.addedProduct}>
         <label htmlFor="title">Title: </label>
-        <input type="text" name="title" onChange={handleChange} />
+        <input type="text" name="title" onChange={this.handleChange} />
         <label htmlFor="description">Description: </label>
-        <input type="text" name="description" onChange={handleChange} />
+        <input type="text" name="description" onChange={this.handleChange} />
         <label htmlFor="imageUrl">Image url: </label>
-        <input type="text" name="imageUrl" onChange={handleChange} />
+        <input type="text" name="imageUrl" onChange={this.handleChange} />
         <label htmlFor="price">Price: </label>
-        <textarea type="text" name="price" onChange={handleChange} />
+        <textarea type="text" name="price" onChange={this.handleChange} />
         <label htmlFor="inventory">Price: </label>
-        <textarea type="text" name="inventory" onChange={handleChange} />
+        <textarea type="text" name="inventory" onChange={this.handleChange} />
         <label htmlFor="category">Price: </label>
-        <textarea type="text" name="category" onChange={handleChange} />
+        <textarea type="text" name="category" onChange={this.handleChange} />
         <button type="submit">submit</button>
       </form>
+      </div>
     )
   }
 }
