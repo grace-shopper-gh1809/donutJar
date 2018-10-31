@@ -29,7 +29,6 @@ export class SingleProduct extends Component {
       .map((item, idx) => idx + 1)
 
     const review = {...this.props.selectedProduct.review}
-    console.log('review.content', review.content)
     return (
       <div className="single-product">
         <h2>{title}</h2>
