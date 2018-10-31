@@ -7,6 +7,8 @@ import {
   Signup,
   UserHome,
   AddProduct,
+  EditProduct,
+  AddProduct,
   StatelessSingleProduct,
   CartView
 } from './components'
@@ -46,8 +48,15 @@ class Routes extends Component {
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route path="/addProduct" component={AddProduct} />
+            <Route
+              exact
+              path="/products/:id/editProduct"
+              component={EditProduct}
+            />
+            <Route path="/home" component={UserHome} />
             <Route exact path="/round" component={RoundDonuts} />
             <Route exact path="/holey" component={HoleyDonuts} />
+
             {}
           </Switch>
         )}

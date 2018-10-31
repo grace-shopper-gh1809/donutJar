@@ -14,10 +14,11 @@ export class RoundDonuts extends Component {
       return product.category === 'Round'
     })
     return (
-      <div>
+      <div className="donut-container">
+        <h2 id="donut-header">Round Donuts</h2>
+
         <div className="sides">
           <ul className="left-side">
-            <h2 id="donut-header">Round Donuts</h2>
             {roundDonuts.map(product => {
               return (
                 <div className="wrapper" key={product.id}>
@@ -25,7 +26,7 @@ export class RoundDonuts extends Component {
                     <div className="wrapper">
                       <img className="product-image" src={product.imageUrl} />
                       <div id="donut-title">
-                        {product.title} ${product.price}
+                        {product.title} ${(product.price / 100).toFixed(2)}
                       </div>
                     </div>
                   </Link>

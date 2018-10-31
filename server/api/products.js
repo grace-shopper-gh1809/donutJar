@@ -48,15 +48,17 @@ router.put('/:id', async (req, res, next) => {
     try {
       const id = +req.params.id
       const product = await Product.findById(id)
-      await product.update({
-        title: req.body.title,
-        description: req.body.description,
-        price: req.body.price,
-        inventory: req.body.inventory,
-        imageUrl: req.body.imageUrl,
-        category: req.body.category
-      })
-      res.status(204).end()
+     const editedProd =  await product.update(
+        // title: req.body.title,
+        // description: req.body.description,
+        // price: req.body.price,
+        // inventory: req.body.inventory,
+        // imageUrl: req.body.imageUrl,
+        // category: req.body.category
+        req.body
+      )
+      res.status(204)
+      res.json(editedProd)
     } catch (err) {
       next(err)
     }

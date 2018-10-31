@@ -11,6 +11,9 @@ const Navbar = ({handleClick, isLoggedIn}) => (
       {isLoggedIn ? (
         <div>
           {/* The navbar will show these links after you log in */}
+          <Link to="/" className="filter">
+            All Donuts
+          </Link>
           <Link to="/round" className="filter">
             Round Donuts
           </Link>
@@ -30,6 +33,9 @@ const Navbar = ({handleClick, isLoggedIn}) => (
       ) : (
         <div>
           {/* The navbar will show these links before you log in */}
+          <Link to="/" className="filter">
+            All Donuts
+          </Link>
           <Link to="/round" className="filter">
             Round Donuts
           </Link>
