@@ -94,3 +94,33 @@ form div {
   justify-content: center;
   margin: 1em;
 }
+
+
+#donut-title {
+  text-decoration: none;
+  text-align: center;
+  color: rgba(59, 5, 46, 0.863);
+}
+
+.sides {
+  display: flex;
+  flex-flow: row wrap;
+  /* flex-wrap: wrap;
+
+  flex-direction: row; */
+  justify-content: center;
+  align-content: center;
+  /* margin-bottom: 2em; */
+}
+
+.wrap {
+  flex-grow: 5;
+  margin: 1em;
+  /* //align-self: auto; */
+  /* border: 0.5px solid #49064991; */
+  /* position: relative; */
+  color: rgb(78, 9, 52);
+  text-decoration: none;
+  /* font-size: 1em;
+  height: 15em; */
+}
