@@ -1,8 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {addProduct} from '../store/product'
+import {editProduct} from '../store/product'
 
-class AddProduct extends React.Component {
+class EditProduct extends React.Component {
   constructor() {
     super()
     this.state = {
@@ -19,7 +19,7 @@ class AddProduct extends React.Component {
   }
   handleSubmit(e) {
     e.preventDefault()
-    this.props.addedProduct(this.state)
+    this.props.editedProduct(this.state)
     // this.setState(
     //   {
     //     title: '',
@@ -63,10 +63,10 @@ class AddProduct extends React.Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    addedProduct(product) {
-      dispatch(addProduct(product))
+    editedProduct(product) {
+      dispatch(editProduct(product))
     }
   }
 }
 
-export default connect(null, mapDispatchToProps)(AddProduct)
+export default connect(null, mapDispatchToProps)(EditProduct)

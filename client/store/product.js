@@ -5,6 +5,7 @@ import axios from 'axios'
  */
 const GET_ALL_PRODUCTS = 'GET_ALL_PRODUCTS'
 const POST_PRODUCT = 'POST_PRODUCT'
+const PUT_PRODUCT = 'PUT_PRODUCT'
 const SELECT_PRODUCT = 'SELECT_PRODUCT'
 /**
  * INITIAL STATE
@@ -24,6 +25,11 @@ const getProducts = products => ({
 
 const postProduct = product => ({
   type: POST_PRODUCT,
+  product
+})
+
+const putProduct = product => ({
+  type: PUT_PRODUCT,
   product
 })
 
@@ -55,6 +61,15 @@ export const addProduct = product => async dispatch => {
   }
 }
 
+export const editProduct = product => async dispatch => {
+  try {
+    const {data: edited} = await axios.put('/api/products', product)
+    dispatch(putProduct(edited))
+  } catch (error) {
+    console.error(error)
+  }
+}
+
 export const selectProductById = id => async dispatch => {
   try {
     const {data: product} = await axios.get(`/api/products/${id}`)
@@ -72,6 +87,8 @@ export const productReducer = (state = initialState, action) => {
       return {...state, products: action.products}
     case POST_PRODUCT:
       return {...state, products: [...state.products, action.product]}
+    case PUT_PRODUCT:
+    return {...state, products: [...state.products, action.product]}
     case SELECT_PRODUCT:
       return {...state, selectedProduct: action.product}
     default:
