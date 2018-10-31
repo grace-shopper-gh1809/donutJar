@@ -8,14 +8,16 @@ const ProductList = (props) => {
     return (
       <div>
         <h2>Donuts</h2>
-        <div className="sides">
+        <div className="sides2">
         <ul className="wrap">
          { products.map(product => {
             return (
                 <div className="wrapper" key={product.id}>
                   <Link to={`/products/${product.id}`} >
+                  <div className="wrapper">
                   <img className="product-image" src={product.imageUrl} />
                   <div id="donut-title">{product.title} ${product.price}</div>
+                  </div>
                   </Link>
                 </div>
             )

@@ -5,11 +5,13 @@ import axios from 'axios'
  */
 const GET_ALL_PRODUCTS = 'GET_ALL_PRODUCTS'
 const POST_PRODUCT = "POST_PRODUCT";
+const SELEECT_PRODUCT = "SELEECT_PRODUCT"
 /**
  * INITIAL STATE
  */
 const initialState = {
-  products: []
+  products: [],
+  selectedProduct: {}
 
 }
 
@@ -26,7 +28,10 @@ const postProduct = product => ({
   product
 })
 
-
+const selectProd = id => ({
+  type: SELEECT_PRODUCT,
+  productId : id
+})
 /**
  * THUNK CREATORS
  */
@@ -45,11 +50,20 @@ export const fetchProducts = () => async (dispatch) => {
 
 export const addProduct = (product) => async (dispatch) => {
     try {
-      const added = await axios.post('/api/products', product);
+      const{data: added}= await axios.post('/api/products', product);
       dispatch(postProduct(added));
     } catch (error) {
       console.error(error)
     }
+}
+
+export const selectProductById = (id) => async(dispatch) => {
+  try {
+    const {data: product} = await axios.get(`/api/products/${id}`)
+    dispatch(selectProd(id))
+  } catch (err){
+    console.error(err)
+  }
 }
 /**
  * REDUCER
@@ -60,6 +74,8 @@ export const productReducer = (state = initialState, action) => {
       return {...state, products: action.products}
     case POST_PRODUCT:
       return {...state, products: [...state.products,action.product]}
+    case SELEECT_PRODUCT:
+      return action.productId
     default:
       return state
   }
