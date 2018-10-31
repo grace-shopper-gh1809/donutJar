@@ -25,7 +25,7 @@ export class RoundDonuts extends Component {
                     <div className="wrapper">
                       <img className="product-image" src={product.imageUrl} />
                       <div id="donut-title">
-                        {product.title} ${product.price}
+                        {product.title} ${(product.price / 100).toFixed(2)}
                       </div>
                     </div>
                   </Link>
