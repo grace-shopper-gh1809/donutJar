@@ -5,7 +5,8 @@ import PropTypes from 'prop-types'
 import {Login, Signup, UserHome, AddProduct} from './components'
 import {me} from './store'
 import {fetchProducts} from './store/product'
-import AllProducts from './components/AllProducts';
+import AllProducts from './components/AllProducts'
+import SingleProduct from './components/SingleProduct'
 
 /**
  * COMPONENT
@@ -27,9 +28,8 @@ class Routes extends Component {
         {/* Routes placed here are available to all visitors */}
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
-        <Route exact path= "/" component={AllProducts} />
-
-
+        <Route exact path="/" component={AllProducts} />
+        <Route exact path="/products/:id" component={SingleProduct} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
@@ -69,7 +69,7 @@ const mapDispatch = dispatch => {
     loadInitialData() {
       dispatch(me())
     },
-    fetchProducts: () => dispatch(fetchProducts()),
+    fetchProducts: () => dispatch(fetchProducts())
   }
 }
 

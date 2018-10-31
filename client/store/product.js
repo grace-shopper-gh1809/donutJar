@@ -4,15 +4,14 @@ import axios from 'axios'
  * ACTION TYPES
  */
 const GET_ALL_PRODUCTS = 'GET_ALL_PRODUCTS'
-const POST_PRODUCT = "POST_PRODUCT";
-const SELEECT_PRODUCT = "SELEECT_PRODUCT"
+const POST_PRODUCT = 'POST_PRODUCT'
+const SELECT_PRODUCT = 'SELECT_PRODUCT'
 /**
  * INITIAL STATE
  */
 const initialState = {
   products: [],
   selectedProduct: {}
-
 }
 
 /**
@@ -28,40 +27,39 @@ const postProduct = product => ({
   product
 })
 
-const selectProd = id => ({
-  type: SELEECT_PRODUCT,
-  productId : id
+const selectProd = product => ({
+  type: SELECT_PRODUCT,
+  product: product
 })
 /**
  * THUNK CREATORS
  */
 
-export const fetchProducts = () => async (dispatch) => {
-    try {
-      const response = await axios.get('/api/products')
-      const products = response.data
-      const action = getProducts(products)
-      dispatch(action)
-    } catch (error) {
-      console.log(error)
-    }
+export const fetchProducts = () => async dispatch => {
+  try {
+    const response = await axios.get('/api/products')
+    const products = response.data
+    const action = getProducts(products)
+    dispatch(action)
+  } catch (error) {
+    console.log(error)
+  }
 }
 
-
-export const addProduct = (product) => async (dispatch) => {
-    try {
-      const{data: added}= await axios.post('/api/products', product);
-      dispatch(postProduct(added));
-    } catch (error) {
-      console.error(error)
-    }
+export const addProduct = product => async dispatch => {
+  try {
+    const {data: added} = await axios.post('/api/products', product)
+    dispatch(postProduct(added))
+  } catch (error) {
+    console.error(error)
+  }
 }
 
-export const selectProductById = (id) => async(dispatch) => {
+export const selectProductById = id => async dispatch => {
   try {
     const {data: product} = await axios.get(`/api/products/${id}`)
-    dispatch(selectProd(id))
-  } catch (err){
+    dispatch(selectProd(product))
+  } catch (err) {
     console.error(err)
   }
 }
@@ -73,9 +71,9 @@ export const productReducer = (state = initialState, action) => {
     case GET_ALL_PRODUCTS:
       return {...state, products: action.products}
     case POST_PRODUCT:
-      return {...state, products: [...state.products,action.product]}
-    case SELEECT_PRODUCT:
-      return action.productId
+      return {...state, products: [...state.products, action.product]}
+    case SELECT_PRODUCT:
+      return {...state, selectedProduct: action.product}
     default:
       return state
   }
