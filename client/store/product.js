@@ -88,7 +88,7 @@ export const productReducer = (state = initialState, action) => {
     case POST_PRODUCT:
       return {...state, products: [...state.products, action.product]}
     case PUT_PRODUCT:
-    return {...state, products: [...state.products, action.product]}
+    return {...state, selectedProduct: action.product}
     case SELECT_PRODUCT:
       return {...state, selectedProduct: action.product}
     default:

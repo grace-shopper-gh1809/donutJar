@@ -1,35 +1,33 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {editProduct} from '../store/product'
+import {editProduct, selectProductById} from '../store/product'
+import {withRouter} from 'react-router-dom'
+
+const defaultState = {product: {}}
 
 class EditProduct extends React.Component {
-  constructor() {
-    super()
-    this.state = {
-      title: '',
-      description: '',
-      imageUrl: '',
-      price: '',
-      inventory: '',
-      category: ''
-    }
+  constructor(props) {
+    super(props)
+  //  this.state = defaultState
+
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
 
   }
-  handleSubmit(e) {
+
+  componentDidMount () {
+      this.props.selectProductById(this.props.match.params.id)
+  }
+
+  async handleSubmit(e) {
     e.preventDefault()
-    this.props.editedProduct(this.state)
-    // this.setState(
-    //   {
-    //     title: '',
-    //     description: '',
-    //     imageUrl: '',
-    //     price: '',
-    //     inventory: '',
-    //     category: ''
-    //   }
-    // )
+    try{
+    await this.props.editedProduct(
+      this.props.match.params.id, this.state)
+    } catch(err){
+      console.log(err)
+    }
+
   }
 
   handleChange(e) {
@@ -37,15 +35,17 @@ class EditProduct extends React.Component {
       [e.target.name]: e.target.value
     })
   }
-  render() {
-    return (
 
+  render() {
+    const {title, description, price, inventory, imageUrl, category} =  {...this.props.selectedProduct}
+console.log('props', this.props.selectedProduct)
+console.log('state', this.state)
+    return (
       <div >
       <form onSubmit={this.handleSubmit}>
         <label htmlFor="title">Title: </label>
-        <input type="text" name="title" onChange={this.handleChange} />
+        <input type="text" name="title" onChange={this.handleChange}>{title}</input>
         <label htmlFor="description">Description: </label>
-        <input type="text" name="description" onChange={this.handleChange} />
         <label htmlFor="imageUrl">Image url: </label>
         <input type="text" name="imageUrl" onChange={this.handleChange} />
         <label htmlFor="price">Price: </label>
@@ -58,6 +58,13 @@ class EditProduct extends React.Component {
       </form>
       </div>
     )
+    }
+}
+
+
+const mapStateToProps = state => {
+  return {
+    selectedProduct: state.products.selectedProduct
   }
 }
 
@@ -65,8 +72,11 @@ const mapDispatchToProps = dispatch => {
   return {
     editedProduct(product) {
       dispatch(editProduct(product))
-    }
+    },
+    selectProductById: id => dispatch(selectProductById(id))
   }
 }
 
-export default connect(null, mapDispatchToProps)(EditProduct)
+export default withRouter(
+   connect(null, mapDispatchToProps)(EditProduct)
+)
