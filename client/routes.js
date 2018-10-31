@@ -7,6 +7,8 @@ import {me} from './store'
 import {fetchProducts} from './store/product'
 import AllProducts from './components/AllProducts'
 import SingleProduct from './components/SingleProduct'
+import RoundDonuts from './components/RoundDonuts'
+import HoleyDonuts from './components/HoleyDonuts'
 
 /**
  * COMPONENT
@@ -19,9 +21,8 @@ class Routes extends Component {
 
   render() {
     const {isLoggedIn, admin} = this.props
-    console.log("is admin?" , admin)
-    console.log("is loggedin?" , isLoggedIn)
-
+    console.log('is admin?', admin)
+    console.log('is loggedin?', isLoggedIn)
 
     return (
       <Switch>
@@ -30,13 +31,18 @@ class Routes extends Component {
         <Route path="/signup" component={Signup} />
         <Route exact path="/" component={AllProducts} />
         <Route exact path="/products/:id" component={SingleProduct} />
+        <Route exact path="/round" component={RoundDonuts} />
+        <Route exact path="/holey" component={HoleyDonuts} />
+
         {admin && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route path="/addProduct" component={AddProduct} />
             <Route exact path="/products/:id/editProduct" component={EditProduct} />
-
             <Route path="/home" component={UserHome} />
+            <Route exact path="/round" component={RoundDonuts} />
+            <Route exact path="/holey" component={HoleyDonuts} />
+
             {}
           </Switch>
         )}
@@ -45,12 +51,11 @@ class Routes extends Component {
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route path="/home" component={UserHome} />
+            <Route exact path="/round" component={RoundDonuts} />
+            <Route exact path="/holey" component={HoleyDonuts} />
             {}
           </Switch>
         )}
-
-
-
 
         {/* Displays our Login component as a fallback */}
         <Route component={Login} />
@@ -66,7 +71,7 @@ const mapState = state => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
-    isLoggedIn: !! state.users.user.id,
+    isLoggedIn: !!state.users.user.id,
     admin: state.users.user.adminStatus,
     products: state.products.products
   }
