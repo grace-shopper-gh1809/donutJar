@@ -8,7 +8,6 @@ import {
   UserHome,
   AddProduct,
   EditProduct,
-  AddProduct,
   StatelessSingleProduct,
   CartView
 } from './components'
