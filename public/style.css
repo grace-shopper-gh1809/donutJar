@@ -95,6 +95,12 @@ form div {
   margin: 1em;
 }
 
+form {
+  color: rgba(59, 5, 46, 0.863);
+  justify-content: center;
+  margin: 7em;
+}
+
 
 #donut-title {
   text-decoration: none;

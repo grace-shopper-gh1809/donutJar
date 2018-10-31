@@ -20,6 +20,16 @@ class AddProduct extends React.Component {
   handleSubmit(e) {
     e.preventDefault()
     this.props.addedProduct(this.state)
+    // this.setState(
+    //   {
+    //     title: '',
+    //     description: '',
+    //     imageUrl: '',
+    //     price: '',
+    //     inventory: '',
+    //     category: ''
+    //   }
+    // )
   }
 
   handleChange(e) {
@@ -30,10 +40,8 @@ class AddProduct extends React.Component {
   render() {
     return (
 
-
       <div >
-        {'\n\n\n\n\n\n\n'}
-      <form onSubmit={this.props.addedProduct}>
+      <form onSubmit={this.handleSubmit}>
         <label htmlFor="title">Title: </label>
         <input type="text" name="title" onChange={this.handleChange} />
         <label htmlFor="description">Description: </label>
@@ -42,9 +50,9 @@ class AddProduct extends React.Component {
         <input type="text" name="imageUrl" onChange={this.handleChange} />
         <label htmlFor="price">Price: </label>
         <textarea type="text" name="price" onChange={this.handleChange} />
-        <label htmlFor="inventory">Price: </label>
+        <label htmlFor="inventory">Quantity: </label>
         <textarea type="text" name="inventory" onChange={this.handleChange} />
-        <label htmlFor="category">Price: </label>
+        <label htmlFor="category">Category (Holey-Donut or Round): </label>
         <textarea type="text" name="category" onChange={this.handleChange} />
         <button type="submit">submit</button>
       </form>
