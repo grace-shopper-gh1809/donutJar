@@ -14,10 +14,11 @@ export class HoleyDonuts extends Component {
       return product.category === 'Holey-Donut'
     })
     return (
-      <div>
+      <div className="donut-container">
+        <h2 id="donut-header">Holey Donuts</h2>
+
         <div className="sides">
           <ul className="left-side">
-            <h2 id="donut-header">Holey Donuts</h2>
             {holeyDonuts.map(product => {
               return (
                 <div className="wrapper" key={product.id}>

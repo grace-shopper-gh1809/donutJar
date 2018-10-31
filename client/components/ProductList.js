@@ -4,10 +4,11 @@ import {Link} from 'react-router-dom'
 const ProductList = props => {
   const products = props.products || []
   return (
-    <div>
+    <div className="donut-container">
       <h2 id="donut-header">Donuts</h2>
+
       <div className="sides2">
-        <ul className="wrap">
+        <ul className="left-side">
           {products.map(product => {
             return (
               <div className="wrapper" key={product.id}>
@@ -15,7 +16,7 @@ const ProductList = props => {
                   <div className="wrapper">
                     <img className="product-image" src={product.imageUrl} />
                     <div id="donut-title">
-                      {product.title} ${product.price / 100}
+                      {product.title} ${(product.price / 100).toFixed(2)}
                     </div>
                   </div>
                 </Link>
