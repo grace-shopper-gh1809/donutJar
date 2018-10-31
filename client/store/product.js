@@ -6,12 +6,14 @@ import axios from 'axios'
 const GET_ALL_PRODUCTS = 'GET_ALL_PRODUCTS'
 const POST_PRODUCT = 'POST_PRODUCT'
 const SELECT_PRODUCT = 'SELECT_PRODUCT'
+const ADD_TO_CART = 'ADD_TO_CART'
 /**
  * INITIAL STATE
  */
 const initialState = {
   products: [],
-  selectedProduct: {}
+  selectedProduct: {},
+  cart: []
 }
 
 /**
@@ -30,6 +32,11 @@ const postProduct = product => ({
 const selectProd = product => ({
   type: SELECT_PRODUCT,
   product: product
+})
+
+export const addCartItem = item => ({
+  type: ADD_TO_CART,
+  item
 })
 /**
  * THUNK CREATORS
@@ -71,9 +78,14 @@ export const productReducer = (state = initialState, action) => {
     case GET_ALL_PRODUCTS:
       return {...state, products: action.products}
     case POST_PRODUCT:
-      return {...state, products: [...state.products, action.product]}
+      return {
+        ...state,
+        products: [...state.products, action.product]
+      }
     case SELECT_PRODUCT:
       return {...state, selectedProduct: action.product}
+    case ADD_TO_CART:
+      return {...state, cart: [...state.cart, action.item]}
     default:
       return state
   }
