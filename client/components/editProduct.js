@@ -38,7 +38,7 @@ class EditProduct extends React.Component {
 
   render() {
     const {title, description, price, inventory, imageUrl, category} =  {...this.props.selectedProduct}
-console.log('props', this.props.selectedProduct)
+console.log('title', title)
 console.log('state', this.state)
     return (
       <div >
