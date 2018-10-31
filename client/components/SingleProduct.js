@@ -29,6 +29,7 @@ export class SingleProduct extends Component {
             <p>{review.content}</p>{' '}
           </div>
         )}
+        <button>Add to Cart</button>
       </div>
     )
   }

@@ -1,4 +1,4 @@
-const db = require ('../db')
+const db = require('../db')
 const User = require('./user')
 const Order = require('./order')
 const Product = require('./product')
@@ -7,8 +7,8 @@ const Review = require('./review')
 Order.belongsTo(User)
 User.hasMany(Order)
 
-Order.belongsTo(Product)
-Product.hasMany(Order)
+Order.belongsToMany(Product, {through: 'OrderProduct'})
+Product.belongsToMany(Order, {through: 'OrderProduct'})
 
 Review.belongsTo(User)
 
@@ -22,8 +22,6 @@ Product.hasOne(Review)
  *    BlogPost.belongsTo(User)
  * We have to add more models.
  */
-
-
 
 /**
  * We'll export all of our models here, so that any time a module needs a model,
