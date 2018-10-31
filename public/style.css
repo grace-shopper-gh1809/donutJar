@@ -108,28 +108,29 @@ form {
 
 .sides {
   display: flex;
-  flex-flow: row wrap;
-  /* flex-wrap: wrap;
-
-  flex-direction: row; */
   justify-content: center;
   align-content: center;
-  /* margin-bottom: 2em; */
 }
 
 .wrap {
-  flex-grow: 5;
   margin: 1em;
-  /* //align-self: auto; */
-  /* border: 0.5px solid #49064991; */
-  /* position: relative; */
   color: rgb(78, 9, 52);
   text-decoration: none;
-  /* font-size: 1em;
-  height: 15em; */
 }
 
-#donut-header {
-  padding-top: 1.5em;
+#donut-header,
+.single-product-title {
+  padding-top: 3em;
+  text-align: center;
+}
+
+.left-side {
+  display: flex;
+  flex-wrap: wrap;
   justify-content: center;
+}
+
+.single-product {
+  justify-content: center;
+  text-align: center;
 }

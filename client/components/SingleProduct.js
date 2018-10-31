@@ -31,32 +31,35 @@ export class SingleProduct extends Component {
     const review = {...this.props.selectedProduct.review}
     console.log('review.content', review.content)
     return (
-      <div className="single-product">
-        <h2>{title}</h2>
-        <img id="single-donut" src={imageUrl} />
-        <p>${price}</p>
-        <p>{description}</p>
-        <h3>Review</h3>
-        {!review.rating || !review.content ? (
-          <div>There are currently no reviews </div>
-        ) : (
-          <div>
-            <p>Rating: {review.rating}</p>
-            <p>{review.content}</p>{' '}
-          </div>
-        )}
-        <form onSubmit={this.submitHandler}>
-          <select name="number">
-            {inventoryArray.map((elem, idx) => {
-              return (
-                <option key={idx} value={elem}>
-                  {elem}
-                </option>
-              )
-            })}
-          </select>
-          <button>Add to Cart</button>
-        </form>
+      <div className="container">
+        <ul className="single-product">
+          <p />
+          <h3 className="single-product-title">{title}</h3>
+          <img id="single-donut" src={imageUrl} />
+          <p>${(price / 100).toFixed(2)}</p>
+          <p>{description}</p>
+          <h3>Review</h3>
+          {!review.rating || !review.content ? (
+            <div>There are currently no reviews </div>
+          ) : (
+            <div>
+              <p>Rating: {review.rating}</p>
+              <p>{review.content}</p>{' '}
+            </div>
+          )}
+          <form onSubmit={this.submitHandler}>
+            <select name="number">
+              {inventoryArray.map((elem, idx) => {
+                return (
+                  <option key={idx} value={elem}>
+                    {elem}
+                  </option>
+                )
+              })}
+            </select>
+            <button>Add to Cart</button>
+          </form>
+        </ul>
       </div>
     )
   }
