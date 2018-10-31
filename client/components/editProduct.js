@@ -8,7 +8,7 @@ const defaultState = {product: {}}
 class EditProduct extends React.Component {
   constructor(props) {
     super(props)
-  //  this.state = defaultState
+//  this.state = defaultState
 
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
@@ -44,16 +44,17 @@ console.log('state', this.state)
       <div >
       <form onSubmit={this.handleSubmit}>
         <label htmlFor="title">Title: </label>
-        <input type="text" name="title" onChange={this.handleChange}>{title}</input>
+        <input type="text" name="title" onChange={this.handleChange} placeholder={title}/>
         <label htmlFor="description">Description: </label>
+        <textarea type="text" name="description" onChange={this.handleChange}  placeholder={description}/>
         <label htmlFor="imageUrl">Image url: </label>
-        <input type="text" name="imageUrl" onChange={this.handleChange} />
+        <input type="text" name="imageUrl" onChange={this.handleChange}  placeholder={imageUrl}/>
         <label htmlFor="price">Price: </label>
-        <textarea type="text" name="price" onChange={this.handleChange} />
+        <input type="text" name="price" onChange={this.handleChange} placeholder={price} />
         <label htmlFor="inventory">Quantity: </label>
-        <textarea type="text" name="inventory" onChange={this.handleChange} />
+        <input type="text" name="inventory" onChange={this.handleChange} placeholder={inventory} />
         <label htmlFor="category">Category (Holey-Donut or Round): </label>
-        <textarea type="text" name="category" onChange={this.handleChange} />
+        <input type="text" name="category" onChange={this.handleChange}  placeholder={category}/>
         <button type="submit">submit</button>
       </form>
       </div>
@@ -70,13 +71,13 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    editedProduct(product) {
-      dispatch(editProduct(product))
+    editedProduct(id, product) {
+      dispatch(editProduct(id, product))
     },
     selectProductById: id => dispatch(selectProductById(id))
   }
 }
 
 export default withRouter(
-   connect(null, mapDispatchToProps)(EditProduct)
+   connect(mapStateToProps, mapDispatchToProps)(EditProduct)
 )

@@ -61,9 +61,9 @@ export const addProduct = product => async dispatch => {
   }
 }
 
-export const editProduct = product => async dispatch => {
+export const editProduct = (id, product) => async dispatch => {
   try {
-    const {data: edited} = await axios.put('/api/products', product)
+    const {data: edited} = await axios.put(`/api/products/${id}`, product)
     dispatch(putProduct(edited))
   } catch (error) {
     console.error(error)
@@ -88,7 +88,8 @@ export const productReducer = (state = initialState, action) => {
     case POST_PRODUCT:
       return {...state, products: [...state.products, action.product]}
     case PUT_PRODUCT:
-    return {...state, selectedProduct: action.product}
+    const productUpdated = state.products.map(product => product !== action.product ? product : {...product, ...action.product})
+      return {...state, products: productUpdated}
     case SELECT_PRODUCT:
       return {...state, selectedProduct: action.product}
     default:
