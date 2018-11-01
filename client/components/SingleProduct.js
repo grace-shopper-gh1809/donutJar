@@ -18,7 +18,6 @@ export class SingleProduct extends Component {
       product: this.props.selectedProduct
     }
     await this.props.addCartItem(item)
-    console.log('right after the addcartitem, this.props.cart', this.props.cart)
     this.props.postToCart(this.props.cart)
   }
 
@@ -29,7 +28,6 @@ export class SingleProduct extends Component {
     const inventoryArray = Array(inventory)
       .fill()
       .map((item, idx) => idx + 1)
-    console.log('whats the ID', this.props.selectedProduct.id)
 
     const review = {...this.props.selectedProduct.review}
     return (

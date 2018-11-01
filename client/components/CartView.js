@@ -2,8 +2,12 @@ import React, {Component} from 'react'
 import {Link, withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {StatelessSingleProduct} from './index'
+import {getCart} from '../store/product'
 
 class CartView extends React.Component {
+  componentDidMount() {
+    this.props.getCart()
+  }
   render() {
     return this.props.cart[0] ? (
       <table className="top-padding">
@@ -39,4 +43,8 @@ const mapStateToProps = state => {
   }
 }
 
-export default withRouter(connect(mapStateToProps, null)(CartView))
+const mapDispatchToProps = dispatch => ({
+  getCart: () => dispatch(getCart())
+})
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CartView))
