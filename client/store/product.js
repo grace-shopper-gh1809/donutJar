@@ -10,6 +10,7 @@ const SELECT_PRODUCT = 'SELECT_PRODUCT'
 const ADD_TO_CART = 'ADD_TO_CART'
 const SEARCH_PRODUCTS = 'SEARCH_PRODUCT'
 const GET_CART = 'GET_CART'
+const CLEAR_CART = 'CLEAR_CART'
 
 /**
  * INITIAL STATE
@@ -59,6 +60,10 @@ export const gotCart = cart => ({
   cart
 })
 
+export const clearTheCart = () => ({
+  type: CLEAR_CART
+})
+
 /**
  * THUNK CREATORS
  */
@@ -101,7 +106,7 @@ export const selectProductById = id => async dispatch => {
   }
 }
 
-export const postToCart = cart => async dispatch => {
+export const postToCart = cart => async (dispatch) => {
   try {
     await axios.post('/api/products/cart', cart)
   } catch (err) {
@@ -113,6 +118,15 @@ export const getCart = () => async (dispatch) => {
   try {
     const {data: cart} = await axios.get('/api/products/cart')
     dispatch(gotCart(cart))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+export const clearCart = (cart) => async(dispatch) => {
+  try {
+    const {data: cartToSave} = await axios.post('/api/products/cart/checkout', cart)
+    dispatch(clearTheCart())
   } catch (err) {
     console.error(err)
   }
@@ -158,7 +172,8 @@ export const productReducer = (state = initialState, action) => {
 
     case GET_CART:
       return {...state, cart: [...action.cart]}
-
+    case CLEAR_CART:
+    return {...state, cart: []}
     default:
       return state
   }

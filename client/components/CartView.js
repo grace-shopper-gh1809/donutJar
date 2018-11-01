@@ -2,14 +2,24 @@ import React, {Component} from 'react'
 import {Link, withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {StatelessSingleProduct} from './index'
-import {getCart} from '../store/product'
+import {getCart, clearCart} from '../store/product'
 
 class CartView extends React.Component {
+  constructor(){
+    super()
+    this.handleSubmit=this.handleSubmit.bind(this)
+  }
+
   componentDidMount() {
     this.props.getCart()
   }
+
+  handleSubmit() {
+      this.props.clearCart(this.props.cart)
+  }
   render() {
     return this.props.cart[0] ? (
+      <div>
       <table className="top-padding">
         <thead>
           <tr>
@@ -31,8 +41,13 @@ class CartView extends React.Component {
           )
         })}
       </table>
+      <button type="Submit" onClick={this.handleSubmit}>Checkout</button>
+      </div>
     ) : (
-      <div className="top-padding">No Items Yet!</div>
+      <div className="top-padding">
+      <p>No Items Yet!</p>
+      <button type="Submit" onClick={this.handleSubmit}>Checkout</button>
+      </div>
     )
   }
 }
@@ -44,7 +59,8 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => ({
-  getCart: () => dispatch(getCart())
+  getCart: () => dispatch(getCart()),
+  clearCart: (cart) => dispatch(clearCart(cart))
 })
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CartView))
