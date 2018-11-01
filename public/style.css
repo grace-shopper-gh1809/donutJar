@@ -134,3 +134,7 @@ form {
   justify-content: center;
   text-align: center;
 }
+
+.top-padding {
+  padding-top: 7em;
+}

@@ -93,15 +93,30 @@ export const productReducer = (state = initialState, action) => {
     case GET_ALL_PRODUCTS:
       return {...state, products: action.products}
     case POST_PRODUCT:
-
       return {...state, products: [...state.products, action.product]}
     case PUT_PRODUCT:
-    const productUpdated = state.products.map(product => product !== action.product ? product : {...product, ...action.product})
+      const productUpdated = state.products.map(
+        product =>
+          product !== action.product ? product : {...product, ...action.product}
+      )
       return {...state, products: productUpdated}
     case SELECT_PRODUCT:
       return {...state, selectedProduct: action.product}
     case ADD_TO_CART:
-      return {...state, cart: [...state.cart, action.item]}
+      let cartCopy = [...state.cart]
+      let newProduct = true
+      cartCopy.map(elem => {
+        if (elem.product.id === action.item.product.id) {
+          elem.number += action.item.number
+          newProduct = false
+        }
+      })
+      if (newProduct) {
+        return {...state, cart: [...cartCopy, action.item]}
+      } else {
+        return {...state, cart: [...cartCopy]}
+      }
+
     default:
       return state
   }

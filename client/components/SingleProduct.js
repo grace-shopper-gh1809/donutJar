@@ -14,7 +14,7 @@ export class SingleProduct extends Component {
   submitHandler(e) {
     e.preventDefault()
     const item = {
-      number: e.target.number.value,
+      number: +e.target.number.value,
       product: this.props.selectedProduct
     }
     this.props.addCartItem(item)
