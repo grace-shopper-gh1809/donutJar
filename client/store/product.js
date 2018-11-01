@@ -8,14 +8,17 @@ const POST_PRODUCT = 'POST_PRODUCT'
 const PUT_PRODUCT = 'PUT_PRODUCT'
 const SELECT_PRODUCT = 'SELECT_PRODUCT'
 const ADD_TO_CART = 'ADD_TO_CART'
+const SEARCH_PRODUCTS = 'SEARCH_PRODUCT'
 const GET_CART = 'GET_CART'
+
 /**
  * INITIAL STATE
  */
 const initialState = {
   products: [],
   selectedProduct: {},
-  cart: []
+  cart: [],
+  searchInput: ''
 }
 
 /**
@@ -46,10 +49,16 @@ export const addCartItem = item => ({
   item
 })
 
+export const searchProducts = title => ({
+  type: SEARCH_PRODUCTS,
+  title
+})
+
 export const gotCart = cart => ({
   type: GET_CART,
   cart
 })
+
 /**
  * THUNK CREATORS
  */
@@ -143,8 +152,13 @@ export const productReducer = (state = initialState, action) => {
       } else {
         return {...state, cart: [...cartCopy]}
       }
+
+    case SEARCH_PRODUCTS:
+      return {...state, searchInput: action.title}
+
     case GET_CART:
       return {...state, cart: [...action.cart]}
+
     default:
       return state
   }
