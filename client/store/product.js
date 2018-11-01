@@ -85,6 +85,19 @@ export const selectProductById = id => async dispatch => {
     console.error(err)
   }
 }
+
+export const postToCart = cart => async dispatch => {
+  try {
+    console.log('we made it to the thunk, here is the cart', cart)
+    await axios.post('/api/products/cart', cart)
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+//when we hit button for add to cart
+//add the item to cart session store
+//add the updated cart to the session store
 /**
  * REDUCER
  */
