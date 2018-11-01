@@ -76,7 +76,7 @@ const products = [
     description: 'Chocolate glazed donut',
     price: 300,
     inventory: 5,
-    imageUrl: '/Chocolate-Cake.png',
+    imageUrl: '/Choc-Iced-Ring-sprinkles.png',
     category: 'Holey-Donut'
   },
   {
