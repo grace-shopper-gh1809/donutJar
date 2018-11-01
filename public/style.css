@@ -134,3 +134,7 @@ form {
   justify-content: center;
   text-align: center;
 }
+
+table {
+  padding-top: 7em;
+}
