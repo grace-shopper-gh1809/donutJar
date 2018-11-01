@@ -8,6 +8,7 @@ const POST_PRODUCT = 'POST_PRODUCT'
 const PUT_PRODUCT = 'PUT_PRODUCT'
 const SELECT_PRODUCT = 'SELECT_PRODUCT'
 const ADD_TO_CART = 'ADD_TO_CART'
+const GET_CART = 'GET_CART'
 /**
  * INITIAL STATE
  */
@@ -43,6 +44,11 @@ const selectProd = product => ({
 export const addCartItem = item => ({
   type: ADD_TO_CART,
   item
+})
+
+export const gotCart = cart => ({
+  type: GET_CART,
+  cart
 })
 /**
  * THUNK CREATORS
@@ -88,8 +94,16 @@ export const selectProductById = id => async dispatch => {
 
 export const postToCart = cart => async dispatch => {
   try {
-    console.log('we made it to the thunk, here is the cart', cart)
     await axios.post('/api/products/cart', cart)
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+export const getCart = () => async (dispatch) => {
+  try {
+    const {data: cart} = await axios.get('/api/products/cart')
+    dispatch(gotCart(cart))
   } catch (err) {
     console.error(err)
   }
@@ -129,7 +143,8 @@ export const productReducer = (state = initialState, action) => {
       } else {
         return {...state, cart: [...cartCopy]}
       }
-
+    case GET_CART:
+      return {...state, cart: [...action.cart]}
     default:
       return state
   }

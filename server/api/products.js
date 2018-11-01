@@ -12,6 +12,15 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+router.get('/cart', (req, res, next) => {
+  try {
+    console.log('we made it thunk', req.session)
+    req.session.cart ? res.json(req.session.cart) : res.sendStatus(204)
+  } catch(err) {
+    next(err)
+  }
+})
+
 router.get('/:id', async (req, res, next) => {
   try {
     const donut = await Product.findById(req.params.id, {
@@ -69,11 +78,11 @@ router.put('/:id', async (req, res, next) => {
 
 //adding info to session store
 router.post('/cart', (req, res, next) => {
-  console.log('req.body', req.body)
   req.session.cart = req.body
-  console.log('hello, backend route req.session', req.session)
   res.sendStatus(201)
 })
+
+
 
 // router.delete('/:id', (req, res, next) => {
 //   if (req.user.adminStatus) {
