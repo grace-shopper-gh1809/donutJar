@@ -9,37 +9,38 @@ const Navbar = ({handleClick, isLoggedIn}) => (
     <nav>
       <h1>Donut Jar</h1> <br />
       {isLoggedIn ? (
-        <div>
+        <div className="navbar-links">
           {/* The navbar will show these links after you log in */}
-          <Link to="/" className="filter">
+          <Link to="/" className="signin">
             All Donuts
           </Link>
-          <Link to="/round" className="filter">
+          <Link to="/round" className="signin">
             Round Donuts
           </Link>
-          <Link to="/holey" className="filter">
+          <Link to="/holey" className="signin">
             Holey Donuts
           </Link>
-          <Link to="/home" className="home">
-            Home
-          </Link>
-          <a href="#" onClick={handleClick}>
-            Logout
-          </a>
           <Link to="/test" className="signin">
             Cart
           </Link>
+          <Link to="/home" className="signin">
+            Home
+          </Link>
+          <a href="#" onClick={handleClick} className="signin">
+            Logout
+          </a>
         </div>
       ) : (
         <div>
           {/* The navbar will show these links before you log in */}
-          <Link to="/" className="filter">
+
+          <Link to="/" className="signin">
             All Donuts
           </Link>
-          <Link to="/round" className="filter">
+          <Link to="/round" className="signin">
             Round Donuts
           </Link>
-          <Link to="/holey" className="filter">
+          <Link to="/holey" className="signin">
             Holey Donuts
           </Link>
           <Link to="/login" className="signin">

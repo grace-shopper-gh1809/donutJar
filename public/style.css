@@ -22,12 +22,12 @@ label {
 }
 
 nav {
+  justify-content: space-evenly;
   align-items: center;
   color: rgba(59, 5, 46, 0.863);
   background-color: rgba(238, 217, 233, 0.863);
   display: flex;
   height: 4em;
-  padding: 0.5px;
   padding: 1em;
   width: 100vw;
   position: fixed;
@@ -55,14 +55,13 @@ nav .home {
 }
 
 nav .signin {
-  flex: 0 0 3;
-  float: right;
+  float: left;
   height: 1.5em;
   margin: 0 1.5em 0 0;
   color: rgba(59, 5, 46, 0.863);
   text-decoration: none;
   font-size: 1em;
-  padding: 1em;
+  padding: 0.5em;
 }
 
 form div {
