@@ -17,6 +17,7 @@ import AllProducts from './components/AllProducts'
 import SingleProduct from './components/SingleProduct'
 import RoundDonuts from './components/RoundDonuts'
 import HoleyDonuts from './components/HoleyDonuts'
+import SearchBarResult from './components/SearchBarResult'
 
 /**
  * COMPONENT
@@ -28,7 +29,7 @@ class Routes extends Component {
   }
 
   render() {
-    const {isLoggedIn, admin} = this.props
+    const {isLoggedIn, admin, searchInput} = this.props
     console.log('is admin?', admin)
     console.log('is loggedin?', isLoggedIn)
 
@@ -37,7 +38,11 @@ class Routes extends Component {
         {/* Routes placed here are available to all visitors */}
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
-        <Route exact path="/" component={AllProducts} />
+        {searchInput ? (
+          <Route exact path="/" component={SearchBarResult} />
+        ) : (
+          <Route exact path="/" component={AllProducts} />
+        )}
         <Route exact path="/products/:id" component={SingleProduct} />
         <Route exact path="/round" component={RoundDonuts} />
         <Route exact path="/holey" component={HoleyDonuts} />
@@ -86,7 +91,8 @@ const mapState = state => {
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
     isLoggedIn: !!state.users.user.id,
     admin: state.users.user.adminStatus,
-    products: state.products.products
+    products: state.products.products,
+    searchInput: state.products.searchInput
   }
 }
 
