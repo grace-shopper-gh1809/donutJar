@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Product, Review, User} = require('../db/models')
+const {Product, Review, User, Order} = require('../db/models')
 
 /////For all to see
 
@@ -14,7 +14,6 @@ router.get('/', async (req, res, next) => {
 
 router.get('/cart', (req, res, next) => {
   try {
-    console.log('we made it thunk', req.session)
     req.session.cart ? res.json(req.session.cart) : res.sendStatus(204)
   } catch(err) {
     next(err)
@@ -82,6 +81,10 @@ router.post('/cart', (req, res, next) => {
   res.sendStatus(201)
 })
 
+router.post('/cart/checkout', (req, res, next) => {
+   req.session.cart = []
+   res.sendStatus(201)
+})
 
 
 // router.delete('/:id', (req, res, next) => {
