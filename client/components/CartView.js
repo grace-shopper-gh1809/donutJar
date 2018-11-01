@@ -6,7 +6,7 @@ import {StatelessSingleProduct} from './index'
 class CartView extends React.Component {
   render() {
     return this.props.cart[0] ? (
-      <table>
+      <table className="top-padding">
         <thead>
           <tr>
             <td>Item#</td>
@@ -28,7 +28,7 @@ class CartView extends React.Component {
         })}
       </table>
     ) : (
-      'No Items Yet!'
+      <div className="top-padding">No Items Yet!</div>
     )
   }
 }
