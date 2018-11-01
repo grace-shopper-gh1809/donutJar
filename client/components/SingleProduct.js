@@ -21,12 +21,17 @@ export class SingleProduct extends Component {
   }
 
   render() {
-    const {title, description, price, inventory, imageUrl, category} = {
+    const {title, description, price, inventory, imageUrl} = {
       ...this.props.selectedProduct
     }
     const inventoryArray = Array(inventory)
       .fill()
       .map((item, idx) => idx + 1)
+      console.log("whats the ID" , this.props.selectedProduct.id)
+
+
+
+
 
     const review = {...this.props.selectedProduct.review}
     return (
@@ -57,6 +62,11 @@ export class SingleProduct extends Component {
               })}
             </select>
             <button>Add to Cart</button>
+            {this.props.admin &&
+        <h2>
+          <Link to={`/products/${this.props.selectedProduct.id}/editProduct`}>Edit</Link>
+        </h2>
+      }
           </form>
         </ul>
       </div>
@@ -66,7 +76,8 @@ export class SingleProduct extends Component {
 
 const mapStateToProps = state => {
   return {
-    selectedProduct: state.products.selectedProduct
+    selectedProduct: state.products.selectedProduct,
+    admin: state.users.user.adminStatus
   }
 }
 

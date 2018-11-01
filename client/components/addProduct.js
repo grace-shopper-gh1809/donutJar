@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {addProduct} from '../store/product'
+import {Link} from 'react-router-dom'
 
 class AddProduct extends React.Component {
   constructor() {
@@ -20,16 +21,6 @@ class AddProduct extends React.Component {
   handleSubmit(e) {
     e.preventDefault()
     this.props.addedProduct(this.state)
-    // this.setState(
-    //   {
-    //     title: '',
-    //     description: '',
-    //     imageUrl: '',
-    //     price: '',
-    //     inventory: '',
-    //     category: ''
-    //   }
-    // )
   }
 
   handleChange(e) {
