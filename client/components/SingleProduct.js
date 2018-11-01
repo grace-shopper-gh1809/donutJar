@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {Link, withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {selectProductById, addCartItem} from '../store/product'
+import {selectProductById, addCartItem, postToCart} from '../store/product'
 
 export class SingleProduct extends Component {
   constructor() {
@@ -11,13 +11,15 @@ export class SingleProduct extends Component {
   componentDidMount() {
     this.props.selectProductById(this.props.match.params.id)
   }
-  submitHandler(e) {
+  async submitHandler(e) {
     e.preventDefault()
     const item = {
       number: +e.target.number.value,
       product: this.props.selectedProduct
     }
-    this.props.addCartItem(item)
+    await this.props.addCartItem(item)
+    console.log('right after the addcartitem, this.props.cart', this.props.cart)
+    this.props.postToCart(this.props.cart)
   }
 
   render() {
@@ -27,11 +29,7 @@ export class SingleProduct extends Component {
     const inventoryArray = Array(inventory)
       .fill()
       .map((item, idx) => idx + 1)
-      console.log("whats the ID" , this.props.selectedProduct.id)
-
-
-
-
+    console.log('whats the ID', this.props.selectedProduct.id)
 
     const review = {...this.props.selectedProduct.review}
     return (
@@ -62,11 +60,15 @@ export class SingleProduct extends Component {
               })}
             </select>
             <button>Add to Cart</button>
-            {this.props.admin &&
-        <h2>
-          <Link to={`/products/${this.props.selectedProduct.id}/editProduct`}>Edit</Link>
-        </h2>
-      }
+            {this.props.admin && (
+              <h2>
+                <Link
+                  to={`/products/${this.props.selectedProduct.id}/editProduct`}
+                >
+                  Edit
+                </Link>
+              </h2>
+            )}
           </form>
         </ul>
       </div>
@@ -77,13 +79,15 @@ export class SingleProduct extends Component {
 const mapStateToProps = state => {
   return {
     selectedProduct: state.products.selectedProduct,
-    admin: state.users.user.adminStatus
+    admin: state.users.user.adminStatus,
+    cart: state.products.cart
   }
 }
 
 const mapDispatchToProps = dispatch => ({
   selectProductById: id => dispatch(selectProductById(id)),
-  addCartItem: item => dispatch(addCartItem(item))
+  addCartItem: item => dispatch(addCartItem(item)),
+  postToCart: cart => dispatch(postToCart(cart))
 })
 
 export default withRouter(

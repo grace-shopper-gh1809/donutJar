@@ -48,7 +48,7 @@ router.put('/:id', async (req, res, next) => {
     try {
       const id = +req.params.id
       const product = await Product.findById(id)
-     const editedProd =  await product.update(
+      const editedProd = await product.update(
         // title: req.body.title,
         // description: req.body.description,
         // price: req.body.price,
@@ -65,6 +65,14 @@ router.put('/:id', async (req, res, next) => {
   } else {
     res.send('not an admin')
   }
+})
+
+//adding info to session store
+router.post('/cart', (req, res, next) => {
+  console.log('req.body', req.body)
+  req.session.cart = req.body
+  console.log('hello, backend route req.session', req.session)
+  res.sendStatus(201)
 })
 
 // router.delete('/:id', (req, res, next) => {
