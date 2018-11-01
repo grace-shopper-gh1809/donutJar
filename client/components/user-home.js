@@ -1,16 +1,24 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
+
 
 /**
  * COMPONENT
  */
 export const UserHome = props => {
-  const {email} = props
+  const {email, admin} = props
+  console.log('is you admin?', admin)
 
   return (
     <div>
-      <h3>Welcome, {email}</h3>
+      <h2>Welcome, {email}</h2>
+      {admin &&
+        <h2>
+          Add a new product to the inventory: <Link to="/addProduct">here </Link>
+        </h2>
+      }
     </div>
   )
 }
@@ -20,7 +28,9 @@ export const UserHome = props => {
  */
 const mapState = state => {
   return {
-    email: state.users.user.email
+    email: state.users.user.email,
+    admin: state.users.user.adminStatus
+
   }
 }
 
