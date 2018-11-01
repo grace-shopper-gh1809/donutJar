@@ -9,8 +9,9 @@ const db = require('./db')
 const sessionStore = new SequelizeStore({
   db,
   checkExpirationInterval: 2 * 60 * 1000,
-  expiration:  2 * 60 * 1000 })
-const PORT = process.env.PORT || 8080
+  expiration: 2 * 60 * 1000
+})
+const PORT = process.env.PORT || 3000
 const app = express()
 const socketio = require('socket.io')
 module.exports = app
