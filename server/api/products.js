@@ -96,10 +96,30 @@ router.put('/cart/checkout', (req, res, next) => {
   }
 })
 
-router.post('/cart/checkout', (req, res, next) => {
-  console.log(req.session.cart)
-  req.session.cart = []
-  res.sendStatus(201)
+router.post('/cart/checkout', async (req, res, next) => {
+  try {
+    const userId = req.session.passport.user
+    const cart = req.session.cart
+    console.log(
+      userId,
+      'cartNum',
+      cart[0].number,
+      'price',
+      cart[0].product.price
+    )
+    const orderCreation = await cart.forEach(product => {
+      return Order.create({
+        quantity: product.number,
+        price: product.price,
+        userId: userId
+      })
+    })
+    console.log('orderCreation', orderCreation)
+    req.session.cart = []
+    res.send(201)
+  } catch (error) {
+    next(error)
+  }
 })
 
 // router.delete('/:id', (req, res, next) => {

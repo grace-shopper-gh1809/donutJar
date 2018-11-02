@@ -8,7 +8,8 @@ const Order = db.define(
       type: Sequelize.STRING,
       validate: {
         isIn: [['Created', 'Processing', 'Cancelled', 'Completed']]
-      }
+      },
+      defaultValue: 'Created'
     },
     quantity: {
       type: Sequelize.INTEGER

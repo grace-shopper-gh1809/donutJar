@@ -3,6 +3,7 @@ import {Link, withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {StatelessSingleProduct} from './index'
 import {getCart, clearCart, updateInventory} from '../store/product'
+import {addOrder, fetchOrders} from '../store/order'
 
 class CartView extends React.Component {
   constructor() {
@@ -12,14 +13,16 @@ class CartView extends React.Component {
 
   componentDidMount() {
     this.props.getCart()
+    this.props.get
   }
 
   handleSubmit() {
+    this.props.add(this.props.cart)
     this.props.changeInventory(this.props.cart)
     this.props.clearCart(this.props.cart)
   }
   render() {
-    console.log(this.props.cart)
+    console.log('the cart', this.props.cart)
     return this.props.cart[0] ? (
       <div>
         <table className="top-padding">
@@ -60,12 +63,15 @@ class CartView extends React.Component {
 
 const mapStateToProps = state => {
   return {
+    orders: state.orders.orders,
     cart: state.products.cart,
     products: state.products.products
   }
 }
 
 const mapDispatchToProps = dispatch => ({
+  fetchOrders: dispatch(fetchOrders()),
+  add: order => dispatch(addOrder(order)),
   getCart: () => dispatch(getCart()),
   clearCart: cart => dispatch(clearCart(cart)),
   changeInventory: cartItems => dispatch(updateInventory(cartItems))

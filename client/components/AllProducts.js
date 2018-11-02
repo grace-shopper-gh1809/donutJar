@@ -2,16 +2,15 @@ import React, {Component} from 'react'
 import {withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {fetchProducts} from '../store/product'
+import {fetchOrders} from '../store/order'
 import ProductList from './ProductList'
 
 export class AllProducts extends Component {
   componentDidMount() {
     this.props.fetchProducts()
   }
-
   render() {
     const products = this.props.products || []
-    console.log('PRODSL', products)
     return (
       <div>
         <div className="sides">
@@ -28,11 +27,13 @@ export class AllProducts extends Component {
   }
 }
 const mapStateToProps = state => ({
-  products: state.products.products
+  products: state.products.products,
+  orders: state.orders.orders
 })
 
 const mapDispatchToProps = dispatch => ({
-  fetchProducts: () => dispatch(fetchProducts())
+  fetchProducts: () => dispatch(fetchProducts()),
+  fetchAllOrders: () => dispatch(fetchOrders())
 })
 
 export default withRouter(
