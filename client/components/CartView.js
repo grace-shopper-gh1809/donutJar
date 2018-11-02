@@ -19,7 +19,7 @@ class CartView extends React.Component {
   }
   render() {
     return this.props.cart[0] ? (
-      <div>
+      <div className="cart">
       <table className="top-padding">
         <thead>
           <tr>
@@ -34,19 +34,23 @@ class CartView extends React.Component {
             <tbody key={idx}>
               <tr>
                 <td>{elem.product.id}</td>
-                <td>{elem.product.title}</td>
+                <td className="cart-title"><img src={elem.product.imageUrl} className="cart-image"/>{elem.product.title}</td>
                 <td>{elem.number}</td>
               </tr>
             </tbody>
           )
         })}
       </table>
-      <button type="Submit" onClick={this.handleSubmit}>Checkout</button>
+      <div className="checkout">
+      <button type="Submit"  className="buttons" onClick={this.handleSubmit}>Checkout</button>
+      </div>
       </div>
     ) : (
-      <div className="top-padding">
+      <div className="cart top-padding">
       <p>No Items Yet!</p>
-      <button type="Submit" onClick={this.handleSubmit}>Checkout</button>
+      <div className="checkout">
+      <button type="Submit"  className="buttons" onClick={this.handleSubmit}>Checkout</button>
+      </div>
       </div>
     )
   }

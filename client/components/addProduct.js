@@ -45,7 +45,7 @@ class AddProduct extends React.Component {
         <textarea type="text" name="inventory" onChange={this.handleChange} />
         <label htmlFor="category">Category (Holey-Donut or Round): </label>
         <textarea type="text" name="category" onChange={this.handleChange} />
-        <button type="submit">submit</button>
+        <button type="submit" className="buttons">submit</button>
       </form>
       </div>
     )
