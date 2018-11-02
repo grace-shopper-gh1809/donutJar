@@ -57,7 +57,7 @@ export class SingleProduct extends Component {
                 )
               })}
             </select>
-            <button>Add to Cart</button>
+            <button className="google buttons">Add to Cart</button>
             {this.props.admin && (
               <h2>
                 <Link
