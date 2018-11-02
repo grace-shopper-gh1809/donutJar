@@ -11,6 +11,7 @@ const ADD_TO_CART = 'ADD_TO_CART'
 const SEARCH_PRODUCTS = 'SEARCH_PRODUCT'
 const GET_CART = 'GET_CART'
 const CLEAR_CART = 'CLEAR_CART'
+const UPDATE_INVENTORY_AFTER_CART = 'UPDATE_INVENTORY_AFTER_CART'
 
 /**
  * INITIAL STATE
@@ -64,6 +65,11 @@ export const clearTheCart = () => ({
   type: CLEAR_CART
 })
 
+export const updateInventoryAfterCart = cartItems => ({
+  type: UPDATE_INVENTORY_AFTER_CART,
+  cartItems
+})
+
 /**
  * THUNK CREATORS
  */
@@ -106,7 +112,7 @@ export const selectProductById = id => async dispatch => {
   }
 }
 
-export const postToCart = cart => async (dispatch) => {
+export const postToCart = cart => async dispatch => {
   try {
     await axios.post('/api/products/cart', cart)
   } catch (err) {
@@ -114,7 +120,7 @@ export const postToCart = cart => async (dispatch) => {
   }
 }
 
-export const getCart = () => async (dispatch) => {
+export const getCart = () => async dispatch => {
   try {
     const {data: cart} = await axios.get('/api/products/cart')
     dispatch(gotCart(cart))
@@ -123,12 +129,26 @@ export const getCart = () => async (dispatch) => {
   }
 }
 
-export const clearCart = (cart) => async(dispatch) => {
+export const clearCart = cart => async dispatch => {
   try {
-    const {data: cartToSave} = await axios.post('/api/products/cart/checkout', cart)
+    const {data: cartToSave} = await axios.post(
+      '/api/products/cart/checkout',
+      cart
+    )
     dispatch(clearTheCart())
   } catch (err) {
     console.error(err)
+  }
+}
+
+export const updateInventory = cartItems => async dispatch => {
+  try {
+    const response = await axios.put('/api/products/cart/checkout')
+    const {data} = response
+    const action = getProducts(data)
+    dispatch(action)
+  } catch (error) {
+    console.error(error)
   }
 }
 
@@ -173,7 +193,17 @@ export const productReducer = (state = initialState, action) => {
     case GET_CART:
       return {...state, cart: [...action.cart]}
     case CLEAR_CART:
-    return {...state, cart: []}
+      return {...state, cart: []}
+    case UPDATE_INVENTORY_AFTER_CART:
+      const inventoryChange = state.products.map(product => {
+        action.cartItems.map(cartItem => {
+          if (cartItem.product.id === product.id) {
+            product.inventory = product.inventory - cartItem.number
+          }
+        })
+        return singleProduct
+      })
+      return {...state, products: inventoryChange}
     default:
       return state
   }

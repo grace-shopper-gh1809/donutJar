@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {searchProducts} from '../store/product'
+import {Link} from 'react-router-dom'
 
 export class SearchBar extends Component {
   constructor() {
@@ -20,6 +21,9 @@ export class SearchBar extends Component {
   handleSubmit(event) {
     event.preventDefault()
     this.props.searching(this.state.searchInput)
+    this.setState({
+      searchInput: ''
+    })
   }
 
   render() {
