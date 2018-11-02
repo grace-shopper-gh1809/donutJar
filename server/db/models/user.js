@@ -2,54 +2,55 @@ const crypto = require('crypto')
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-const User = db.define('user', {
-  email: {
-    type: Sequelize.STRING,
-    unique: true,
-    allowNull: false,
-    isEmail:true
-  },
-  password: {
-    type: Sequelize.STRING,
-    // Making `.password` act like a func hides it when serializing to JSON.
-    // This is a hack to get around Sequelize's lack of a "private" option.
-    get() {
-      return () => this.getDataValue('password')
+const User = db.define(
+  'user',
+  {
+    email: {
+      type: Sequelize.STRING,
+      unique: true,
+      allowNull: false,
+      validate: {
+        isEmail: true
+      }
+    },
+    password: {
+      type: Sequelize.STRING,
+      // Making `.password` act like a func hides it when serializing to JSON.
+      // This is a hack to get around Sequelize's lack of a "private" option.
+      get() {
+        return () => this.getDataValue('password')
+      }
+    },
+    salt: {
+      type: Sequelize.STRING,
+      // Making `.salt` act like a function hides it when serializing to JSON.
+      // This is a hack to get around Sequelize's lack of a "private" option.
+      get() {
+        return () => this.getDataValue('salt')
+      }
+    },
+    googleId: {
+      type: Sequelize.STRING
+    },
+    address: {
+      type: Sequelize.STRING
+    },
+    adminStatus: {
+      type: Sequelize.BOOLEAN
+    },
+    passwordChangeDate: {
+      type: Sequelize.DATE
     }
   },
-  salt: {
-    type: Sequelize.STRING,
-    // Making `.salt` act like a function hides it when serializing to JSON.
-    // This is a hack to get around Sequelize's lack of a "private" option.
-    get() {
-      return () => this.getDataValue('salt')
-    }
-  },
-  googleId: {
-    type: Sequelize.STRING
-  }, address:
   {
-    type: Sequelize.STRING
-
-  },
-  adminStatus: {
-    type: Sequelize.BOOLEAN
-  },
-  passwordChangeDate : {
-    type: Sequelize.DATE
-  }
-},
-  {
-    hooks : {
-      afterValidate: (user) => {
-        if(user.changed('password')) {
-          user.passwordChangeDate = new Date();
+    hooks: {
+      afterValidate: user => {
+        if (user.changed('password')) {
+          user.passwordChangeDate = new Date()
         }
       }
     }
-
   }
-
 )
 
 module.exports = User
