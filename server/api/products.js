@@ -15,7 +15,7 @@ router.get('/', async (req, res, next) => {
 router.get('/cart', (req, res, next) => {
   try {
     req.session.cart ? res.json(req.session.cart) : res.sendStatus(204)
-  } catch(err) {
+  } catch (err) {
     next(err)
   }
 })
@@ -81,11 +81,46 @@ router.post('/cart', (req, res, next) => {
   res.sendStatus(201)
 })
 
-router.post('/cart/checkout', (req, res, next) => {
-   req.session.cart = []
-   res.sendStatus(201)
+router.put('/cart/checkout', (req, res, next) => {
+  try {
+    const cart = req.session.cart
+    const changes = cart.map(async product => {
+      const donut = await Product.findById(product.product.id)
+      const newInventory = await donut.update({
+        inventory: donut.inventory - product.number
+      })
+    })
+    res.send(changes)
+  } catch (error) {
+    next(error)
+  }
 })
 
+router.post('/cart/checkout', async (req, res, next) => {
+  try {
+    const userId = req.session.passport.user
+    const cart = req.session.cart
+    console.log(
+      userId,
+      'cartNum',
+      cart[0].number,
+      'price',
+      cart[0].product.price
+    )
+    const orderCreation = await cart.forEach(product => {
+      return Order.create({
+        quantity: product.number,
+        price: product.price,
+        userId: userId
+      })
+    })
+    console.log('orderCreation', orderCreation)
+    req.session.cart = []
+    res.send(201)
+  } catch (error) {
+    next(error)
+  }
+})
 
 // router.delete('/:id', (req, res, next) => {
 //   if (req.user.adminStatus) {

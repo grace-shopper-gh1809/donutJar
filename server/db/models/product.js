@@ -31,7 +31,7 @@ const Product = db.define('product', {
   }
 })
 
-Product.prototype.inventoryUpdate = (soldItem) => {
+Product.prototype.inventoryUpdate = soldItem => {
   this.inventory = this.inventory - soldItem
 }
 

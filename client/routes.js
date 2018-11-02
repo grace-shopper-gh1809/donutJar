@@ -18,6 +18,7 @@ import SingleProduct from './components/SingleProduct'
 import RoundDonuts from './components/RoundDonuts'
 import HoleyDonuts from './components/HoleyDonuts'
 import SearchBarResult from './components/SearchBarResult'
+import {fetchOrders} from './store/order'
 
 /**
  * COMPONENT
@@ -32,6 +33,7 @@ class Routes extends Component {
     const {isLoggedIn, admin, searchInput} = this.props
     console.log('is admin?', admin)
     console.log('is loggedin?', isLoggedIn)
+    console.log('searchInput?', searchInput)
 
     return (
       <Switch>
@@ -93,6 +95,7 @@ const mapState = state => {
     admin: state.users.user.adminStatus,
     products: state.products.products,
     searchInput: state.products.searchInput
+    // orders: state.orders.orders
   }
 }
 
@@ -101,7 +104,8 @@ const mapDispatch = dispatch => {
     loadInitialData() {
       dispatch(me())
     },
-    fetchProducts: () => dispatch(fetchProducts())
+    fetchProducts: () => dispatch(fetchProducts()),
+    fetchAllOrders: () => dispatch(fetchOrders())
   }
 }
 
