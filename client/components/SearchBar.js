@@ -38,7 +38,7 @@ export class SearchBar extends Component {
               placeholder="Search Our Donuts"
             />
           </div>
-          <button className="search-btn" type="submit">
+          <button className="search-btn buttons" type="submit">
             Search
           </button>
         </form>

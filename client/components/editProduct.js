@@ -55,7 +55,7 @@ console.log('state', this.state)
         <input type="text" name="inventory" onChange={this.handleChange} placeholder={inventory} />
         <label htmlFor="category">Category (Holey-Donut or Round): </label>
         <input type="text" name="category" onChange={this.handleChange}  placeholder={category}/>
-        <button type="submit">submit</button>
+        <button type="submit" className="buttons">submit</button>
       </form>
       </div>
     )
