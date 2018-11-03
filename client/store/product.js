@@ -12,6 +12,7 @@ const SEARCH_PRODUCTS = 'SEARCH_PRODUCT'
 const GET_CART = 'GET_CART'
 const CLEAR_CART = 'CLEAR_CART'
 const UPDATE_INVENTORY_AFTER_CART = 'UPDATE_INVENTORY_AFTER_CART'
+const POST_REVIEW = "POST_REVIEW"
 
 /**
  * INITIAL STATE
@@ -20,7 +21,8 @@ const initialState = {
   products: [],
   selectedProduct: {},
   cart: [],
-  searchInput: ''
+  searchInput: '',
+  reviews: []
 }
 
 /**
@@ -68,6 +70,11 @@ export const clearTheCart = () => ({
 export const updateInventoryAfterCart = cartItems => ({
   type: UPDATE_INVENTORY_AFTER_CART,
   cartItems
+})
+
+export const postAReview = (review) => ({
+  type: POST_REVIEW,
+  review,
 })
 
 /**
@@ -152,6 +159,14 @@ export const updateInventory = cartItems => async dispatch => {
   }
 }
 
+export const postReview = (id, reviews) => async(dispatch) => {
+  try {
+    const {data : review} = await axios.post(`/api/products/${id}`, reviews)
+    dispatch(postAReview(review))
+  } catch (err) {
+    console.error(err)
+  }
+}
 //when we hit button for add to cart
 //add the item to cart session store
 //add the updated cart to the session store
@@ -204,6 +219,8 @@ export const productReducer = (state = initialState, action) => {
         return singleProduct
       })
       return {...state, products: inventoryChange}
+      case POST_REVIEW:
+      return {...state, reviews: [...state.reviews, action.review]}
     default:
       return state
   }

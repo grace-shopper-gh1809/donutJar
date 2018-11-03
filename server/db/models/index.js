@@ -13,7 +13,7 @@ Product.belongsToMany(Order, {through: 'OrderProduct'})
 Review.belongsTo(User)
 
 Review.belongsTo(Product)
-Product.hasOne(Review)
+Product.hasMany(Review)
 
 /**
  * If we had any associations to make, this would be a great place to put them!
