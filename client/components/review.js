@@ -4,67 +4,31 @@ import {connect} from 'react-redux'
 import {selectProductById, postReview} from '../store/product'
 import StarRatingComponent from 'react-star-rating-component';
 
-export class ReviewForm extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      content: {},
-      rating: 1
-    }
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleChange = this.handleChange.bind(this)
-    this.onStarClick = this.onStarClick.bind(this)
-  }
-
-  async handleSubmit (event) {
-    event.preventDefault()
-    try {
-      await this.props.postReview(this.props.id, this.state)
-      await this.props.selectProductById(this.props.id)
-    } catch (err) {
-      console.error(err)
-    }
-  }
-
-  handleChange(e) {
-    this.setState({
-      [e.target.name]: e.target.value
-    })
-  }
-
-  onStarClick(nextValue, prevValue, name) {
-    this.setState({rating: nextValue});
-  }
-
-
-  render() {
-    const { rating } = this.state;
+const Review = (props) => {
+  const review = props.review
+  console.log('review', review)
   return (
+
     <div>
-        <div>Rating:</div>
-        <StarRatingComponent
-          name="rating"
-          starCount={5}
-          starColor='#590546'
-          emptyStarColor='#16105136'
-          value={rating}
-          onStarClick={this.onStarClick.bind(this)}
-        />
-    <form onSubmit={this.handleSubmit}>
-    <label htmlFor="content">Your review:</label>
-    <input name="content" type="text" onChange={this.handleChange}/>
-    <button type="submit" className="buttons">submit</button>
-    </form>
-    </div>
+      <li className="formratingstar">
+    <StarRatingComponent
+      name="disabled"
+      editing={false}
+      disabled={true}
+      starCount={5}
+      starColor='#590546'
+      emptyStarColor='#16105136'
+      value={review.rating}
+      className="reviewratingstar"
+    />
+     <p className="form-reviewform">{review.content}</p>
+     </li>
+  </div>
+  // <div>
+  //   <p>Rating: {review.rating}</p>
+  //   <p>{review.content}</p>
+  // </div>
   )
-  }
 }
 
-const mapDispatchToProps = dispatch => ({
-  postReview: (id, review) => dispatch(postReview(id, review)),
-  selectProductById: id => dispatch(selectProductById(id)),
-})
-
-export default withRouter(
-  connect(null, mapDispatchToProps)(ReviewForm)
-)
+export default Review
