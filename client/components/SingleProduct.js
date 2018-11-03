@@ -1,8 +1,10 @@
 import React, {Component} from 'react'
 import {Link, withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
+import StarRatingComponent from 'react-star-rating-component';
 import {selectProductById, addCartItem, postToCart} from '../store/product'
-import ReviewForm from './review'
+import ReviewForm from './ReviewForm'
+import Review from './review.js'
 
 export class SingleProduct extends Component {
   constructor() {
@@ -34,6 +36,9 @@ export class SingleProduct extends Component {
       .map((item, idx) => idx + 1)
 
     const reviews = selectProd.reviews || []
+    let averageReview = 0;
+    reviews.forEach(review => {averageReview += review.rating})
+    averageReview = reviews.length ? averageReview/reviews.length : 1
     return (
       <div className="container">
         <ul className="single-product">
@@ -42,21 +47,7 @@ export class SingleProduct extends Component {
           <img id="single-donut" src={imageUrl} />
           <p>${(price / 100).toFixed(2)}</p>
           <p>{description}</p>
-          <h3>Reviews</h3>
-          {!reviews.length ? (
-            <div>There are currently no reviews </div>
-          ) : (
-            <div>
-            {reviews.map(review => {
-             return (
-             <div key={review.id}>
-                <p>Rating: {review.rating}</p>
-                <p>{review.content}</p>
-              </div>)
-            })}
-            </div>
-          )}
-           <ReviewForm id={id}/>
+
           <form onSubmit={this.submitHandler}>
             <select name="number">
               {inventoryArray.map((elem, idx) => {
@@ -72,13 +63,38 @@ export class SingleProduct extends Component {
               <h2>
                 <Link
                   to={`/products/${this.props.selectedProduct.id}/editProduct`}
-                >
+                  className="google buttons">
                   Edit
                 </Link>
               </h2>
             )}
-
           </form>
+          <h3>Reviews</h3>
+          {!reviews.length ? (
+            <div>There are currently no reviews </div>
+          ) : (
+            <div >
+              <div>
+              <p className="reviewrating">Average Rating:</p>
+              <p className="reviewratingstar"><StarRatingComponent
+                  name="disabled"
+                  editing={false}
+                  disabled={true}
+                  starCount={5}
+                  starColor='#590546'
+                  emptyStarColor='#16105136'
+                  value={averageReview}
+                /></p>
+                </div>
+              <ul className="reviewratingform">
+            {reviews.map(review => {
+             return (
+             <Review key={review.id} review={review} /> )
+            })}
+            </ul>
+            </div>
+          )}
+           <ReviewForm id={id}/>
         </ul>
       </div>
     )

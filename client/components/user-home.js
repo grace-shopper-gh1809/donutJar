@@ -12,11 +12,12 @@ export const UserHome = props => {
   console.log('is you admin?', admin)
 
   return (
-    <div>
-      <h2>Welcome, {email}</h2>
+    <div className="homepage">
+      <h2>Welcome, {email}!</h2>
       {admin &&
         <h2>
-          Add a new product to the inventory: <Link to="/addProduct">here </Link>
+          <Link to="/addProduct" className="google buttons">
+          Add a new product to the inventory</Link>
         </h2>
       }
     </div>
