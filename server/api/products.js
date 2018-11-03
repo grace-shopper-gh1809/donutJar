@@ -23,7 +23,7 @@ router.get('/cart', (req, res, next) => {
 router.get('/:id', async (req, res, next) => {
   try {
     const donut = await Product.findById(req.params.id, {
-      include: [{model: Review}]
+      include: [{model: Review, include: User}] //included User in the Review model
     })
     res.json(donut)
   } catch (err) {
@@ -122,6 +122,24 @@ router.post('/cart/checkout', async (req, res, next) => {
   }
 })
 
+//post reviews
+router.post('/:id', async(req, res, next) => {
+
+  try {
+    if (req.user.id){
+    const id = req.params.id
+    // const donut = await Product.findById(req.params.id)
+    const reviewPosted = await Review.build(req.body)
+    reviewPosted.productId = id
+    reviewPosted.userId = req.user.id
+    await reviewPosted.save()
+    console.log("thisis posted", reviewPosted)
+    res.json(reviewPosted)
+    }
+  } catch(err) {
+    next(err)
+  }
+})
 // router.delete('/:id', (req, res, next) => {
 //   if (req.user.adminStatus) {
 //   Product.destroy({
