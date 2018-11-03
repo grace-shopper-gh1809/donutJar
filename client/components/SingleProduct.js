@@ -33,10 +33,7 @@ export class SingleProduct extends Component {
       .fill()
       .map((item, idx) => idx + 1)
 
-    // const reviewsArr = this.props.selectedProduct.review
     const reviews = selectProd.reviews || []
-    console.log("yel", reviews)
-    // const reviews = [...reviewArr] || []
     return (
       <div className="container">
         <ul className="single-product">
