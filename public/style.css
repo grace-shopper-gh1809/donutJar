@@ -103,6 +103,11 @@ form {
   margin: 7em;
 }
 
+.homepage {
+  color: rgba(59, 5, 46, 0.863);
+  justify-content: center;
+  margin: 10em;
+}
 #donut-title {
   text-decoration: none;
   text-align: center;
@@ -175,6 +180,7 @@ form {
   justify-content: center;
   margin: 1em;
   width: 7em;
+  height: 3em;
   padding: 0.5em;
 }
 

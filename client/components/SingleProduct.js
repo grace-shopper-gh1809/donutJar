@@ -63,7 +63,7 @@ export class SingleProduct extends Component {
               <h2>
                 <Link
                   to={`/products/${this.props.selectedProduct.id}/editProduct`}
-                >
+                  className="google buttons">
                   Edit
                 </Link>
               </h2>
