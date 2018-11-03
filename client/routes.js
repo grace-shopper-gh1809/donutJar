@@ -9,7 +9,8 @@ import {
   AddProduct,
   EditProduct,
   StatelessSingleProduct,
-  CartView
+  CartView,
+  AllUsers
 } from './components'
 import {me} from './store'
 import {fetchProducts} from './store/product'
@@ -54,6 +55,8 @@ class Routes extends Component {
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route path="/addProduct" component={AddProduct} />
+            <Route exact path="/userList" component={AllUsers} />
+
             <Route
               exact
               path="/products/:id/editProduct"

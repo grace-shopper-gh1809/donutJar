@@ -9,15 +9,19 @@ import {Link} from 'react-router-dom'
  */
 export const UserHome = props => {
   const {email, admin} = props
-  console.log('is you admin?', admin)
-
   return (
-    <div>
-      <h2>Welcome, {email}</h2>
+    <div className="donut-container">
+    <h2 id="donut-header">Welcome, {email}</h2>
+
       {admin &&
-        <h2>
+        <ul>
+          <li>
           Add a new product to the inventory: <Link to="/addProduct">here </Link>
-        </h2>
+          </li>
+          <li>
+          Manage DonutJar users: <Link to="/userList">here </Link>
+          </li>
+        </ul>
       }
     </div>
   )
@@ -29,8 +33,8 @@ export const UserHome = props => {
 const mapState = state => {
   return {
     email: state.users.user.email,
-    admin: state.users.user.adminStatus
-
+    admin: state.users.user.adminStatus,
+    address: state.users.user.address
   }
 }
 
