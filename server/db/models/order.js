@@ -35,6 +35,7 @@ const Order = db.define(
 
 const calculation = orderInstance => {
   orderInstance.subtotal = orderInstance.price * orderInstance.quantity
+  return orderInstance.subtotal
 }
 
 Order.beforeCreate(calculation)

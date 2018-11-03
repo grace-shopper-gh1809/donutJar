@@ -7,8 +7,8 @@ const Review = require('./review')
 Order.belongsTo(User)
 User.hasMany(Order)
 
-Order.belongsToMany(Product, {through: 'OrderProduct'})
-Product.belongsToMany(Order, {through: 'OrderProduct'})
+Product.belongsToMany(Order, {through: 'OrderProduct', foreignKey: 'productId'})
+Order.belongsToMany(Product, {through: 'OrderProduct', foreignKey: 'orderId'})
 
 Review.belongsTo(User)
 

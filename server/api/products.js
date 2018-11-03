@@ -100,23 +100,22 @@ router.post('/cart/checkout', async (req, res, next) => {
   try {
     const userId = req.session.passport.user
     const cart = req.session.cart
-    console.log(
-      userId,
-      'cartNum',
-      cart[0].number,
-      'price',
-      cart[0].product.price
-    )
-    const orderCreation = await cart.forEach(product => {
-      return Order.create({
+    const orderCreation = cart.map(product => {
+      return {
         quantity: product.number,
-        price: product.price,
-        userId: userId
-      })
+        price: +product.product.price,
+        userId: userId,
+        productId: product.product.id
+      }
     })
-    console.log('orderCreation', orderCreation)
+    const newItems = []
+    orderCreation.forEach(async (product, index) => {
+      newItems.push(orderCreation[index])
+      await Order.create(orderCreation[index])
+    })
+    console.log('newItems', newItems)
+    res.json(newItems)
     req.session.cart = []
-    res.send(201)
   } catch (error) {
     next(error)
   }
