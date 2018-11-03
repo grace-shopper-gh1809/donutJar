@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Product, Review, User, Order} = require('../db/models')
+const {Product, Review, User, Order, OrderProducts} = require('../db/models')
 
 /////For all to see
 
@@ -23,7 +23,7 @@ router.get('/cart', (req, res, next) => {
 router.get('/:id', async (req, res, next) => {
   try {
     const donut = await Product.findById(req.params.id, {
-      include: [{model: Review, include: User}] //included User in the Review model
+      include: [{model: Review}]
     })
     res.json(donut)
   } catch (err) {
@@ -81,6 +81,37 @@ router.post('/cart', (req, res, next) => {
   res.sendStatus(201)
 })
 
+router.post('/cart/checkout', async (req, res, next) => {
+  try {
+    const userId = req.session.passport.user
+    const cart = req.session.cart
+
+    const orderInfo = cart.map(product => {
+      return {
+        quantity: product.number,
+        price: +product.product.price,
+        userId: userId,
+        productId: product.product.id
+      }
+    })
+    const newItems = []
+    const newOrderItem = await Order.create({userId: userId})
+    orderInfo.forEach(async (product, index) => {
+      newItems.push(orderInfo[index])
+      await newOrderItem.addProduct(orderInfo[index].productId, {
+        through: {
+          price: orderInfo[index].price,
+          quantity: orderInfo[index].quantity,
+          subtotal: orderInfo[index].quantity * orderInfo[index].price
+        }
+      })
+    })
+    res.send(newOrderItem)
+  } catch (error) {
+    next(error)
+  }
+})
+
 router.put('/cart/checkout', (req, res, next) => {
   try {
     const cart = req.session.cart
@@ -91,55 +122,12 @@ router.put('/cart/checkout', (req, res, next) => {
       })
     })
     res.send(changes)
-  } catch (error) {
-    next(error)
-  }
-})
-
-router.post('/cart/checkout', async (req, res, next) => {
-  try {
-    const userId = req.session.passport.user
-    const cart = req.session.cart
-    console.log(
-      userId,
-      'cartNum',
-      cart[0].number,
-      'price',
-      cart[0].product.price
-    )
-    const orderCreation = await cart.forEach(product => {
-      return Order.create({
-        quantity: product.number,
-        price: product.price,
-        userId: userId
-      })
-    })
-    console.log('orderCreation', orderCreation)
     req.session.cart = []
-    res.send(201)
   } catch (error) {
     next(error)
   }
 })
 
-//post reviews
-router.post('/:id', async(req, res, next) => {
-
-  try {
-    if (req.user.id){
-    const id = req.params.id
-    // const donut = await Product.findById(req.params.id)
-    const reviewPosted = await Review.build(req.body)
-    reviewPosted.productId = id
-    reviewPosted.userId = req.user.id
-    await reviewPosted.save()
-    console.log("thisis posted", reviewPosted)
-    res.json(reviewPosted)
-    }
-  } catch(err) {
-    next(err)
-  }
-})
 // router.delete('/:id', (req, res, next) => {
 //   if (req.user.adminStatus) {
 //   Product.destroy({

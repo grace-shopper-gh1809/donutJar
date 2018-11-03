@@ -13,13 +13,12 @@ class CartView extends React.Component {
 
   componentDidMount() {
     this.props.getCart()
-    this.props.get
   }
 
   handleSubmit() {
     this.props.add(this.props.cart)
     this.props.changeInventory(this.props.cart)
-    this.props.clearCart(this.props.cart)
+    this.props.clearCart([])
   }
   render() {
     console.log('the cart', this.props.cart)
@@ -77,7 +76,6 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => ({
-  fetchOrders: dispatch(fetchOrders()),
   add: order => dispatch(addOrder(order)),
   getCart: () => dispatch(getCart()),
   clearCart: cart => dispatch(clearCart(cart)),
