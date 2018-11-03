@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {Link, withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {selectProductById, addCartItem, postToCart} from '../store/product'
+import ReviewForm from './review'
 
 export class SingleProduct extends Component {
   constructor() {
@@ -21,15 +22,18 @@ export class SingleProduct extends Component {
     this.props.postToCart(this.props.cart)
   }
 
+
   render() {
     const {title, description, price, inventory, imageUrl} = {
       ...this.props.selectedProduct
     }
+    const selectProd = {...this.props.selectedProduct}
+    const id = this.props.match.params.id
     const inventoryArray = Array(inventory)
       .fill()
       .map((item, idx) => idx + 1)
 
-    const review = {...this.props.selectedProduct.review}
+    const reviews = selectProd.reviews || []
     return (
       <div className="container">
         <ul className="single-product">
@@ -38,15 +42,21 @@ export class SingleProduct extends Component {
           <img id="single-donut" src={imageUrl} />
           <p>${(price / 100).toFixed(2)}</p>
           <p>{description}</p>
-          <h3>Review</h3>
-          {!review.rating || !review.content ? (
+          <h3>Reviews</h3>
+          {!reviews.length ? (
             <div>There are currently no reviews </div>
           ) : (
             <div>
-              <p>Rating: {review.rating}</p>
-              <p>{review.content}</p>{' '}
+            {reviews.map(review => {
+             return (
+             <div key={review.id}>
+                <p>Rating: {review.rating}</p>
+                <p>{review.content}</p>
+              </div>)
+            })}
             </div>
           )}
+           <ReviewForm id={id}/>
           <form onSubmit={this.submitHandler}>
             <select name="number">
               {inventoryArray.map((elem, idx) => {
@@ -67,6 +77,7 @@ export class SingleProduct extends Component {
                 </Link>
               </h2>
             )}
+
           </form>
         </ul>
       </div>
@@ -85,7 +96,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
   selectProductById: id => dispatch(selectProductById(id)),
   addCartItem: item => dispatch(addCartItem(item)),
-  postToCart: cart => dispatch(postToCart(cart))
+  postToCart: cart => dispatch(postToCart(cart)),
+  //postReview: (id, review) => dispatch(postReview(id, review))
 })
 
 export default withRouter(
