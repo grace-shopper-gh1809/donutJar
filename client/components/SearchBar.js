@@ -28,7 +28,6 @@ export class SearchBar extends Component {
 
   render() {
     const {searchInput} = this.state
-    console.log('inputt', searchInput)
     return (
       <div>
         <form id="search-bar" onSubmit={this.handleSubmit}>
