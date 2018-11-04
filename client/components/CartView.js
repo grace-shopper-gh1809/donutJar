@@ -16,6 +16,7 @@ class CartView extends React.Component {
   }
 
   handleSubmit() {
+    console.log('hello')
     this.props.add(this.props.cart)
     this.props.changeInventory(this.props.cart)
     this.props.clearCart()
@@ -49,7 +50,7 @@ class CartView extends React.Component {
           })}
         </table>
         <div className="checkout">
-          <button type="Submit" className="buttons" onClick={this.handleSubmit}>
+          <button type="submit" className="buttons" onClick={this.handleSubmit}>
             Checkout
           </button>
         </div>
@@ -57,11 +58,6 @@ class CartView extends React.Component {
     ) : (
       <div className="cart top-padding">
         <p>No Items Yet!</p>
-        <div className="checkout">
-          <button type="Submit" className="buttons" onClick={this.handleSubmit}>
-            Checkout
-          </button>
-        </div>
       </div>
     )
   }
