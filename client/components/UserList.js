@@ -23,7 +23,7 @@ const UserList = props => {
               <tbody key={user.id}>
                 <tr>
                   <td>{user.id}</td>
-                  <td className="cart-title">
+                  <td>
                     {user.email}
                   </td>
                   <td>{user.address}</td>
@@ -31,12 +31,12 @@ const UserList = props => {
                   <td>
                   {user.id === me.id ?
                   '':
-                  <button className="search-btn buttons" onClick ={() => {props.remove(user)}}>Delete User</button>
+                  <button className="google buttons" onClick ={() => {props.remove(user)}}>Delete User</button>
                   }
                   <br></br>
                   {user.adminStatus ?
                   '':
-                  <button className="search-btn buttons" onClick ={() => {props.makeAdmin(user)}}>Make Admin</button>
+                  <button className="google buttons" onClick ={() => {props.makeAdmin(user)}}>Make Admin</button>
                   }
                   </td>
                 </tr>

@@ -44,17 +44,17 @@ console.log('state', this.state)
       <div >
       <form onSubmit={this.handleSubmit}>
         <label htmlFor="title">Title: </label>
-        <input type="text" name="title" onChange={this.handleChange} placeholder={title}/>
+        <input type="text" name="title" className="textbox" onChange={this.handleChange} placeholder={title}/>
         <label htmlFor="description">Description: </label>
-        <textarea type="text" name="description" onChange={this.handleChange}  placeholder={description}/>
+        <textarea type="text" name="description" className="textbox" onChange={this.handleChange}  placeholder={description}/>
         <label htmlFor="imageUrl">Image url: </label>
-        <input type="text" name="imageUrl" onChange={this.handleChange}  placeholder={imageUrl}/>
+        <input type="text" name="imageUrl" className="textbox" onChange={this.handleChange}  placeholder={imageUrl}/>
         <label htmlFor="price">Price: </label>
-        <input type="text" name="price" onChange={this.handleChange} placeholder={price} />
+        <input type="text" name="price" className="textbox" onChange={this.handleChange} placeholder={price} />
         <label htmlFor="inventory">Quantity: </label>
-        <input type="text" name="inventory" onChange={this.handleChange} placeholder={inventory} />
+        <input type="text" name="inventory" className="textbox" onChange={this.handleChange} placeholder={inventory} />
         <label htmlFor="category">Category (Holey-Donut or Round): </label>
-        <input type="text" name="category" onChange={this.handleChange}  placeholder={category}/>
+        <input type="text" name="category" className="textbox" onChange={this.handleChange}  placeholder={category}/>
         <button type="submit" className="buttons">submit</button>
       </form>
       </div>
