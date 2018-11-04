@@ -33,7 +33,7 @@ export class SearchBar extends Component {
         <form id="search-bar" onSubmit={this.handleSubmit}>
           <div className="search-bar-form">
             <input
-              className="form-control"
+              className="form-control textbox"
               type="text"
               name="searchInput"
               value={searchInput}
