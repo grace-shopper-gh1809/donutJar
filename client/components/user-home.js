@@ -14,13 +14,13 @@ export const UserHome = props => {
       <h2>Welcome, {email}!</h2>
       {admin &&
         <h2>
-          <Link to="/addProduct" className="google buttons">
-          Add a new product to the inventory</Link>
+          <Link to="/addProduct" className="google buttons usersb">
+          Add a new product</Link>
         </h2>
       }
     {admin &&
       <h2>
-         <Link to="/userList" className="google buttons">Manage DonutJar users</Link>
+        <Link to="/userList" className="google buttons usersb">Manage DonutJar users</Link>
       </h2>
     }
     </div>

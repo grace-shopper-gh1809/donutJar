@@ -34,17 +34,17 @@ class AddProduct extends React.Component {
       <div >
       <form onSubmit={this.handleSubmit}>
         <label htmlFor="title">Title: </label>
-        <input type="text" name="title" onChange={this.handleChange} />
+        <input type="text" name="title" className="textbox" onChange={this.handleChange} />
         <label htmlFor="description">Description: </label>
-        <input type="text" name="description" onChange={this.handleChange} />
+        <input type="text" name="description" className="textbox" onChange={this.handleChange} />
         <label htmlFor="imageUrl">Image url: </label>
-        <input type="text" name="imageUrl" onChange={this.handleChange} />
+        <input type="text" name="imageUrl" className="textbox" onChange={this.handleChange} />
         <label htmlFor="price">Price: </label>
-        <textarea type="text" name="price" onChange={this.handleChange} />
+        <textarea type="text" name="price" className="textbox" onChange={this.handleChange} />
         <label htmlFor="inventory">Quantity: </label>
-        <textarea type="text" name="inventory" onChange={this.handleChange} />
+        <textarea type="text" name="inventory" className="textbox" onChange={this.handleChange} />
         <label htmlFor="category">Category (Holey-Donut or Round): </label>
-        <textarea type="text" name="category" onChange={this.handleChange} />
+        <textarea type="text" name="category" className="textbox" onChange={this.handleChange} />
         <button type="submit" className="buttons">submit</button>
       </form>
       </div>

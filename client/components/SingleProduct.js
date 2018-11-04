@@ -49,7 +49,7 @@ export class SingleProduct extends Component {
           <p>{description}</p>
 
           <form onSubmit={this.submitHandler}>
-            <select name="number">
+            <select name="number" className="custom-select">
               {inventoryArray.map((elem, idx) => {
                 return (
                   <option key={idx} value={elem}>
