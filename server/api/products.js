@@ -57,12 +57,6 @@ router.put('/:id', async (req, res, next) => {
       const id = +req.params.id
       const product = await Product.findById(id)
       const editedProd = await product.update(
-        // title: req.body.title,
-        // description: req.body.description,
-        // price: req.body.price,
-        // inventory: req.body.inventory,
-        // imageUrl: req.body.imageUrl,
-        // category: req.body.category
         req.body
       )
       res.status(204)

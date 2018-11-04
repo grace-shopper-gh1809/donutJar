@@ -9,7 +9,8 @@ import {
   AddProduct,
   EditProduct,
   StatelessSingleProduct,
-  CartView
+  CartView,
+  AllUsers
 } from './components'
 import {me} from './store'
 import {fetchProducts} from './store/product'
@@ -31,9 +32,9 @@ class Routes extends Component {
 
   render() {
     const {isLoggedIn, admin, searchInput} = this.props
-    console.log('is admin?', admin)
-    console.log('is loggedin?', isLoggedIn)
-    console.log('searchInput?', searchInput)
+    // console.log('is admin?', admin)
+    // console.log('is loggedin?', isLoggedIn)
+    // console.log('searchInput?', searchInput)
 
     return (
       <Switch>
@@ -53,7 +54,9 @@ class Routes extends Component {
         {admin && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
-            <Route path="/addProduct" component={AddProduct} />
+            <Route exact path="/userList" component={AllUsers} />
+            <Route exact path="/addProduct" component={AddProduct} />
+
             <Route
               exact
               path="/products/:id/editProduct"
