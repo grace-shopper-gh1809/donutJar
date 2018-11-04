@@ -10,6 +10,11 @@ body {
   margin: 0;
   background-repeat: no-repeat;
   background-attachment: fixed;
+  font-weight: bold;
+  color: rgba(59, 5, 46, 0.863);
+  text-shadow: 0px 2px 3px  rgba(22, 3, 15, 0.205);
+  /* text-shadow: 2px 8px 6px rgba(0,0,0,0.2),
+  0px -5px 35px rgba(255,255,255,0.3); */
 }
 
 a {
@@ -23,6 +28,7 @@ label {
 
 nav {
   justify-content: space-evenly;
+  white-space: nowrap;
   align-items: center;
   color: rgba(59, 5, 46, 0.863);
   background-color: rgba(238, 217, 233, 0.863);
@@ -98,6 +104,12 @@ form {
   margin: 7em;
 }
 
+.homepage {
+  color: rgba(59, 5, 46, 0.863);
+  justify-content: center;
+  margin: 10em;
+}
+
 #donut-title {
   text-decoration: none;
   text-align: center;
@@ -122,7 +134,7 @@ form {
   text-align: center;
   color: rgb(78, 9, 52);
   text-shadow: 2px 8px 6px rgba(0,0,0,0.2),
-                  0px -5px 35px rgba(255,255,255,0.3);
+                0px -5px 35px rgba(255,255,255,0.3);
   /* text-shadow: rgba(124, 51, 116, 0.452) 1px 0 10px; */
 }
 
@@ -143,15 +155,27 @@ form {
 
 .buttons {
   text-decoration: none;
-  border-radius: 15%;
+  border-radius: 19% ;
+  border: 0.1em solid rgb(243, 75, 159);
   text-align: center;
   justify-content: center;
-  color: rgb(255, 248, 254);
-  background: rgb(243, 75, 159);
   height: 2em;
   width: 6em;
   margin: 0.5em;
   padding: 0.1em;
+  font-size: 0.8em;
+  font-weight: bold;
+  color: 				rgb(248, 210, 242) !important;
+	background-color: 	rgb(243, 75, 159);
+	-webkit-box-shadow: inset rgba(255,254,255,0.6) 0 0.3em .3em, inset rgba(0,0,0,0.15) 0 -0.1em .3em, /* inner shadow */
+							hsl(327, 70%, 50%) 0 .1em 3px, hsl(327, 80%, 40%) 0 .3em 1px, /* color border */
+							rgba(0,0,0,0.2) 0 .5em 5px; /* drop shadow */
+	-moz-box-shadow: 	inset rgba(255,254,255,0.6) 0 0.3em .3em, inset rgba(0,0,0,0.15) 0 -0.1em .3em, /* inner shadow */
+							hsl(327, 70%, 50%) 0 .1em 3px, hsl(327, 80%, 40%) 0 .3em 1px, /* color border */
+							rgba(0,0,0,0.2) 0 .5em 5px; /* drop shadow */
+	box-shadow: 		inset rgba(255,254,255,0.6) 0 0.3em .3em, inset rgba(0,0,0,0.15) 0 -0.1em .3em, /* inner shadow */
+							hsl(327, 70%, 50%) 0 .1em 3px, hsl(327, 80%, 40%) 0 .3em 1px, /* color border */
+							rgba(0,0,0,0.2) 0 .5em 5px; /* drop shadow */
 }
 
 .google {
@@ -159,12 +183,15 @@ form {
   justify-content: center;
   margin: 1em;
   width: 7em;
+  height: 3em;
   padding: 0.5em;
+  font-weight: bold;
 }
 
 .search-btn {
   padding: 0.1em;
   justify-content: center;
+  font-weight: bold;
 }
 .cart{
   display: flex;
@@ -175,18 +202,22 @@ form {
 .checkout {
   margin: 1em;
   padding-top: 7em;
-  font-size: 2em;
+  font-weight: bold;
+}
+
+.usersb {
+  justify-content: center;
+  vertical-align: middle;
 }
 
 .cart-image {
   width: 3em;
   height: 3em;
-  /* margin: 1em; */
   clear: both;
 }
 
 table {
-  border-collapse: separate;
+  /* border-collapse: separate; */
   border-spacing: 0;
   padding: 5em;
   color:  rgba(59, 5, 46, 0.863);
@@ -204,6 +235,17 @@ thead {
   background: linear-gradient (rgb(243, 75, 159), #f395e7);
   color: #fff;
   font-size: 1em;
+  color: 				rgb(248, 210, 242) !important;
+	background-color: 	rgb(243, 75, 159);
+	-webkit-box-shadow: inset rgba(255,254,255,0.6) 0 0.3em .3em, inset rgba(0,0,0,0.15) 0 -0.1em .3em, /* inner shadow */
+							hsl(327, 70%, 50%) 0 .1em 3px, hsl(327, 80%, 40%) 0 .3em 1px, /* color border */;
+
+	-moz-box-shadow: 	inset rgba(255,254,255,0.6) 0 0.3em .3em, inset rgba(0,0,0,0.15) 0 -0.1em .3em, /* inner shadow */
+							hsl(327, 70%, 50%) 0 .1em 3px, hsl(327, 80%, 40%) 0 .3em 1px, /* color border */;
+
+	box-shadow: 		inset rgba(255,254,255,0.6) 0 0.3em .3em, inset rgba(0,0,0,0.15) 0 -0.1em .3em, /* inner shadow */
+							hsl(327, 70%, 50%) 0 .1em 3px, hsl(327, 80%, 40%) 0 .3em 1px, /* color border */;
+
 }
 
 td {
@@ -224,4 +266,71 @@ td:first-child {
   text-align: left;
   justify-content: center;
   font-size: 0.5em;
+}
+
+.reviewrating {
+  display: inline-block;
+  /* flex-wrap: wrap; */
+  justify-content: center;
+  text-shadow: none;
+  margin-right: 1em;
+}
+
+.reviewratingstar {
+  display: inline-block;
+  /* margin-top: 8em; */
+  margin-right: 1em;
+  /* justify-content: center; */
+  text-align: center;
+  text-shadow: none;
+}
+
+.reviewform {
+  display: inline-block;
+  margin-right: 1em;
+  justify-content: center;
+  text-align: center;
+  text-shadow: none;
+}
+
+.reviewratingform {
+  display: inline-block;
+  justify-content: left;
+  text-shadow: none;
+}
+
+.formratingstar {
+  display: inline-block;
+  margin-right: 1em;
+  text-align: left;
+  text-shadow: none;
+}
+
+.form-reviewform {
+  margin-bottom: 1em;
+  display: inline-block;
+  justify-content: left;
+  text-align: left;
+  text-shadow: none;
+}
+
+/* drop down menu */
+.custom-select {
+  position: relative;
+  font-family: Arial;
+  background:  rgb(250, 226, 246);
+  color: rgba(59, 5, 46, 0.863);
+  font-size: 1em;
+  border: 0.1em solid rgb(250, 226, 246);
+}
+
+.textbox {
+  position: relative;
+  font-family: Arial;
+  background-color:  rgb(250, 226, 246);
+  color: rgba(59, 5, 46, 0.863);
+  font-size: 1em;
+  margin: 0.5em;
+  border: 0.1em solid rgb(250, 226, 246);
+  vertical-align: middle;
 }

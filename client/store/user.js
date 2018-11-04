@@ -5,13 +5,17 @@ import history from '../history'
  * ACTION TYPES
  */
 const REMOVE_USER = 'REMOVE_USER'
+const DELETE_USER = 'DELETE_USER'
 const GET_USER = 'GET_USER'
+const GET_ALL_USERS= 'GET_ALL_USERS'
+const PROMOTE_USER= 'PROMOTE_USER'
 
 /**
  * INITIAL STATE
  */
 const defaultUser = {
-  user: {}
+  user: {},
+  users:[]
 }
 
 /**
@@ -19,6 +23,13 @@ const defaultUser = {
  */
 const getUser = user => ({type: GET_USER, user})
 const removeUser = () => ({type: REMOVE_USER})
+const deleteUser = (user) => ({type: DELETE_USER, user})
+const upgradeUser = (user) => ({type: PROMOTE_USER, user})
+
+const getUsers = users => ({
+  type: GET_ALL_USERS,
+  users
+})
 
 /**
  * THUNK CREATORS
@@ -29,6 +40,17 @@ export const me = () => async dispatch => {
     dispatch(getUser(res.data || defaultUser))
   } catch (err) {
     console.error(err)
+  }
+}
+
+export const fetchUsers = () => async dispatch => {
+  try {
+    const response = await axios.get('/api/users')
+    const users = response.data
+    const action = getUsers(users)
+    dispatch(action)
+  } catch (error) {
+    console.log(error)
   }
 }
 
@@ -59,13 +81,35 @@ export const logout = () => async dispatch => {
   }
 }
 
+export const removingUser = id => dispatch => {
+  axios.delete(`/api/users/${id}`)
+      .then(() => dispatch(deleteUser(id)))
+      .catch(err => console.error(`Removing user: ${id} unsuccessful`, err));
+};
+
+export const upgradingUser = id => dispatch => {
+  axios.put(`/api/users/${id}`)
+      .then(() => dispatch(upgradeUser(id)))
+      .catch(err => console.error(`Promoting user: ${id} unsuccessful`, err));
+};
+
+
 /**
  * REDUCER
  */
 export default function(state = defaultUser, action) {
   switch (action.type) {
+    case GET_ALL_USERS:
+      return {...state, users: action.users}
     case GET_USER:
       return {...state, user: action.user}
+    case PROMOTE_USER:
+      const newList = [...state.users]
+      const us = newList.find(user => user.id === action.user)
+      us.adminStatus = true
+      return {...state, users: newList}
+   case DELETE_USER:
+      return {...state, users: [...state.users.filter(user => user.id !== action.user)]}
     case REMOVE_USER:
       return defaultUser
     default:

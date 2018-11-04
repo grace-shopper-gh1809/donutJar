@@ -28,13 +28,12 @@ export class SearchBar extends Component {
 
   render() {
     const {searchInput} = this.state
-    console.log('inputt', searchInput)
     return (
       <div>
         <form id="search-bar" onSubmit={this.handleSubmit}>
           <div className="search-bar-form">
             <input
-              className="form-control"
+              className="form-control textbox"
               type="text"
               name="searchInput"
               value={searchInput}
