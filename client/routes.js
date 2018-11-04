@@ -107,8 +107,8 @@ const mapDispatch = dispatch => {
     loadInitialData() {
       dispatch(me())
     },
-    fetchProducts: () => dispatch(fetchProducts()),
-    fetchAllOrders: () => dispatch(fetchOrders())
+    fetchProducts: () => dispatch(fetchProducts())
+    // fetchAllOrders: () => dispatch(fetchOrders())
   }
 }
 

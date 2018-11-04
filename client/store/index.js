@@ -9,7 +9,7 @@ import {orderReducer} from './order'
 const reducer = combineReducers({
   products: productReducer,
   orders: orderReducer,
-  users: user
+  users: user,
 })
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
@@ -20,3 +20,4 @@ export default store
 export * from './product'
 export * from './user'
 export * from './order'
+

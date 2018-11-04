@@ -150,7 +150,7 @@ const reviews = [
   {
     content: 'Very slow delivery.',
     rating: 3,
-    productId: 7,
+    productId: 4,
     userId: 3
   }
 ]

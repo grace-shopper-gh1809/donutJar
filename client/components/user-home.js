@@ -10,14 +10,15 @@ import {Link} from 'react-router-dom'
 export const UserHome = props => {
   const {email, admin} = props
   return (
-    <div className="donut-container">
-    <h2 id="donut-header">Welcome, {email}</h2>
+    <div className="homepage">
+      <h2>Welcome, {email}!</h2>
       {admin &&
-      <div>Add a new product to the inventory: <Link to="/addProduct">here </Link></div>
+        <h2>
+          <Link to="/addProduct" className="google buttons">
+          Add a new product to the inventory</Link>
       }
-      {admin &&
-      <div>Manage DonutJar users: <Link to="/userList">here </Link></div>
-      }
+    {admin &&
+      <div> <Link to="/userList" className="google buttons">Manage DonutJar users</Link></div>
     </div>
   )
 }
