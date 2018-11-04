@@ -115,8 +115,8 @@ router.put('/cart/checkout', (req, res, next) => {
         inventory: donut.inventory - product.number
       })
     })
-    res.send(changes)
     req.session.cart = []
+    res.send(changes)
   } catch (error) {
     next(error)
   }

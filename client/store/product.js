@@ -63,8 +63,9 @@ export const gotCart = cart => ({
   cart
 })
 
-export const clearTheCart = () => ({
-  type: CLEAR_CART
+export const clearCart = () => ({
+  type: CLEAR_CART,
+  cart: []
 })
 
 export const updateInventoryAfterCart = cartItems => ({
@@ -136,13 +137,10 @@ export const getCart = () => async dispatch => {
   }
 }
 
-export const clearCart = cart => async dispatch => {
+export const clearTheCart = () => async dispatch => {
   try {
-    const {data: cartToSave} = await axios.put(
-      '/api/products/cart/checkout',
-      cart
-    )
-    dispatch(clearTheCart())
+    const response = await axios.put('/api/products/cart/checkout')
+    dispatch(clearCart())
   } catch (err) {
     console.error(err)
   }
