@@ -3,7 +3,7 @@ import React from 'react'
 const UserList = props => {
   const users = props.users || []
   const me = props.me
-  console.log('me', me)
+  console.log('ULprops', props)
   return (
     <div className="donut-container">
       <h2 id="donut-header">Users</h2>
@@ -23,9 +23,7 @@ const UserList = props => {
               <tbody key={user.id}>
                 <tr>
                   <td>{user.id}</td>
-                  <td>
-                    {user.email}
-                  </td>
+                  <td>{user.email}</td>
                   <td>{user.address}</td>
                   <td>{user.adminStatus ? 'Admin' : 'Customer'}</td>
                   <td>
