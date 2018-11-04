@@ -12,7 +12,7 @@ body {
   background-attachment: fixed;
   font-weight: bold;
   color: rgba(59, 5, 46, 0.863);
-  text-shadow: 0px 2px 3px  rgba(22, 3, 15, 0.205);
+  text-shadow: 0px 2px 3px rgba(22, 3, 15, 0.205);
   /* text-shadow: 2px 8px 6px rgba(0,0,0,0.2),
   0px -5px 35px rgba(255,255,255,0.3); */
 }
@@ -38,9 +38,9 @@ nav {
   width: 100vw;
   position: fixed;
   z-index: 2;
-  text-shadow: 2px 8px 6px rgba(0,0,0,0.2),
-                  0px -5px 35px rgba(255,255,255,0.3);
-  }
+  text-shadow: 2px 8px 6px rgba(0, 0, 0, 0.2),
+    0px -5px 35px rgba(255, 255, 255, 0.3);
+}
 
 nav a {
   display: inline-block;
@@ -49,8 +49,8 @@ nav a {
 
 h1 {
   size: 20em;
-  text-shadow: 2px 8px 6px rgba(0,0,0,0.2),
-                 0px -5px 35px rgba(255,255,255,0.3);
+  text-shadow: 2px 8px 6px rgba(0, 0, 0, 0.2),
+    0px -5px 35px rgba(255, 255, 255, 0.3);
 }
 
 nav .home {
@@ -97,7 +97,6 @@ form div {
   padding-top: 5em;
 }
 
-
 form {
   color: rgba(59, 5, 46, 0.863);
   justify-content: center;
@@ -133,8 +132,8 @@ form {
   padding-top: 3em;
   text-align: center;
   color: rgb(78, 9, 52);
-  text-shadow: 2px 8px 6px rgba(0,0,0,0.2),
-                0px -5px 35px rgba(255,255,255,0.3);
+  text-shadow: 2px 8px 6px rgba(0, 0, 0, 0.2),
+    0px -5px 35px rgba(255, 255, 255, 0.3);
   /* text-shadow: rgba(124, 51, 116, 0.452) 1px 0 10px; */
 }
 
@@ -155,7 +154,7 @@ form {
 
 .buttons {
   text-decoration: none;
-  border-radius: 19% ;
+  border-radius: 19%;
   border: 0.1em solid rgb(243, 75, 159);
   text-align: center;
   justify-content: center;
@@ -165,17 +164,23 @@ form {
   padding: 0.1em;
   font-size: 0.8em;
   font-weight: bold;
-  color: 				rgb(248, 210, 242) !important;
-	background-color: 	rgb(243, 75, 159);
-	-webkit-box-shadow: inset rgba(255,254,255,0.6) 0 0.3em .3em, inset rgba(0,0,0,0.15) 0 -0.1em .3em, /* inner shadow */
-							hsl(327, 70%, 50%) 0 .1em 3px, hsl(327, 80%, 40%) 0 .3em 1px, /* color border */
-							rgba(0,0,0,0.2) 0 .5em 5px; /* drop shadow */
-	-moz-box-shadow: 	inset rgba(255,254,255,0.6) 0 0.3em .3em, inset rgba(0,0,0,0.15) 0 -0.1em .3em, /* inner shadow */
-							hsl(327, 70%, 50%) 0 .1em 3px, hsl(327, 80%, 40%) 0 .3em 1px, /* color border */
-							rgba(0,0,0,0.2) 0 .5em 5px; /* drop shadow */
-	box-shadow: 		inset rgba(255,254,255,0.6) 0 0.3em .3em, inset rgba(0,0,0,0.15) 0 -0.1em .3em, /* inner shadow */
-							hsl(327, 70%, 50%) 0 .1em 3px, hsl(327, 80%, 40%) 0 .3em 1px, /* color border */
-							rgba(0,0,0,0.2) 0 .5em 5px; /* drop shadow */
+  color: rgb(248, 210, 242) !important;
+  background-color: rgb(243, 75, 159);
+  -webkit-box-shadow: inset rgba(255, 254, 255, 0.6) 0 0.3em 0.3em,
+    inset rgba(0, 0, 0, 0.15) 0 -0.1em 0.3em,
+    /* inner shadow */ hsl(327, 70%, 50%) 0 0.1em 3px,
+    hsl(327, 80%, 40%) 0 0.3em 1px,
+    /* color border */ rgba(0, 0, 0, 0.2) 0 0.5em 5px; /* drop shadow */
+  -moz-box-shadow: inset rgba(255, 254, 255, 0.6) 0 0.3em 0.3em,
+    inset rgba(0, 0, 0, 0.15) 0 -0.1em 0.3em,
+    /* inner shadow */ hsl(327, 70%, 50%) 0 0.1em 3px,
+    hsl(327, 80%, 40%) 0 0.3em 1px,
+    /* color border */ rgba(0, 0, 0, 0.2) 0 0.5em 5px; /* drop shadow */
+  box-shadow: inset rgba(255, 254, 255, 0.6) 0 0.3em 0.3em,
+    inset rgba(0, 0, 0, 0.15) 0 -0.1em 0.3em,
+    /* inner shadow */ hsl(327, 70%, 50%) 0 0.1em 3px,
+    hsl(327, 80%, 40%) 0 0.3em 1px,
+    /* color border */ rgba(0, 0, 0, 0.2) 0 0.5em 5px; /* drop shadow */
 }
 
 .google {
@@ -193,7 +198,7 @@ form {
   justify-content: center;
   font-weight: bold;
 }
-.cart{
+.cart {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -202,7 +207,7 @@ form {
 .checkout {
   margin: 1em;
   padding-top: 7em;
-  font-weight: bold;
+  font-size: 2em;
 }
 
 .usersb {
@@ -220,8 +225,8 @@ table {
   /* border-collapse: separate; */
   border-spacing: 0;
   padding: 5em;
-  color:  rgba(59, 5, 46, 0.863);
-  font: 1.4em
+  color: rgba(59, 5, 46, 0.863);
+  font: 1.4em;
 }
 
 th,
@@ -235,29 +240,34 @@ thead {
   background: linear-gradient (rgb(243, 75, 159), #f395e7);
   color: #fff;
   font-size: 1em;
-  color: 				rgb(248, 210, 242) !important;
-	background-color: 	rgb(243, 75, 159);
-	-webkit-box-shadow: inset rgba(255,254,255,0.6) 0 0.3em .3em, inset rgba(0,0,0,0.15) 0 -0.1em .3em, /* inner shadow */
-							hsl(327, 70%, 50%) 0 .1em 3px, hsl(327, 80%, 40%) 0 .3em 1px, /* color border */;
+  color: rgb(248, 210, 242) !important;
+  background-color: rgb(243, 75, 159);
+  -webkit-box-shadow: inset rgba(255, 254, 255, 0.6) 0 0.3em 0.3em,
+    inset rgba(0, 0, 0, 0.15) 0 -0.1em 0.3em,
+    /* inner shadow */ hsl(327, 70%, 50%) 0 0.1em 3px,
+    hsl(327, 80%, 40%) 0 0.3em 1px, /* color border */;
 
-	-moz-box-shadow: 	inset rgba(255,254,255,0.6) 0 0.3em .3em, inset rgba(0,0,0,0.15) 0 -0.1em .3em, /* inner shadow */
-							hsl(327, 70%, 50%) 0 .1em 3px, hsl(327, 80%, 40%) 0 .3em 1px, /* color border */;
+  -moz-box-shadow: inset rgba(255, 254, 255, 0.6) 0 0.3em 0.3em,
+    inset rgba(0, 0, 0, 0.15) 0 -0.1em 0.3em,
+    /* inner shadow */ hsl(327, 70%, 50%) 0 0.1em 3px,
+    hsl(327, 80%, 40%) 0 0.3em 1px, /* color border */;
 
-	box-shadow: 		inset rgba(255,254,255,0.6) 0 0.3em .3em, inset rgba(0,0,0,0.15) 0 -0.1em .3em, /* inner shadow */
-							hsl(327, 70%, 50%) 0 .1em 3px, hsl(327, 80%, 40%) 0 .3em 1px, /* color border */;
-
+  box-shadow: inset rgba(255, 254, 255, 0.6) 0 0.3em 0.3em,
+    inset rgba(0, 0, 0, 0.15) 0 -0.1em 0.3em,
+    /* inner shadow */ hsl(327, 70%, 50%) 0 0.1em 3px,
+    hsl(327, 80%, 40%) 0 0.3em 1px, /* color border */;
 }
 
 td {
   border-bottom: 0.05em solid #cecfd5;
-  border-right:  0.05em solid #cecfd5;
+  border-right: 0.05em solid #cecfd5;
   vertical-align: middle;
   text-align: center;
 }
 td:first-child {
-  border-left:  0.05em solid #cecfd5;
+  border-left: 0.05em solid #cecfd5;
 }
- .cart-title {
+.cart-title {
   display: block;
   justify-content: center;
   text-align: left;
@@ -318,7 +328,7 @@ td:first-child {
 .custom-select {
   position: relative;
   font-family: Arial;
-  background:  rgb(250, 226, 246);
+  background: rgb(250, 226, 246);
   color: rgba(59, 5, 46, 0.863);
   font-size: 1em;
   border: 0.1em solid rgb(250, 226, 246);
@@ -327,7 +337,7 @@ td:first-child {
 .textbox {
   position: relative;
   font-family: Arial;
-  background-color:  rgb(250, 226, 246);
+  background-color: rgb(250, 226, 246);
   color: rgba(59, 5, 46, 0.863);
   font-size: 1em;
   margin: 0.5em;
