@@ -106,6 +106,7 @@ router.post('/cart/checkout', async (req, res, next) => {
         }
       })
     })
+    req.session.cart = []
     res.send(newOrderItem)
   } catch (error) {
     next(error)
@@ -129,20 +130,19 @@ router.put('/cart/checkout', (req, res, next) => {
 })
 
 //post reviews
-router.post('/:id', async(req, res, next) => {
-
+router.post('/:id', async (req, res, next) => {
   try {
-    if (req.user.id){
-    const id = req.params.id
-    // const donut = await Product.findById(req.params.id)
-    const reviewPosted = await Review.build(req.body)
-    reviewPosted.productId = id
-    reviewPosted.userId = req.user.id
-    await reviewPosted.save()
-    console.log("thisis posted", reviewPosted)
-    res.json(reviewPosted)
+    if (req.user.id) {
+      const id = req.params.id
+      // const donut = await Product.findById(req.params.id)
+      const reviewPosted = await Review.build(req.body)
+      reviewPosted.productId = id
+      reviewPosted.userId = req.user.id
+      await reviewPosted.save()
+      console.log('thisis posted', reviewPosted)
+      res.json(reviewPosted)
     }
-  } catch(err) {
+  } catch (err) {
     next(err)
   }
 })
