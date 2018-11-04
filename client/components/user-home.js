@@ -19,7 +19,10 @@ export const UserHome = props => {
         </h2>
       }
     {admin &&
-      <div> <Link to="/userList" className="google buttons">Manage DonutJar users</Link></div>
+      <h2>
+         <Link to="/userList" className="google buttons">Manage DonutJar users</Link>
+      </h2>
+    }
     </div>
   )
 }

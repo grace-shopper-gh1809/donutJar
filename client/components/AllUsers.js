@@ -1,13 +1,15 @@
 import React, {Component} from 'react'
 import {withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {fetchUsers, removingUser, me} from '../store/user'
+import {fetchUsers, removingUser, upgradingUser} from '../store/user'
 import UserList from './UserList'
 
 export class AllUsers extends Component {
   constructor (props) {
     super(props)
     this.remove = this.remove.bind(this)
+    this.makeAdmin = this.makeAdmin.bind(this)
+
   }
 
   componentDidMount() {
@@ -16,6 +18,10 @@ export class AllUsers extends Component {
 
   remove(id){
     this.props.destroy(id.id)
+  }
+
+  makeAdmin(id){
+    this.props.upgrade(id.id)
   }
 
   render() {
@@ -27,7 +33,7 @@ export class AllUsers extends Component {
         <div className="sides">
           <div className="left-side">
             {users.length ? (
-              <UserList users={users} remove={this.remove} me={me} />
+              <UserList users={users} remove={this.remove} makeAdmin={this.makeAdmin} me={me} />
             ) : (
               <div>There are no users in the donutJar..if you are seeing this, you are a ghost</div>
             )}
@@ -44,7 +50,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   fetchUsers: () => dispatch(fetchUsers()),
-  destroy:(id) => dispatch(removingUser(id))
+  destroy:(id) => dispatch(removingUser(id)),
+  upgrade:(id) => dispatch(upgradingUser(id))
+
 })
 
 export default withRouter(

@@ -22,7 +22,7 @@ router.put('/:id', async (req, res, next) => {
       const id = +req.params.id
       const user = await User.findById(id)
       const editedUser = await user.update(
-        req.body
+        {adminStatus: true}
       )
       res.status(204)
       res.json(editedUser)
