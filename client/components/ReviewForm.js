@@ -57,7 +57,7 @@ export class ReviewForm extends Component {
     <div className="reviewform">
       <form onSubmit={this.handleSubmit}>
       <label htmlFor="content" className="reviewform">Your review:</label>
-      <textarea type="text" name="content" onChange={this.handleChange} />
+      <textarea type="text" name="content" className="textbox" onChange={this.handleChange} />
       <button type="submit" className="buttons">Submit</button>
       </form>
       </div>

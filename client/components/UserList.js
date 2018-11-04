@@ -3,7 +3,7 @@ import React from 'react'
 const UserList = props => {
   const users = props.users || []
   const me = props.me
-  console.log('me', me)
+  console.log('ULprops', props)
   return (
     <div className="donut-container">
       <h2 id="donut-header">Users</h2>
@@ -23,20 +23,18 @@ const UserList = props => {
               <tbody key={user.id}>
                 <tr>
                   <td>{user.id}</td>
-                  <td className="cart-title">
-                    {user.email}
-                  </td>
+                  <td>{user.email}</td>
                   <td>{user.address}</td>
                   <td>{user.adminStatus ? 'Admin' : 'Customer'}</td>
                   <td>
                   {user.id === me.id ?
                   '':
-                  <button className="search-btn buttons" onClick ={() => {props.remove(user)}}>Delete User</button>
+                  <button className="google buttons" onClick ={() => {props.remove(user)}}>Delete User</button>
                   }
                   <br></br>
                   {user.adminStatus ?
                   '':
-                  <button className="search-btn buttons" onClick ={() => {props.makeAdmin(user)}}>Make Admin</button>
+                  <button className="google buttons" onClick ={() => {props.makeAdmin(user)}}>Make Admin</button>
                   }
                   </td>
                 </tr>

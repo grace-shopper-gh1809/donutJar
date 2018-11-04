@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {Link, withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {StatelessSingleProduct} from './index'
-import {getCart, clearCart, updateInventory} from '../store/product'
+import {getCart, clearTheCart, updateInventory} from '../store/product'
 import {addOrder, fetchOrders} from '../store/order'
 
 class CartView extends React.Component {
@@ -18,7 +18,7 @@ class CartView extends React.Component {
   handleSubmit() {
     this.props.add(this.props.cart)
     this.props.changeInventory(this.props.cart)
-    this.props.clearCart([])
+    this.props.clearCart()
   }
   render() {
     console.log('the cart', this.props.cart)
@@ -78,7 +78,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
   add: order => dispatch(addOrder(order)),
   getCart: () => dispatch(getCart()),
-  clearCart: cart => dispatch(clearCart(cart)),
+  clearCart: () => dispatch(clearTheCart()),
   changeInventory: cartItems => dispatch(updateInventory(cartItems))
 })
 
