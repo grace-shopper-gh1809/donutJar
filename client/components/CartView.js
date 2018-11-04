@@ -54,6 +54,7 @@ class CartView extends React.Component {
           </button>
         </div>
       </div>
+
     ) : (
       <div className="cart top-padding">
         <p>No Items Yet!</p>
