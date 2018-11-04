@@ -2,7 +2,8 @@ import React from 'react'
 
 const UserList = props => {
   const users = props.users || []
-  console.log('userlisr', users[0].email)
+  const me = props.me
+  console.log('me', me)
   return (
     <div className="donut-container">
       <h2 id="donut-header">Users</h2>
@@ -14,6 +15,7 @@ const UserList = props => {
               <td>Email</td>
               <td>Address</td>
               <td>Administrative Status</td>
+              <td>Actions</td>
             </tr>
           </thead>
           {users.map((user) => {
@@ -25,7 +27,18 @@ const UserList = props => {
                     {user.email}
                   </td>
                   <td>{user.address}</td>
-                  <td>{user.adminStatus}</td>
+                  <td>{user.adminStatus ? 'Admin' : 'Customer'}</td>
+                  <td>
+                  {user.id === me.id ?
+                  '':
+                  <button className="search-btn buttons" onClick ={() => {props.remove(user)}}>Delete User</button>
+                  }
+                  <br></br>
+                  {user.adminStatus ?
+                  '':
+                  <button className="search-btn buttons" onClick ={() => {props.makeAdmin(user)}}>Make Admin</button>
+                  }
+                  </td>
                 </tr>
               </tbody>
             )

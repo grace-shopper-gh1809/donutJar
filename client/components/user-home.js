@@ -12,16 +12,11 @@ export const UserHome = props => {
   return (
     <div className="donut-container">
     <h2 id="donut-header">Welcome, {email}</h2>
-
       {admin &&
-        <ul>
-          <li>
-          Add a new product to the inventory: <Link to="/addProduct">here </Link>
-          </li>
-          <li>
-          Manage DonutJar users: <Link to="/userList">here </Link>
-          </li>
-        </ul>
+      <div>Add a new product to the inventory: <Link to="/addProduct">here </Link></div>
+      }
+      {admin &&
+      <div>Manage DonutJar users: <Link to="/userList">here </Link></div>
       }
     </div>
   )

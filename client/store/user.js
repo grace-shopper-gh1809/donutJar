@@ -5,6 +5,7 @@ import history from '../history'
  * ACTION TYPES
  */
 const REMOVE_USER = 'REMOVE_USER'
+const DELETE_USER = 'DELETE_USER'
 const GET_USER = 'GET_USER'
 const GET_ALL_USERS= 'GET_ALL_USERS'
 
@@ -21,6 +22,7 @@ const defaultUser = {
  */
 const getUser = user => ({type: GET_USER, user})
 const removeUser = () => ({type: REMOVE_USER})
+const deleteUser = (user) => ({type: DELETE_USER, user})
 
 const getUsers = users => ({
   type: GET_ALL_USERS,
@@ -77,6 +79,13 @@ export const logout = () => async dispatch => {
   }
 }
 
+export const removingUser = id => dispatch => {
+  axios.delete(`/api/users/${id}`)
+      .then(() => dispatch(deleteUser(id), console.log('delete thunk id:', deleteUser(id))))
+      .catch(err => console.error(`Removing user: ${id} unsuccessful`, err));
+};
+
+
 /**
  * REDUCER
  */
@@ -86,6 +95,8 @@ export default function(state = defaultUser, action) {
       return {...state, users: action.users}
     case GET_USER:
       return {...state, user: action.user}
+   case DELETE_USER:
+      return {...state, users: [...state.users.filter(user => user.id !== action.user)]}
     case REMOVE_USER:
       return defaultUser
     default:
