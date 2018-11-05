@@ -22,7 +22,7 @@ describe('Product model', () => {
       }
     })
 
-    it('can handle a long `description`', async () => {
+    it('can handle a long `description`', () => {
       let donutDescription =
         'Traditional carrot cake with lots of fresh carrots, raisins, walnuts & spices in the dough and a cream cheese filling and glaze and sprinkled with carrots and walnuts.'
 
@@ -56,18 +56,14 @@ describe('Product model', () => {
     })
 
     it('should have a category property of only "Round" or "Holey-Donut"', async () => {
-      let donutDescription =
-        'Traditional carrot cake with lots of fresh carrots, raisins, walnuts & spices in the dough and a cream cheese filling and glaze and sprinkled with carrots and walnuts.'
-
       newProduct.title = 'Carrot Cake'
-      newProduct.description = donutDescription
       newProduct.price = 350
       newProduct.inventory = 15
 
-      await newProduct.save()
       newProduct.category = 'Round'
       await newProduct.save()
       newProduct.category = 'Holey-Donut'
+      await newProduct.save()
 
       try {
         newProduct.category = 'Square'
