@@ -9,7 +9,6 @@ const DELETE_USER = 'DELETE_USER'
 const GET_USER = 'GET_USER'
 const GET_ALL_USERS = 'GET_ALL_USERS'
 const PROMOTE_USER = 'PROMOTE_USER'
-const GET_ORDER_HISTORY = 'GET_ORDER_HISTORY'
 /**
  * INITIAL STATE
  */
@@ -30,11 +29,6 @@ const upgradeUser = user => ({type: PROMOTE_USER, user})
 const getUsers = users => ({
   type: GET_ALL_USERS,
   users
-})
-
-const getOrderHistory = orders => ({
-  type: GET_ORDER_HISTORY,
-  orders
 })
 
 /**
@@ -101,14 +95,6 @@ export const upgradingUser = id => dispatch => {
     .catch(err => console.error(`Promoting user: ${id} unsuccessful`, err))
 }
 
-export const fetchOrderHistory = () => async dispatch => {
-  try {
-    const {data} = await axios.get('/api/users/orders')
-    dispatch(getOrderHistory(data))
-  } catch (error) {
-    console.error('fetchOrderHistory did not work', error)
-  }
-}
 /**
  * REDUCER
  */
@@ -130,11 +116,6 @@ export default function(state = defaultUser, action) {
       }
     case REMOVE_USER:
       return defaultUser
-    case GET_ORDER_HISTORY:
-      return {
-        ...state,
-        orderHistory: action.orders
-      }
     default:
       return state
   }
