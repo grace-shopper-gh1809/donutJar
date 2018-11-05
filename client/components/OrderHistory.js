@@ -39,12 +39,15 @@ class OrderHistory extends React.Component {
       historyObj[date]
     })
     return (
-      <div>
+      <div className="top-padding">
         {Object.keys(historyObj).map((key, idx) => {
           const status = historyObj[key][0].status
           return (
             <div key={idx}>
-              {`Order Created: ${key}   Status: ${status}`}
+              <div className="donut-title order-padding">
+                {' '}
+                {`Order Created: ${key}   Status: ${status}`}
+              </div>
               <StatelessOrderView cart={historyObj[key]} />
             </div>
           )
