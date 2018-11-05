@@ -6,7 +6,7 @@ const UserList = props => {
   console.log('ULprops', props)
   return (
     <div className="donut-container">
-      <h2 id="donut-header">Users</h2>
+      <h2 className="donut-header">Users</h2>
       <div className="cart">
         <table className="top-padding">
           <thead>
@@ -18,7 +18,7 @@ const UserList = props => {
               <td>Actions</td>
             </tr>
           </thead>
-          {users.map((user) => {
+          {users.map(user => {
             return (
               <tbody key={user.id}>
                 <tr>
@@ -27,24 +27,39 @@ const UserList = props => {
                   <td>{user.address}</td>
                   <td>{user.adminStatus ? 'Admin' : 'Customer'}</td>
                   <td>
-                  {user.id === me.id ?
-                  '':
-                  <button className="google buttons" onClick ={() => {props.remove(user)}}>Delete User</button>
-                  }
-                  <br></br>
-                  {user.adminStatus ?
-                  '':
-                  <button className="google buttons" onClick ={() => {props.makeAdmin(user)}}>Make Admin</button>
-                  }
+                    {user.id === me.id ? (
+                      ''
+                    ) : (
+                      <button
+                        className="google buttons"
+                        onClick={() => {
+                          props.remove(user)
+                        }}
+                      >
+                        Delete User
+                      </button>
+                    )}
+                    <br />
+                    {user.adminStatus ? (
+                      ''
+                    ) : (
+                      <button
+                        className="google buttons"
+                        onClick={() => {
+                          props.makeAdmin(user)
+                        }}
+                      >
+                        Make Admin
+                      </button>
+                    )}
                   </td>
                 </tr>
               </tbody>
             )
           })}
         </table>
+      </div>
     </div>
-    </div>
-
   )
 }
 
