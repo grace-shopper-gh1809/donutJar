@@ -2,13 +2,20 @@ import React, {Component} from 'react'
 import {Link, withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {StatelessSingleProduct} from './index'
-import {getCart, clearTheCart, updateInventory} from '../store/product'
+import {
+  getCart,
+  clearTheCart,
+  updateInventory,
+  editCartQuantity
+} from '../store/product'
 import {addOrder, fetchOrders} from '../store/order'
+import CartItem from './CartItem'
 
 class CartView extends React.Component {
   constructor() {
     super()
     this.handleSubmit = this.handleSubmit.bind(this)
+    // this.handleChange = this.handleChange.bind(this)
   }
 
   componentDidMount() {
@@ -20,6 +27,7 @@ class CartView extends React.Component {
     this.props.changeInventory(this.props.cart)
     this.props.clearCart()
   }
+
   render() {
     console.log('the cart', this.props.cart)
     return this.props.cart[0] ? (
@@ -35,16 +43,37 @@ class CartView extends React.Component {
 
           {this.props.cart.map((elem, idx) => {
             return (
-              <tbody key={idx}>
-                <tr>
-                  <td>{elem.product.id}</td>
-                  <td className="cart-title">
-                    <img src={elem.product.imageUrl} className="cart-image" />
-                    {elem.product.title}
-                  </td>
-                  <td>{elem.number}</td>
-                </tr>
-              </tbody>
+              <CartItem
+                key={idx}
+                elem={elem}
+                // handleChange={this.handleChange}
+                // editCart={this.editCart}
+              />
+              // <tbody key={idx}>
+              //   <tr>
+              //     <td>{elem.product.id}</td>
+              //     <td className="cart-title">
+              //       <img src={elem.product.imageUrl} className="cart-image" />
+              //       {elem.product.title}
+              //     </td>
+              //     <td>
+              //       <select name="number" className="custom-select">
+              //         <option>{elem.number}</option>
+              //         {quantityyArray.map((item, idx) => {
+              //           return (
+              //             <option
+              //               key={idx}
+              //               value={item}
+              //               onChange={this.handleChange}
+              //             >
+              //               {item}
+              //             </option>
+              //           )
+              //         })}
+              //       </select>
+              //     </td>
+              //   </tr>
+              // </tbody>
             )
           })}
         </table>
@@ -54,7 +83,6 @@ class CartView extends React.Component {
           </button>
         </div>
       </div>
-
     ) : (
       <div className="cart top-padding">
         <p>No Items Yet!</p>
@@ -75,7 +103,8 @@ const mapDispatchToProps = dispatch => ({
   add: order => dispatch(addOrder(order)),
   getCart: () => dispatch(getCart()),
   clearCart: () => dispatch(clearTheCart()),
-  changeInventory: cartItems => dispatch(updateInventory(cartItems))
+  changeInventory: cartItems => dispatch(updateInventory(cartItems)),
+  editCart: (id, quantity) => dispatch(editCartQuantity(id, quantity))
 })
 
 export default withRouter(

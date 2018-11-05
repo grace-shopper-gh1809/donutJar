@@ -13,6 +13,7 @@ const GET_CART = 'GET_CART'
 const CLEAR_CART = 'CLEAR_CART'
 const UPDATE_INVENTORY_AFTER_CART = 'UPDATE_INVENTORY_AFTER_CART'
 const POST_REVIEW = 'POST_REVIEW'
+const EDIT_CART_QUANTITY = 'EDIT_CART_QUANTITY'
 
 /**
  * INITIAL STATE
@@ -76,6 +77,12 @@ export const updateInventoryAfterCart = cartItems => ({
 export const postAReview = review => ({
   type: POST_REVIEW,
   review
+})
+
+export const editCartQuantity = (id, quantity) => ({
+  type: EDIT_CART_QUANTITY,
+  id,
+  quantity
 })
 
 /**
@@ -165,6 +172,15 @@ export const postReview = (id, reviews) => async dispatch => {
     console.error(err)
   }
 }
+
+export const updateQuantity = (id, quantity) => async dispatch => {
+  try {
+    const {data: updateItem} = await axios.put('/api/products/cart', quantity)
+    dispatch(editCartQuantity(id, updateItem))
+  } catch (err) {
+    console.log(err)
+  }
+}
 //when we hit button for add to cart
 //add the item to cart session store
 //add the updated cart to the session store
@@ -199,7 +215,23 @@ export const productReducer = (state = initialState, action) => {
       } else {
         return {...state, cart: [...cartCopy]}
       }
-
+    case EDIT_CART_QUANTITY:
+      const updateCartInfo = state.cart.map(item => {
+        if (item.product.id === action.id) {
+          // elem.number = action.item.number
+          return (item.number = action.quantity)
+        } else {
+          return item
+        }
+      })
+      // const updateCartInfo = state.cart.map(item => {
+      //   if (item.id === action.id) {
+      //     return {...cart, quantity: action.quantity}
+      //   } else {
+      //     return item
+      //   }
+      // })
+      return {...state, updateCartInfo}
     case SEARCH_PRODUCTS:
       return {...state, searchInput: action.title}
 
@@ -219,6 +251,7 @@ export const productReducer = (state = initialState, action) => {
       return {...state, products: inventoryChange}
     case POST_REVIEW:
       return {...state, reviews: [...state.reviews, action.review]}
+
     default:
       return state
   }

@@ -30,7 +30,6 @@ class Routes extends Component {
     this.props.loadInitialData()
     this.props.fetchProducts()
   }
-
   render() {
     const {isLoggedIn, admin, searchInput} = this.props
 
@@ -67,7 +66,6 @@ class Routes extends Component {
     )
   }
 }
-
 /**
  * CONTAINER
  */
@@ -81,7 +79,6 @@ const mapState = state => {
     searchInput: state.products.searchInput
   }
 }
-
 const mapDispatch = dispatch => {
   return {
     loadInitialData() {
@@ -90,11 +87,9 @@ const mapDispatch = dispatch => {
     fetchProducts: () => dispatch(fetchProducts())
   }
 }
-
 // The `withRouter` wrapper makes sure that updates are not blocked
 // when the url changes
 export default withRouter(connect(mapState, mapDispatch)(Routes))
-
 /**
  * PROP TYPES
  */
