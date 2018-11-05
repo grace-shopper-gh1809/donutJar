@@ -76,7 +76,6 @@ router.post('/cart', (req, res, next) => {
 
 router.delete('/cart', (req, res, next) => {
   req.session.cart = req.body
-  console.log('req.session.cart', req.session.cart)
   res.sendStatus(201)
 })
 
@@ -95,9 +94,19 @@ router.post('/cart/checkout', async (req, res, next) => {
     })
     const newItems = []
     const newOrderItem = await Order.create({userId: userId})
-    orderInfo.forEach(async (product, index) => {
+    // orderInfo.forEach(async (product, index) => {
+    //   newItems.push(orderInfo[index])
+    //   await newOrderItem.addProduct(orderInfo[index].productId, {
+    //     through: {
+    // price: orderInfo[index].price,
+    // quantity: orderInfo[index].quantity,
+    // subtotal: orderInfo[index].quantity * orderInfo[index].price
+    //     }
+    //   })
+    // })
+    let orderInforPromises = orderInfo.map((product, index) => {
       newItems.push(orderInfo[index])
-      await newOrderItem.addProduct(orderInfo[index].productId, {
+      newOrderItem.addProduct(orderInfo[index].productId, {
         through: {
           price: orderInfo[index].price,
           quantity: orderInfo[index].quantity,
@@ -105,8 +114,11 @@ router.post('/cart/checkout', async (req, res, next) => {
         }
       })
     })
+
+    const newOrder = await Promise.all(...orderInforPromises)
+
     req.session.cart = []
-    res.send(newOrderItem)
+    res.send(newOrder)
   } catch (error) {
     next(error)
   }
