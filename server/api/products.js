@@ -56,9 +56,7 @@ router.put('/:id', async (req, res, next) => {
     try {
       const id = +req.params.id
       const product = await Product.findById(id)
-      const editedProd = await product.update(
-        req.body
-      )
+      const editedProd = await product.update(req.body)
       res.status(204)
       res.json(editedProd)
     } catch (err) {
@@ -72,6 +70,13 @@ router.put('/:id', async (req, res, next) => {
 //adding info to session store
 router.post('/cart', (req, res, next) => {
   req.session.cart = req.body
+  console.log('postreqsession', req.session.cart)
+  res.sendStatus(201)
+})
+
+router.delete('/cart', (req, res, next) => {
+  req.session.cart = req.body
+  console.log('req.session.cart', req.session.cart)
   res.sendStatus(201)
 })
 

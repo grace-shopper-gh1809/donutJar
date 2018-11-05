@@ -23,6 +23,7 @@ class CartView extends React.Component {
   }
 
   handleSubmit() {
+    this.props.getCart()
     this.props.add(this.props.cart)
     this.props.changeInventory(this.props.cart)
     this.props.clearCart()
