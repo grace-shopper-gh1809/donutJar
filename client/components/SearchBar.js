@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {searchProducts} from '../store/product'
-import {Link} from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
 
 export class SearchBar extends Component {
   constructor() {
@@ -17,6 +17,7 @@ export class SearchBar extends Component {
     this.setState({
       [event.target.name]: event.target.value
     })
+    this.props.searching(this.state.searchInput)
   }
   handleSubmit(event) {
     event.preventDefault()
@@ -45,6 +46,13 @@ export class SearchBar extends Component {
             Search
           </button>
         </form>
+        {this.state.searchInput.length > 0 && (
+          <Redirect
+            to={{
+              pathname: '/search'
+            }}
+          />
+        )}
       </div>
     )
   }

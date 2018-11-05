@@ -11,19 +11,9 @@ const Order = db.define(
       },
       defaultValue: 'Created'
     },
-    // quantity: {
-    //   type: Sequelize.INTEGER
-    // },
-    // price: {
-    //   type: Sequelize.INTEGER
-    // },
     creationDateAndTime: {
       type: Sequelize.DATE
     }
-    // ,
-    // subtotal: {
-    //   type: Sequelize.INTEGER
-    // },
   },
   {
     hooks: {
@@ -33,12 +23,5 @@ const Order = db.define(
     }
   }
 )
-
-// const calculation = orderInstance => {
-//   orderInstance.subtotal = orderInstance.price * orderInstance.quantity
-//   return orderInstance.subtotal
-// }
-
-// Order.beforeCreate(calculation)
 
 module.exports = Order
