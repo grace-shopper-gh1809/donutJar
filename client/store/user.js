@@ -7,15 +7,16 @@ import history from '../history'
 const REMOVE_USER = 'REMOVE_USER'
 const DELETE_USER = 'DELETE_USER'
 const GET_USER = 'GET_USER'
-const GET_ALL_USERS= 'GET_ALL_USERS'
-const PROMOTE_USER= 'PROMOTE_USER'
-
+const GET_ALL_USERS = 'GET_ALL_USERS'
+const PROMOTE_USER = 'PROMOTE_USER'
+const GET_ORDER_HISTORY = 'GET_ORDER_HISTORY'
 /**
  * INITIAL STATE
  */
 const defaultUser = {
   user: {},
-  users:[]
+  users: [],
+  orderHistory: []
 }
 
 /**
@@ -23,12 +24,17 @@ const defaultUser = {
  */
 const getUser = user => ({type: GET_USER, user})
 const removeUser = () => ({type: REMOVE_USER})
-const deleteUser = (user) => ({type: DELETE_USER, user})
-const upgradeUser = (user) => ({type: PROMOTE_USER, user})
+const deleteUser = user => ({type: DELETE_USER, user})
+const upgradeUser = user => ({type: PROMOTE_USER, user})
 
 const getUsers = users => ({
   type: GET_ALL_USERS,
   users
+})
+
+const getOrderHistory = orders => ({
+  type: GET_ORDER_HISTORY,
+  orders
 })
 
 /**
@@ -82,18 +88,27 @@ export const logout = () => async dispatch => {
 }
 
 export const removingUser = id => dispatch => {
-  axios.delete(`/api/users/${id}`)
-      .then(() => dispatch(deleteUser(id)))
-      .catch(err => console.error(`Removing user: ${id} unsuccessful`, err));
-};
+  axios
+    .delete(`/api/users/${id}`)
+    .then(() => dispatch(deleteUser(id)))
+    .catch(err => console.error(`Removing user: ${id} unsuccessful`, err))
+}
 
 export const upgradingUser = id => dispatch => {
-  axios.put(`/api/users/${id}`)
-      .then(() => dispatch(upgradeUser(id)))
-      .catch(err => console.error(`Promoting user: ${id} unsuccessful`, err));
-};
+  axios
+    .put(`/api/users/${id}`)
+    .then(() => dispatch(upgradeUser(id)))
+    .catch(err => console.error(`Promoting user: ${id} unsuccessful`, err))
+}
 
-
+export const fetchOrderHistory = () => async dispatch => {
+  try {
+    const {data} = await axios.get('/api/users/orders')
+    dispatch(getOrderHistory(data))
+  } catch (error) {
+    console.error('fetchOrderHistory did not work', error)
+  }
+}
 /**
  * REDUCER
  */
@@ -108,10 +123,18 @@ export default function(state = defaultUser, action) {
       const us = newList.find(user => user.id === action.user)
       us.adminStatus = true
       return {...state, users: newList}
-   case DELETE_USER:
-      return {...state, users: [...state.users.filter(user => user.id !== action.user)]}
+    case DELETE_USER:
+      return {
+        ...state,
+        users: [...state.users.filter(user => user.id !== action.user)]
+      }
     case REMOVE_USER:
       return defaultUser
+    case GET_ORDER_HISTORY:
+      return {
+        ...state,
+        orderHistory: action.orders
+      }
     default:
       return state
   }
