@@ -32,7 +32,10 @@ class Routes extends Component {
   }
   render() {
     const {isLoggedIn, admin, searchInput} = this.props
-
+    const filterProducts = this.props.products.filter(
+      product => product.inventory > 0
+    )
+    console.log(filterProducts)
     return (
       <Switch>
         {/* Routes placed here are for all visitors */}
