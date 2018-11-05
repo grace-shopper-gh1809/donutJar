@@ -30,16 +30,16 @@ export const postOrder = order => ({
  * THUNK CREATORS
  */
 
-// export const fetchOrders = () => async dispatch => {
-//   try {
-//     const response = await axios.get('/api/orders')
-//     const orders = response.data
-//     const action = getOrders(orders)
-//     dispatch(action)
-//   } catch (error) {
-//     console.log(error)
-//   }
-// }
+export const fetchOrders = () => async dispatch => {
+  try {
+    const response = await axios.get('/api/orders')
+    const orders = response.data
+    const action = getOrders(orders)
+    dispatch(action)
+  } catch (error) {
+    console.log(error)
+  }
+}
 
 export const addOrder = order => async dispatch => {
   try {

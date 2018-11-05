@@ -12,6 +12,7 @@ import {
   CartView,
   AllUsers
 } from './components'
+import {OrderHistory} from './components/OrderHistory'
 import {me} from './store'
 import {fetchProducts} from './store/product'
 import AllProducts from './components/AllProducts'
@@ -20,6 +21,7 @@ import RoundDonuts from './components/RoundDonuts'
 import HoleyDonuts from './components/HoleyDonuts'
 import SearchBarResult from './components/SearchBarResult'
 import {fetchOrders} from './store/order'
+import {fetchOrderHistory} from './store/user'
 
 /**
  * COMPONENT
@@ -28,6 +30,7 @@ class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData()
     this.props.fetchProducts()
+    this.props.fetchOrderHistory()
   }
 
   render() {
@@ -35,6 +38,7 @@ class Routes extends Component {
     // console.log('is admin?', admin)
     // console.log('is loggedin?', isLoggedIn)
     // console.log('searchInput?', searchInput)
+    console.log('orderHistory', this.props.orderHistory)
 
     return (
       <Switch>
@@ -65,7 +69,11 @@ class Routes extends Component {
             <Route path="/home" component={UserHome} />
             <Route exact path="/round" component={RoundDonuts} />
             <Route exact path="/holey" component={HoleyDonuts} />
-
+            <Route
+              exact
+              path="/orderHistory"
+              render={() => <OrderHistory {...this.props} />}
+            />
             {}
           </Switch>
         )}
@@ -76,6 +84,7 @@ class Routes extends Component {
             <Route path="/home" component={UserHome} />
             <Route exact path="/round" component={RoundDonuts} />
             <Route exact path="/holey" component={HoleyDonuts} />
+
             {}
           </Switch>
         )}
@@ -97,8 +106,8 @@ const mapState = state => {
     isLoggedIn: !!state.users.user.id,
     admin: state.users.user.adminStatus,
     products: state.products.products,
-    searchInput: state.products.searchInput
-    // orders: state.orders.orders
+    searchInput: state.products.searchInput,
+    orderHistory: state.users.orderHistory
   }
 }
 
@@ -107,8 +116,8 @@ const mapDispatch = dispatch => {
     loadInitialData() {
       dispatch(me())
     },
-    fetchProducts: () => dispatch(fetchProducts())
-    // fetchAllOrders: () => dispatch(fetchOrders())
+    fetchProducts: () => dispatch(fetchProducts()),
+    fetchOrderHistory: () => dispatch(fetchOrderHistory())
   }
 }
 
