@@ -12,7 +12,7 @@ import {
   CartView,
   AllUsers
 } from './components'
-import {OrderHistory} from './components/OrderHistory'
+import OrderHistory from './components/OrderHistory'
 import {me} from './store'
 import {fetchProducts} from './store/product'
 import AllProducts from './components/AllProducts'
@@ -21,7 +21,6 @@ import RoundDonuts from './components/RoundDonuts'
 import HoleyDonuts from './components/HoleyDonuts'
 import SearchBarResult from './components/SearchBarResult'
 import {fetchOrders} from './store/order'
-import {fetchOrderHistory} from './store/user'
 
 /**
  * COMPONENT
@@ -30,7 +29,6 @@ class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData()
     this.props.fetchProducts()
-    this.props.fetchOrderHistory()
   }
 
   render() {
@@ -39,7 +37,8 @@ class Routes extends Component {
     return (
       <Switch>
         {/* Routes placed here are for all visitors */}
-        (<Route exact path="/search" component={SearchBarResult} />
+        (
+        <Route path="/search" component={SearchBarResult} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         <Route path="/round" component={RoundDonuts} />
@@ -51,10 +50,7 @@ class Routes extends Component {
         {isLoggedIn && (
           <Switch>
             <Route path="/home" component={UserHome} />
-            <Route
-              path="/orderHistory"
-              render={() => <OrderHistory {...this.props} />}
-            />
+            <Route path="/orderHistory" component={OrderHistory} />
           </Switch>
         )}
         {admin && (
@@ -82,8 +78,7 @@ const mapState = state => {
     isLoggedIn: !!state.users.user.id,
     admin: state.users.user.adminStatus,
     products: state.products.products,
-    searchInput: state.products.searchInput,
-    orderHistory: state.users.orderHistory
+    searchInput: state.products.searchInput
   }
 }
 
@@ -92,8 +87,7 @@ const mapDispatch = dispatch => {
     loadInitialData() {
       dispatch(me())
     },
-    fetchProducts: () => dispatch(fetchProducts()),
-    fetchOrderHistory: () => dispatch(fetchOrderHistory())
+    fetchProducts: () => dispatch(fetchProducts())
   }
 }
 
