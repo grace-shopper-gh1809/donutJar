@@ -42,25 +42,35 @@ class Routes extends Component {
 
     return (
       <Switch>
-        {/* Routes placed here are available to all visitors */}
-        <Route path="/login" component={Login} />
-        <Route path="/signup" component={Signup} />
+        {/* Routes placed here are for all visitors */}
         {searchInput ? (
-          <Route exact path="/" component={SearchBarResult} />
+          <Switch>
+            <Route exact path="/" component={AllProducts} />
+            <Route exact path="/search" component={SearchBarResult} />
+            <Route path="/login" component={Login} />
+            <Route path="/signup" component={Signup} />
+            <Route exact path="/products/:id" component={SingleProduct} />
+            <Route exact path="/round" component={RoundDonuts} />
+            <Route exact path="/holey" component={HoleyDonuts} />
+            <Route exact path="/cart" component={CartView} />
+          </Switch>
         ) : (
-          <Route exact path="/" component={AllProducts} />
+          <Switch>
+            <Route exact path="/" component={AllProducts} />
+            <Route path="/login" component={Login} />
+            <Route path="/signup" component={Signup} />
+            <Route exact path="/products/:id" component={SingleProduct} />
+            <Route exact path="/round" component={RoundDonuts} />
+            <Route exact path="/holey" component={HoleyDonuts} />
+            <Route exact path="/cart" component={CartView} />
+          </Switch>
         )}
-        <Route exact path="/products/:id" component={SingleProduct} />
-        <Route exact path="/round" component={RoundDonuts} />
-        <Route exact path="/holey" component={HoleyDonuts} />
-        <Route exact path="/cart" component={CartView} />
 
         {admin && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route exact path="/userList" component={AllUsers} />
             <Route exact path="/addProduct" component={AddProduct} />
-
             <Route
               exact
               path="/products/:id/editProduct"
@@ -74,7 +84,6 @@ class Routes extends Component {
               path="/orderHistory"
               render={() => <OrderHistory {...this.props} />}
             />
-            {}
           </Switch>
         )}
 
