@@ -15,7 +15,7 @@ export class RoundDonuts extends Component {
     })
     return (
       <div className="donut-container">
-        <h2 id="donut-header">Round Donuts</h2>
+        <h2 className="donut-header">Round Donuts</h2>
 
         <div className="sides">
           <ul className="left-side">

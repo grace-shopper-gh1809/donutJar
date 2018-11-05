@@ -23,7 +23,7 @@ export class SearchBarResults extends Component {
     })
     return (
       <div className="donut-container">
-        <h2 id="donut-header">Search Results</h2>
+        <h2 className="donut-header">Search Results</h2>
         <div className="sides">
           <ul className="left-side">
             {presentedfilter.map(product => {
@@ -32,7 +32,7 @@ export class SearchBarResults extends Component {
                   <Link to={`/products/${product.id}`}>
                     <div className="wrapper">
                       <img className="product-image" src={product.imageUrl} />
-                      <div id="donut-title">
+                      <div className="donut-title">
                         {product.title} ${(product.price / 100).toFixed(2)}
                       </div>
                     </div>

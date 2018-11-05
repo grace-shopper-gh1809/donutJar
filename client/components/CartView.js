@@ -58,11 +58,6 @@ class CartView extends React.Component {
     ) : (
       <div className="cart top-padding">
         <p>No Items Yet!</p>
-        <div className="checkout">
-          <button type="Submit" className="buttons" onClick={this.handleSubmit}>
-            Checkout
-          </button>
-        </div>
       </div>
     )
   }
