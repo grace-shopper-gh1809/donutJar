@@ -15,7 +15,7 @@ export class HoleyDonuts extends Component {
     })
     return (
       <div className="donut-container">
-        <h2 id="donut-header">Holey Donuts</h2>
+        <h2 className="donut-header">Holey Donuts</h2>
 
         <div className="sides">
           <ul className="left-side">
@@ -25,7 +25,7 @@ export class HoleyDonuts extends Component {
                   <Link to={`/products/${product.id}`}>
                     <div className="wrapper">
                       <img className="product-image" src={product.imageUrl} />
-                      <div id="donut-title">
+                      <div className="donut-title">
                         {product.title} ${(product.price / 100).toFixed(2)}
                       </div>
                     </div>

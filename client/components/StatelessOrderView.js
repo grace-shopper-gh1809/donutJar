@@ -1,8 +1,8 @@
 import React from 'react'
 export const StatelessOrderView = props => {
   return (
-    <div className="cart">
-      <table className="top-padding">
+    <div className="cart order-padding">
+      <table>
         <thead>
           <tr>
             <td>Item#</td>

@@ -79,7 +79,11 @@ class Routes extends Component {
             <Route path="/home" component={UserHome} />
             <Route exact path="/round" component={RoundDonuts} />
             <Route exact path="/holey" component={HoleyDonuts} />
-            {}
+            <Route
+              exact
+              path="/orderHistory"
+              render={() => <OrderHistory {...this.props} />}
+            />
           </Switch>
         )}
 

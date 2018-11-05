@@ -2,12 +2,8 @@ import React from 'react'
 import {StatelessOrderView} from './StatelessOrderView'
 
 export const OrderHistory = props => {
-  //product.imageUrl
-  //product.id
-  //product.title
-  //number
+
   const historyObj = {}
-  console.log('hello;', props)
 
   props.orderHistory.map(elem => {
     const date = elem.createdAt
@@ -26,20 +22,16 @@ export const OrderHistory = props => {
       } else {
         historyObj[date].push(product)
       }
-      console.log(elem2)
     })
-    console.log('historyObj', historyObj, historyObj[date])
-    historyObj[date]
   })
 
   return (
-    <div>
+    <div className="top-padding">
       {Object.keys(historyObj).map((key, idx) => {
         const status = historyObj[key][0].status
-        console.log(status)
         return (
           <div key={idx}>
-            {`Order Created: ${key}   Status: ${status}`}
+            <div className="donut-title order-padding">{`Order Created: ${key}   Status: ${status}`}</div>
             <StatelessOrderView cart={historyObj[key]} />
           </div>
         )

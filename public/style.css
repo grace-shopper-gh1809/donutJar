@@ -49,12 +49,13 @@ nav a {
 
 h1 {
   size: 20em;
+  margin-left: 2em;
   text-shadow: 2px 8px 6px rgba(0, 0, 0, 0.2),
     0px -5px 35px rgba(255, 255, 255, 0.3);
 }
 
 nav .home {
-  flex: 0 0 3;
+  flex: 0 0 10;
   color: rgba(59, 5, 46, 0.863);
   float: left;
   height: 1.5em;
@@ -65,7 +66,7 @@ nav .home {
 }
 
 nav .signin {
-  float: left;
+  float: center;
   height: 1.5em;
   margin: 0 1.5em 0 0;
   color: rgba(59, 5, 46, 0.863);
@@ -109,7 +110,7 @@ form {
   margin: 10em;
 }
 
-#donut-title {
+.donut-title {
   text-decoration: none;
   text-align: center;
   color: rgba(59, 5, 46, 0.863);
@@ -127,7 +128,7 @@ form {
   text-decoration: none;
 }
 
-#donut-header,
+.donut-header,
 .single-product-title {
   padding-top: 3em;
   text-align: center;
@@ -223,7 +224,7 @@ form {
 table {
   /* border-collapse: separate; */
   border-spacing: 0;
-  padding: 5em;
+  padding: 0em;
   color: rgba(59, 5, 46, 0.863);
   font: 1.4em;
 }
@@ -265,6 +266,12 @@ td {
 }
 td:first-child {
   border-left: 0.05em solid #cecfd5;
+}
+
+.order-padding {
+  padding: 0em;
+  margin: 0.5em;
+  padding-top: 0.5em;
 }
 .cart-title {
   display: block;
