@@ -59,23 +59,17 @@ describe('Product model', () => {
       newProduct.title = 'Carrot Cake'
       newProduct.price = 350
       newProduct.inventory = 15
-
-      newProduct.category = 'Round'
-      await newProduct.save()
-      newProduct.category = 'Holey-Donut'
-      await newProduct.save()
+      newProduct.category = 'Square'
 
       try {
-        newProduct.category = 'Square'
-        await newProduct.save()
+        await newProduct.validate()
+        throw Error(
+          'Trying to `save` a donut with invalid `category` should have failed.'
+        )
       } catch (err) {
         expect(err).to.exist
-        expect(err.message).to.contain('category')
-        return // everything is fine, so stop this spec.
+        expect(err.message).to.contain('isIn')
       }
-      throw Error(
-        'Trying to `save` a donut with invalid `category` should have failed.'
-      )
     })
   })
 })
