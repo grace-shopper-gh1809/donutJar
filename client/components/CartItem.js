@@ -7,15 +7,11 @@ import {
   postToCart,
   clearTheCart,
   updateInventory,
-  editCartQuantity
+  editCartQuantity,
+  deleteItemFromCart
 } from '../store/product'
 import {addOrder, fetchOrders} from '../store/order'
-// import EditQuantity from './EditQuantity'
 
-// let item ={
-//   number: '',
-//   product: {}
-// }
 class CartItem extends React.Component {
   constructor(props) {
     super(props)
@@ -34,6 +30,15 @@ class CartItem extends React.Component {
       product: this.props.selectedProduct
     }
     this.props.postToCart(this.props.cart)
+  }
+
+  async removeItem(id) {
+    try {
+      await this.props.deleteFromCart(id)
+      this.props.postToCart(this.props.cart)
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   async handleChange(e) {
@@ -78,6 +83,16 @@ class CartItem extends React.Component {
               <button type="submit" className="buttons">
                 Update
               </button>
+              <button
+                type="submit"
+                className="buttons"
+                value={product.id}
+                onClick={() => {
+                  this.removeItem(product.id)
+                }}
+              >
+                Remove
+              </button>
             </form>
             {/* <EditQuantity
               product={product}
@@ -103,9 +118,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   getCart: () => dispatch(getCart()),
-  addCartItem: item => dispatch(addCartItem(item)),
   postToCart: cart => dispatch(postToCart(cart)),
-  editCart: (id, quantity) => dispatch(editCartQuantity(id, quantity))
+  editCart: (id, quantity) => dispatch(editCartQuantity(id, quantity)),
+  deleteFromCart: id => dispatch(deleteItemFromCart(id))
 })
 
 export default withRouter(

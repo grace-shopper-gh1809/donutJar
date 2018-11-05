@@ -22,18 +22,12 @@ class CartView extends React.Component {
   }
 
   handleSubmit() {
-    if (this.props.isLoggedIn) {
-      this.props.add(this.props.cart)
-      this.props.changeInventory(this.props.cart)
-      this.props.clearCart()
-      this.props.history.push('/orderHistory')
-    } else {
-      this.props.history.push('/login')
-    }
+    this.props.add(this.props.cart)
+    this.props.changeInventory(this.props.cart)
+    this.props.clearCart()
   }
 
   render() {
-    console.log('the props', this.props)
     return this.props.cart[0] ? (
       <div className="cart">
         <table className="top-padding">

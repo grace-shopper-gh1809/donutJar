@@ -14,6 +14,7 @@ const CLEAR_CART = 'CLEAR_CART'
 const UPDATE_INVENTORY_AFTER_CART = 'UPDATE_INVENTORY_AFTER_CART'
 const POST_REVIEW = 'POST_REVIEW'
 const EDIT_CART_QUANTITY = 'EDIT_CART_QUANTITY'
+const DELETE_FROM_CART = 'DELETE_FROM_CART'
 
 /**
  * INITIAL STATE
@@ -83,6 +84,11 @@ export const editCartQuantity = (id, quantity) => ({
   type: EDIT_CART_QUANTITY,
   id,
   quantity
+})
+
+export const deleteFromCart = id => ({
+  type: DELETE_FROM_CART,
+  id
 })
 
 /**
@@ -164,6 +170,16 @@ export const updateInventory = cartItems => async dispatch => {
   }
 }
 
+export const deleteItemFromCart = id => async dispatch => {
+  try {
+    const response = await axios.delete('/api/products/cart')
+    const action = deleteFromCart(id)
+    dispatch(action)
+  } catch (error) {
+    console.error(error)
+  }
+}
+
 export const postReview = (id, reviews) => async dispatch => {
   try {
     const {data: review} = await axios.post(`/api/products/${id}`, reviews)
@@ -221,19 +237,11 @@ export const productReducer = (state = initialState, action) => {
     case EDIT_CART_QUANTITY:
       const updateCartInfo = state.cart.map(item => {
         if (item.product.id === action.id) {
-          // elem.number = action.item.number
           return (item.number = action.quantity)
         } else {
           return item
         }
       })
-      // const updateCartInfo = state.cart.map(item => {
-      //   if (item.id === action.id) {
-      //     return {...cart, quantity: action.quantity}
-      //   } else {
-      //     return item
-      //   }
-      // })
       return {...state, updateCartInfo}
     case SEARCH_PRODUCTS:
       return {...state, searchInput: action.title}
@@ -254,7 +262,9 @@ export const productReducer = (state = initialState, action) => {
       return {...state, products: inventoryChange}
     case POST_REVIEW:
       return {...state, reviews: [...state.reviews, action.review]}
-
+    case DELETE_FROM_CART:
+      const newCart = state.cart.filter(item => item.product.id !== action.id)
+      return {...state, cart: newCart}
     default:
       return state
   }
