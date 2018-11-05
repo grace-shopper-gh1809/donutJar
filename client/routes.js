@@ -35,74 +35,36 @@ class Routes extends Component {
 
   render() {
     const {isLoggedIn, admin, searchInput} = this.props
-    // console.log('is admin?', admin)
-    // console.log('is loggedin?', isLoggedIn)
-    // console.log('searchInput?', searchInput)
-    console.log('orderHistory', this.props.orderHistory)
 
     return (
       <Switch>
         {/* Routes placed here are for all visitors */}
-        {searchInput ? (
+        (<Route exact path="/search" component={SearchBarResult} />
+        <Route path="/login" component={Login} />
+        <Route path="/signup" component={Signup} />
+        <Route path="/round" component={RoundDonuts} />
+        <Route path="/holey" component={HoleyDonuts} />
+        <Route path="/cart" component={CartView} />
+        <Route path="/products/:id" component={SingleProduct} />
+        <Route exact path="/" component={AllProducts} />
+        )
+        {isLoggedIn && (
           <Switch>
-            <Route exact path="/" component={AllProducts} />
-            <Route exact path="/search" component={SearchBarResult} />
-            <Route path="/login" component={Login} />
-            <Route path="/signup" component={Signup} />
-            <Route exact path="/products/:id" component={SingleProduct} />
-            <Route exact path="/round" component={RoundDonuts} />
-            <Route exact path="/holey" component={HoleyDonuts} />
-            <Route exact path="/cart" component={CartView} />
-          </Switch>
-        ) : (
-          <Switch>
-            <Route exact path="/" component={AllProducts} />
-            <Route path="/login" component={Login} />
-            <Route path="/signup" component={Signup} />
-            <Route exact path="/products/:id" component={SingleProduct} />
-            <Route exact path="/round" component={RoundDonuts} />
-            <Route exact path="/holey" component={HoleyDonuts} />
-            <Route exact path="/cart" component={CartView} />
+            <Route path="/home" component={UserHome} />
+            <Route
+              path="/orderHistory"
+              render={() => <OrderHistory {...this.props} />}
+            />
           </Switch>
         )}
-
         {admin && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
-            <Route exact path="/userList" component={AllUsers} />
-            <Route exact path="/addProduct" component={AddProduct} />
-            <Route
-              exact
-              path="/products/:id/editProduct"
-              component={EditProduct}
-            />
-            <Route path="/home" component={UserHome} />
-            <Route exact path="/round" component={RoundDonuts} />
-            <Route exact path="/holey" component={HoleyDonuts} />
-            <Route
-              exact
-              path="/orderHistory"
-              render={() => <OrderHistory {...this.props} />}
-            />
+            <Route path="/userList" component={AllUsers} />
+            <Route path="/addProduct" component={AddProduct} />
+            <Route path="/products/:id/editProduct" component={EditProduct} />
           </Switch>
         )}
-
-        {isLoggedIn && (
-          <Switch>
-            {/* Routes placed here are only available after logging in */}
-            <Route path="/home" component={UserHome} />
-            <Route exact path="/round" component={RoundDonuts} />
-            <Route exact path="/holey" component={HoleyDonuts} />
-            <Route
-              exact
-              path="/orderHistory"
-              render={() => <OrderHistory {...this.props} />}
-            />
-
-            {}
-          </Switch>
-        )}
-
         {/* Displays our Login component as a fallback */}
         <Route component={Login} />
       </Switch>
