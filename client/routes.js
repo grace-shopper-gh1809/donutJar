@@ -22,7 +22,6 @@ import HoleyDonuts from './components/HoleyDonuts'
 import SearchBarResult from './components/SearchBarResult'
 import {fetchOrders} from './store/order'
 import {fetchOrderHistory} from './store/user'
-
 /**
  * COMPONENT
  */
@@ -32,14 +31,12 @@ class Routes extends Component {
     this.props.fetchProducts()
     this.props.fetchOrderHistory()
   }
-
   render() {
     const {isLoggedIn, admin, searchInput} = this.props
     // console.log('is admin?', admin)
     // console.log('is loggedin?', isLoggedIn)
     // console.log('searchInput?', searchInput)
     console.log('orderHistory', this.props.orderHistory)
-
     return (
       <Switch>
         {/* Routes placed here are for all visitors */}
@@ -65,7 +62,6 @@ class Routes extends Component {
             <Route exact path="/cart" component={CartView} />
           </Switch>
         )}
-
         {admin && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
@@ -86,7 +82,6 @@ class Routes extends Component {
             />
           </Switch>
         )}
-
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
@@ -98,18 +93,15 @@ class Routes extends Component {
               path="/orderHistory"
               render={() => <OrderHistory {...this.props} />}
             />
-
             {}
           </Switch>
         )}
-
         {/* Displays our Login component as a fallback */}
         <Route component={Login} />
       </Switch>
     )
   }
 }
-
 /**
  * CONTAINER
  */
@@ -124,7 +116,6 @@ const mapState = state => {
     orderHistory: state.users.orderHistory
   }
 }
-
 const mapDispatch = dispatch => {
   return {
     loadInitialData() {
@@ -134,11 +125,9 @@ const mapDispatch = dispatch => {
     fetchOrderHistory: () => dispatch(fetchOrderHistory())
   }
 }
-
 // The `withRouter` wrapper makes sure that updates are not blocked
 // when the url changes
 export default withRouter(connect(mapState, mapDispatch)(Routes))
-
 /**
  * PROP TYPES
  */
