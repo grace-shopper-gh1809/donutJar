@@ -64,7 +64,6 @@ describe('Product model', () => {
       newProduct.price = 350
       newProduct.inventory = 15
 
-      newProduct.category = 'Round'
       await newProduct.save()
       newProduct.category = 'Round'
       await newProduct.save()
