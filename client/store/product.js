@@ -174,7 +174,10 @@ export const postReview = (id, reviews) => async dispatch => {
 export const productReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_ALL_PRODUCTS:
-      return {...state, products: action.products}
+      const filteredProducts = action.products.filter(
+        product => product.inventory > 0
+      )
+      return {...state, products: filteredProducts}
     case POST_PRODUCT:
       return {...state, products: [...state.products, action.product]}
     case PUT_PRODUCT:
