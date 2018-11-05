@@ -26,18 +26,12 @@ describe('Product model', () => {
       let donutDescription =
         'Traditional carrot cake with lots of fresh carrots, raisins, walnuts & spices in the dough and a cream cheese filling and glaze and sprinkled with carrots and walnuts.'
 
-      const result = await Product.create({
-        title: 'Carrot Cake',
-        description: donutDescription,
-        price: 350,
-        inventory: 10,
-        imageUrl: './CarrotCake.png',
-        category: 'Holey-Donut'
-      })
+      newProduct.title = 'Carrot Cake'
+      newProduct.description = donutDescription
 
-      expect(result).to.be.an('object')
-      expect(result.title).to.equal('Carrot Cake')
-      expect(result.description).to.equal(donutDescription)
+      expect(newProduct).to.be.an('object')
+      expect(newProduct.title).to.equal('Carrot Cake')
+      expect(newProduct.description).to.equal(donutDescription)
     })
 
     it('should require price', async () => {
@@ -62,14 +56,14 @@ describe('Product model', () => {
     })
 
     it('should have a category property of only "Round" or "Holey-Donut"', async () => {
-      const newProduct = await Product.create({
-        title: 'Carrot Cake',
-        description:
-          'Traditional carrot cake with lots of fresh carrots, raisins, walnuts & spices in the dough and a cream cheese filling and glaze and sprinkled with carrots and walnuts.',
-        price: 350,
-        inventory: 10,
-        imageUrl: './CarrotCake.png'
-      })
+      let donutDescription =
+        'Traditional carrot cake with lots of fresh carrots, raisins, walnuts & spices in the dough and a cream cheese filling and glaze and sprinkled with carrots and walnuts.'
+
+      newProduct.title = 'Carrot Cake'
+      newProduct.description = donutDescription
+      newProduct.price = 350
+      newProduct.inventory = 15
+
       newProduct.category = 'Round'
       await newProduct.save()
       newProduct.category = 'Round'
