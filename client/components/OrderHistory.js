@@ -8,12 +8,12 @@ class OrderHistory extends React.Component {
   // constructor() {
   //   super()
   // }
-  componentDidMount() {
-    this.props.fetchOrders()
+  async componentDidMount() {
+    await this.props.fetchOrders()
   }
 
   render() {
-    console.log('ordred', this.props.orders)
+    console.log('ordred', this.props)
     // const historyObj = {}
     // this.state.orderHistory.map(elem => {
     //   const date = elem.createdAt
@@ -54,11 +54,12 @@ class OrderHistory extends React.Component {
   }
 }
 const mapsStateToProps = state => ({
-  ordres: state.orders.orders
+  orders: state.orders.orders,
+  products: state.products
 })
 
 const mapDispatchToProps = dispatch => ({
-  fetchOrders: () => dispatch(fetchOrders)
+  fetchOrders: () => dispatch(fetchOrders())
 })
 
 export default withRouter(

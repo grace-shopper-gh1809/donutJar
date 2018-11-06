@@ -30,13 +30,14 @@ class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData()
     this.props.fetchProducts()
+    this.props.fetchOrders()
   }
   render() {
     const {isLoggedIn, admin, searchInput} = this.props
-    const filterProducts = this.props.products.filter(
-      product => product.inventory > 0
-    )
-    console.log(filterProducts)
+    // const filterProducts = this.props.products.filter(
+    //   product => product.inventory > 0
+    // )
+    // console.log(filterProducts)
     return (
       <Switch>
         {/* Routes placed here are for all visitors */}
@@ -94,7 +95,8 @@ const mapDispatch = dispatch => {
     loadInitialData() {
       dispatch(me())
     },
-    fetchProducts: () => dispatch(fetchProducts())
+    fetchProducts: () => dispatch(fetchProducts()),
+    fetchOrders: () => dispatch(fetchOrders())
   }
 }
 // The `withRouter` wrapper makes sure that updates are not blocked
