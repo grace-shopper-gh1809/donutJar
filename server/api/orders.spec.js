@@ -14,7 +14,9 @@ describe('Order Route:', () => {
   afterEach(() => {
     return Promise.all([
       Order.truncate({cascade: true}),
-      User.truncate({cascade: true})
+      User.truncate({cascade: true}),
+      Product.truncate({cascade: true}),
+      OrderProducts.truncate({cascade: true})
     ])
   })
 
@@ -29,7 +31,7 @@ describe('Order Route:', () => {
       expect(res.body).to.be.an.instanceOf(Array)
       expect(res.body).to.have.length(0)
     })
-    it('returns an order if there is one in the DB', async () => {
+    it('returns an order if there is one in the database', async () => {
       const user = await User.create({
         email: 'candy@email.com',
         password: 'hellothere',
