@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {fetchProducts} from '../store/product'
+import {fetchProdAdmin} from '../store/product'
 import {fetchOrders} from '../store/order'
 import ProductList from './ProductList'
 
@@ -32,7 +33,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  fetchProducts: () => dispatch(fetchProducts()),
+  fetchProducts: () => dispatch(fetchProdAdmin()),
   fetchAllOrders: () => dispatch(fetchOrders())
 })
 

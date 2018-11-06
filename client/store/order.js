@@ -16,10 +16,10 @@ const initialState = {
 /**
  * ACTION CREATORS
  */
-// export const getOrders = orders => ({
-//   type: GET_ALL_ORDERS,
-//   orders
-// })
+export const getOrders = orders => ({
+  type: GET_ALL_ORDERS,
+  orders
+})
 
 export const postOrder = order => ({
   type: POST_ORDER,
@@ -32,7 +32,7 @@ export const postOrder = order => ({
 
 export const fetchOrders = () => async dispatch => {
   try {
-    const response = await axios.get('/api/orders')
+    const response = await axios.get('/api/users/orders')
     const orders = response.data
     const action = getOrders(orders)
     dispatch(action)
@@ -59,8 +59,8 @@ export const addOrder = order => async dispatch => {
  */
 export const orderReducer = (state = initialState, action) => {
   switch (action.type) {
-    // case GET_ALL_ORDERS:
-    //   return {...state, orders: action.orders}
+    case GET_ALL_ORDERS:
+      return {...state, orders: action.orders}
     case POST_ORDER:
       return {...state, orders: [...state.orders, action.order]}
     default:

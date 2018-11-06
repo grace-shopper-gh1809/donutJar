@@ -225,12 +225,17 @@ export const updateQuantity = (id, quantity) => async dispatch => {
 export const productReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_ALL_PRODUCTS:
+      return {...state, products: action.products}
+    // const filteredProducts = action.products.filter(
+    //   product => product.inventory > 0
+    // )
+    // return {...state, products: filteredProducts}
+    case GET_ALL_PROD_ADMIN:
       const filteredProducts = action.products.filter(
         product => product.inventory > 0
       )
       return {...state, products: filteredProducts}
-    case GET_ALL_PROD_ADMIN:
-      return {...state, products: action.products}
+    //return {...state, products: action.products}
     case POST_PRODUCT:
       return {...state, products: [...state.products, action.product]}
     case PUT_PRODUCT:
