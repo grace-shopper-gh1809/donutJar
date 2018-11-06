@@ -34,6 +34,7 @@ const Product = db.define('product', {
 
 Product.prototype.inventoryUpdate = soldItem => {
   this.inventory = this.inventory - soldItem
+  return this.inventory
 }
 
 module.exports = Product

@@ -147,7 +147,6 @@ router.post('/:id', async (req, res, next) => {
   try {
     if (req.user.id) {
       const id = req.params.id
-      // const donut = await Product.findById(req.params.id)
       const reviewPosted = await Review.build(req.body)
       reviewPosted.productId = id
       reviewPosted.userId = req.user.id
