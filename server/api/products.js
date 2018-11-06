@@ -74,8 +74,10 @@ router.post('/cart', (req, res, next) => {
   res.sendStatus(201)
 })
 
-router.delete('/cart', (req, res, next) => {
-  req.session.cart = req.body
+router.delete('/cart/:id', (req, res, next) => {
+  const id = +req.params.id
+  const newCart = req.session.cart.filter(elem => elem.product.id !== id)
+  req.session.cart = newCart
   res.sendStatus(201)
 })
 
