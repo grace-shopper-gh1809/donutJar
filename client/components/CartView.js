@@ -47,13 +47,13 @@ class CartView extends React.Component {
           {this.props.isLoggedIn ? (
             <Link
               to="/orderHistory"
-              className="buttons"
+              className="google buttons"
               onClick={this.handleSubmit}
             >
               Checkout
             </Link>
           ) : (
-            <Link to="/login" className="buttons">
+            <Link to="/login" className="google buttons">
               Checkout
             </Link>
           )}
