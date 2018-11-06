@@ -9,6 +9,7 @@ const DELETE_USER = 'DELETE_USER'
 const GET_USER = 'GET_USER'
 const GET_ALL_USERS = 'GET_ALL_USERS'
 const PROMOTE_USER = 'PROMOTE_USER'
+const GET_ORDER_HISTORY = 'GET_ORDER_HISTORY'
 /**
  * INITIAL STATE
  */
@@ -31,6 +32,10 @@ const getUsers = users => ({
   users
 })
 
+export const getOrderHistory = orders => ({
+  type: GET_ORDER_HISTORY,
+  orders
+})
 /**
  * THUNK CREATORS
  */
@@ -95,6 +100,17 @@ export const upgradingUser = id => dispatch => {
     .catch(err => console.error(`Promoting user: ${id} unsuccessful`, err))
 }
 
+export const fetchOrderHistory = () => async dispatch => {
+  try {
+    const response = await axios.get('/api/users/orders')
+    const orders = response.data
+    const action = getOrders(orders)
+    dispatch(action)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 /**
  * REDUCER
  */
@@ -116,6 +132,8 @@ export default function(state = defaultUser, action) {
       }
     case REMOVE_USER:
       return defaultUser
+    case GET_ORDER_HISTORY:
+      return {...state, orderHistory: action.orders}
     default:
       return state
   }
