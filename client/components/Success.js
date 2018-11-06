@@ -12,30 +12,20 @@ import {addOrder, fetchOrders} from '../store/order'
 import CartItem from './CartItem'
 import Checkout from './Checkout'
 
-
-class CartView extends React.Component {
+class Success extends React.Component {
   constructor() {
     super()
-    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentDidMount() {
     this.props.getCart()
-  }
-
-  handleSubmit() {
     this.props.add(this.props.cart)
     this.props.changeInventory(this.props.cart)
     this.props.clearCart()
   }
 
   render() {
-    const carts = this.props.cart
-    const cartArr = [...carts]
-    console.log("cartignlkagfj", cartArr[0])
-    // let result = cartArr.map(a =>a.product.price*a.number).reduce(function (accumulator, currentValue) {
-    //   return accumulator + currentValue;
-    // }, 0);
+    console.log('success i am success')
     return this.props.cart[0] ? (
       <div className="cart">
         <table className="top-padding">
@@ -50,16 +40,13 @@ class CartView extends React.Component {
           {this.props.cart.map((elem, idx) => {
             return <CartItem key={idx} elem={elem} />
           })}
-         {this.props.cart.map(a =>a.product.price)}
-
         </table>
         <div className="checkout">
           {this.props.isLoggedIn ? (
+           // <Link to="/orderHistory" onClick={this.handleSubmit} >   </Link>
             <Checkout  name={'Donut Order'} handleSubmit={this.handleSubmit}
             description={'Yum Donuts'}
-            amount={this.props.cart.map(a =>a.product.price*a.number).reduce(function (accumulator, currentValue) {
-              return accumulator + currentValue;
-            }, 0)}/>
+            amount={1}/>
           ) : (
           <Link to="/login" className="buttons"> Checkout </Link>
 
@@ -69,7 +56,7 @@ class CartView extends React.Component {
       </div>
     ) : (
       <div className="cart top-padding">
-        <p>No Items Yet!</p>
+        <p>Thank you for your purchase</p>
       </div>
     )
   }
@@ -92,5 +79,5 @@ const mapDispatchToProps = dispatch => ({
 })
 
 export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(CartView)
+  connect(mapStateToProps, mapDispatchToProps)(Success)
 )
