@@ -12,7 +12,6 @@ import {
   CartView,
   AllUsers
 } from './components'
-import OrderHistory from './components/OrderHistory'
 import {me} from './store'
 import {fetchProducts} from './store/product'
 import AllProducts from './components/AllProducts'
@@ -21,7 +20,7 @@ import SingleProduct from './components/SingleProduct'
 import RoundDonuts from './components/RoundDonuts'
 import HoleyDonuts from './components/HoleyDonuts'
 import SearchBarResult from './components/SearchBarResult'
-import {fetchOrders} from './store/order'
+import OrderHistory from './components/OrderHistory'
 
 /**
  * COMPONENT
@@ -30,7 +29,6 @@ class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData()
     this.props.fetchProducts()
-    this.props.fetchOrders()
   }
   render() {
     const {isLoggedIn, admin, searchInput} = this.props
@@ -95,8 +93,7 @@ const mapDispatch = dispatch => {
     loadInitialData() {
       dispatch(me())
     },
-    fetchProducts: () => dispatch(fetchProducts()),
-    fetchOrders: () => dispatch(fetchOrders())
+    fetchProducts: () => dispatch(fetchProducts())
   }
 }
 // The `withRouter` wrapper makes sure that updates are not blocked

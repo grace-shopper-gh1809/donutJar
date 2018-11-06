@@ -19,16 +19,13 @@ router.get('/', async (req, res, next) => {
 router.get('/orders', async (req, res, next) => {
   try {
     if (req.user) {
-      const orders = await Order.findAll(
-        {
-          include: [{model: Product}]
+      console.log('req.user.id', typeof req.user.id)
+      const orders = await Order.findAll({
+        where: {
+          userId: +req.user.id
         },
-        {
-          where: {
-            userId: req.user.id
-          }
-        }
-      )
+        include: [{model: Product}]
+      })
       res.json(orders)
     } else {
       res.sendStatus(404)

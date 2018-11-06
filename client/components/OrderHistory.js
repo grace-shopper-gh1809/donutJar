@@ -3,6 +3,7 @@ import {withRouter, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {StatelessOrderView} from './StatelessOrderView'
 import {fetchOrders} from '../store/order'
+import {fetchUsers} from '../store/user'
 
 class OrderHistory extends React.Component {
   // constructor() {
@@ -13,31 +14,33 @@ class OrderHistory extends React.Component {
   }
 
   render() {
-    console.log('ordred', this.props)
-    // const historyObj = {}
-    // this.state.orderHistory.map(elem => {
-    //   const date = elem.createdAt
-    //   elem.products.forEach(elem2 => {
-    //     const product = {
-    //       number: elem2.orderProducts.quantity,
-    //       status: elem.orderStatus,
-    //       product: {
-    //         title: elem2.title,
-    //         id: elem2.id,
-    //         imageUrl: elem2.imageUrl
-    //       }
-    //     }
-    //     if (!historyObj[date]) {
-    //       historyObj[date] = [product]
-    //     } else {
-    //       historyObj[date].push(product)
-    //     }
-    //   })
-    // historyObj[date]
-    // })
+    const ordersArr = this.props.orders || []
+    const orders = [...ordersArr]
+
+    const historyObj = {}
+    orders.map(elem => {
+      const date = elem.createdAt
+      elem.products.forEach(elem2 => {
+        const product = {
+          number: elem2.orderProducts.quantity,
+          status: elem.orderStatus,
+          product: {
+            title: elem2.title,
+            id: elem2.id,
+            imageUrl: elem2.imageUrl
+          }
+        }
+        if (!historyObj[date]) {
+          historyObj[date] = [product]
+        } else {
+          historyObj[date].push(product)
+        }
+      })
+      // historyObj[date]
+    })
     return (
       <div className="top-padding">
-        {/* {Object.keys(historyObj).map((key, idx) => {
+        {Object.keys(historyObj).map((key, idx) => {
           const status = historyObj[key][0].status
           return (
             <div key={idx}>
@@ -48,14 +51,15 @@ class OrderHistory extends React.Component {
               <StatelessOrderView cart={historyObj[key]} />
             </div>
           )
-        })} */}
+        })}
       </div>
     )
   }
 }
+
 const mapsStateToProps = state => ({
-  orders: state.orders.orders,
-  products: state.products
+  orders: state.orders.orders
+  // products: state.products,
 })
 
 const mapDispatchToProps = dispatch => ({

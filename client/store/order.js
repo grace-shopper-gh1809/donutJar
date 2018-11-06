@@ -32,7 +32,7 @@ export const postOrder = order => ({
 
 export const fetchOrders = () => async dispatch => {
   try {
-    const response = await axios.get('/api/orders')
+    const response = await axios.get('/api/users/orders')
     const orders = response.data
     const action = getOrders(orders)
     dispatch(action)
