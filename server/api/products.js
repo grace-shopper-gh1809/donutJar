@@ -70,7 +70,6 @@ router.put('/:id', async (req, res, next) => {
 //adding info to session store
 router.post('/cart', (req, res, next) => {
   req.session.cart = req.body
-  console.log('postreqsession', req.session.cart)
   res.sendStatus(201)
 })
 
@@ -117,7 +116,7 @@ router.post('/cart/checkout', async (req, res, next) => {
       })
     })
 
-    const newOrder = await Promise.all(...orderInforPromises)
+    const newOrder = await Promise.all(orderInforPromises)
 
     req.session.cart = []
     res.send(newOrder)
