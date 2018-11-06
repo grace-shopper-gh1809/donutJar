@@ -16,6 +16,7 @@ import OrderHistory from './components/OrderHistory'
 import {me} from './store'
 import {fetchProducts} from './store/product'
 import AllProducts from './components/AllProducts'
+import AllProdAdmin from './components/AllProdAdmin'
 import SingleProduct from './components/SingleProduct'
 import RoundDonuts from './components/RoundDonuts'
 import HoleyDonuts from './components/HoleyDonuts'
@@ -50,8 +51,8 @@ class Routes extends Component {
           component={props => <CartView {...props} {...this.props} />}
         />
         <Route path="/products/:id" component={SingleProduct} />
-        <Route exact path="/" component={AllProducts} />
         )
+        {!admin && <Route exact path="/" component={AllProducts} />}
         {isLoggedIn && (
           <Switch>
             <Route path="/home" component={UserHome} />
@@ -64,6 +65,7 @@ class Routes extends Component {
             <Route path="/userList" component={AllUsers} />
             <Route path="/addProduct" component={AddProduct} />
             <Route path="/products/:id/editProduct" component={EditProduct} />
+            <Route exact path="/" component={AllProdAdmin} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
