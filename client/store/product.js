@@ -4,6 +4,7 @@ import axios from 'axios'
  * ACTION TYPES
  */
 const GET_ALL_PRODUCTS = 'GET_ALL_PRODUCTS'
+const GET_ALL_PROD_ADMIN = 'GET_ALL_PROD_ADMIN'
 const POST_PRODUCT = 'POST_PRODUCT'
 const PUT_PRODUCT = 'PUT_PRODUCT'
 const SELECT_PRODUCT = 'SELECT_PRODUCT'
@@ -13,6 +14,8 @@ const GET_CART = 'GET_CART'
 const CLEAR_CART = 'CLEAR_CART'
 const UPDATE_INVENTORY_AFTER_CART = 'UPDATE_INVENTORY_AFTER_CART'
 const POST_REVIEW = 'POST_REVIEW'
+const EDIT_CART_QUANTITY = 'EDIT_CART_QUANTITY'
+const DELETE_FROM_CART = 'DELETE_FROM_CART'
 
 /**
  * INITIAL STATE
@@ -30,6 +33,11 @@ const initialState = {
  */
 const getProducts = products => ({
   type: GET_ALL_PRODUCTS,
+  products
+})
+
+const getProdAdmin = products => ({
+  type: GET_ALL_PROD_ADMIN,
   products
 })
 
@@ -78,6 +86,17 @@ export const postAReview = review => ({
   review
 })
 
+export const editCartQuantity = (id, quantity) => ({
+  type: EDIT_CART_QUANTITY,
+  id,
+  quantity
+})
+
+export const deleteFromCart = id => ({
+  type: DELETE_FROM_CART,
+  id
+})
+
 /**
  * THUNK CREATORS
  */
@@ -87,6 +106,17 @@ export const fetchProducts = () => async dispatch => {
     const response = await axios.get('/api/products')
     const products = response.data
     const action = getProducts(products)
+    dispatch(action)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const fetchProdAdmin = () => async dispatch => {
+  try {
+    const response = await axios.get('/api/products')
+    const products = response.data
+    const action = getProdAdmin(products)
     dispatch(action)
   } catch (error) {
     console.log(error)
@@ -157,12 +187,33 @@ export const updateInventory = cartItems => async dispatch => {
   }
 }
 
+export const deleteItemFromCart = id => async dispatch => {
+  try {
+    console.log('id inside thunk', id)
+    const response = await axios.delete(`/api/products/cart/${id}`)
+    console.log('response.data', response.data)
+    const action = deleteFromCart(id)
+    dispatch(action)
+  } catch (error) {
+    console.error(error)
+  }
+}
+
 export const postReview = (id, reviews) => async dispatch => {
   try {
     const {data: review} = await axios.post(`/api/products/${id}`, reviews)
     dispatch(postAReview(review))
   } catch (err) {
     console.error(err)
+  }
+}
+
+export const updateQuantity = (id, quantity) => async dispatch => {
+  try {
+    const {data: updateItem} = await axios.put('/api/products/cart', quantity)
+    dispatch(editCartQuantity(id, updateItem))
+  } catch (err) {
+    console.log(err)
   }
 }
 //when we hit button for add to cart
@@ -174,6 +225,11 @@ export const postReview = (id, reviews) => async dispatch => {
 export const productReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_ALL_PRODUCTS:
+      const filteredProducts = action.products.filter(
+        product => product.inventory > 0
+      )
+      return {...state, products: filteredProducts}
+    case GET_ALL_PROD_ADMIN:
       return {...state, products: action.products}
     case POST_PRODUCT:
       return {...state, products: [...state.products, action.product]}
@@ -199,7 +255,15 @@ export const productReducer = (state = initialState, action) => {
       } else {
         return {...state, cart: [...cartCopy]}
       }
-
+    case EDIT_CART_QUANTITY:
+      const updateCartInfo = state.cart.map(item => {
+        if (item.product.id === action.id) {
+          return (item.number = action.quantity)
+        } else {
+          return item
+        }
+      })
+      return {...state, updateCartInfo}
     case SEARCH_PRODUCTS:
       return {...state, searchInput: action.title}
 
@@ -219,6 +283,9 @@ export const productReducer = (state = initialState, action) => {
       return {...state, products: inventoryChange}
     case POST_REVIEW:
       return {...state, reviews: [...state.reviews, action.review]}
+    case DELETE_FROM_CART:
+      const newCart = state.cart.filter(item => item.product.id !== action.id)
+      return {...state, cart: newCart}
     default:
       return state
   }

@@ -16,6 +16,7 @@ import OrderHistory from './components/OrderHistory'
 import {me} from './store'
 import {fetchProducts} from './store/product'
 import AllProducts from './components/AllProducts'
+import AllProdAdmin from './components/AllProdAdmin'
 import SingleProduct from './components/SingleProduct'
 import RoundDonuts from './components/RoundDonuts'
 import HoleyDonuts from './components/HoleyDonuts'
@@ -30,10 +31,12 @@ class Routes extends Component {
     this.props.loadInitialData()
     this.props.fetchProducts()
   }
-
   render() {
     const {isLoggedIn, admin, searchInput} = this.props
-
+    const filterProducts = this.props.products.filter(
+      product => product.inventory > 0
+    )
+    console.log(filterProducts)
     return (
       <Switch>
         {/* Routes placed here are for all visitors */}
@@ -43,31 +46,36 @@ class Routes extends Component {
         <Route path="/signup" component={Signup} />
         <Route path="/round" component={RoundDonuts} />
         <Route path="/holey" component={HoleyDonuts} />
-        <Route path="/cart" component={CartView} />
-        <Route path="/products/:id" component={SingleProduct} />
-        <Route exact path="/" component={AllProducts} />
+        <Route
+          path="/cart"
+          component={props => <CartView {...props} {...this.props} />}
+        />
+        <Route exact path="/products/:id" component={SingleProduct} />
         )
+        {admin && (
+          <Switch>
+            {/* Routes placed here are only available after logging in */}
+            <Route path="/products/:id/editProduct" component={EditProduct} />
+            <Route path="/home" component={UserHome} />
+            <Route path="/userList" component={AllUsers} />
+            <Route path="/addProduct" component={AddProduct} />
+            <Route path="/" component={AllProdAdmin} />
+          </Switch>
+        )}
         {isLoggedIn && (
           <Switch>
             <Route path="/home" component={UserHome} />
             <Route path="/orderHistory" component={OrderHistory} />
-          </Switch>
-        )}
-        {admin && (
-          <Switch>
-            {/* Routes placed here are only available after logging in */}
-            <Route path="/userList" component={AllUsers} />
-            <Route path="/addProduct" component={AddProduct} />
-            <Route path="/products/:id/editProduct" component={EditProduct} />
+            <Route exact path="/" component={AllProducts} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
+        <Route exact path="/" component={AllProducts} />
         <Route component={Login} />
       </Switch>
     )
   }
 }
-
 /**
  * CONTAINER
  */
@@ -81,7 +89,6 @@ const mapState = state => {
     searchInput: state.products.searchInput
   }
 }
-
 const mapDispatch = dispatch => {
   return {
     loadInitialData() {
@@ -90,11 +97,9 @@ const mapDispatch = dispatch => {
     fetchProducts: () => dispatch(fetchProducts())
   }
 }
-
 // The `withRouter` wrapper makes sure that updates are not blocked
 // when the url changes
 export default withRouter(connect(mapState, mapDispatch)(Routes))
-
 /**
  * PROP TYPES
  */
