@@ -18,7 +18,6 @@ router.get('/', async (req, res, next) => {
 router.get('/orders', async (req, res, next) => {
   try {
     if (req.user) {
-      console.log('req.user.id', typeof req.user.id)
       const orders = await Order.findAll({
         where: {
           userId: +req.user.id

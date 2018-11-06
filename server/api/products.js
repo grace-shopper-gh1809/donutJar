@@ -154,26 +154,11 @@ router.post('/:id', async (req, res, next) => {
       reviewPosted.productId = id
       reviewPosted.userId = req.user.id
       await reviewPosted.save()
-      console.log('thisis posted', reviewPosted)
       res.json(reviewPosted)
     }
   } catch (err) {
     next(err)
   }
 })
-
-// router.delete('/:id', (req, res, next) => {
-//   if (req.user.adminStatus) {
-//   Product.destroy({
-//     where: {
-//       id: req.params.id
-//     }
-//   })
-//     .then(() => res.status(204).end())
-//     .catch(err => next(err))
-//   } else {
-//     res.send("not an admin")
-//   }
-// })
 
 module.exports = router

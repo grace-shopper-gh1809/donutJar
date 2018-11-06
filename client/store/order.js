@@ -62,7 +62,6 @@ export const orderReducer = (state = initialState, action) => {
     case GET_ALL_ORDERS:
       return {...state, orders: action.orders}
     case POST_ORDER:
-      console.log('HELLLLLLLLO', action.order)
       return {...state, orders: [...state.orders, ...action.order]}
     default:
       return state
