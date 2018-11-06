@@ -17,6 +17,7 @@ class OrderHistory extends React.Component {
   }
 
   render() {
+    console.log('order history', this.state.orderHistory)
     const historyObj = {}
     this.state.orderHistory.map(elem => {
       const date = elem.createdAt
