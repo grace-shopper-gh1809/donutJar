@@ -3,6 +3,14 @@ import {withRouter, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {fetchProducts} from '../store/product'
 
+function upperCase(str) {
+  return str.toUpperCase()
+}
+function fixTitle(str) {
+  var firstLetterRx = /(^|\s)[a-z]/g
+  return str.replace(firstLetterRx, upperCase)
+}
+
 export class SearchBarResults extends Component {
   componentDidMount() {
     this.props.fetchProducts()
@@ -33,7 +41,9 @@ export class SearchBarResults extends Component {
                     <div className="wrapper">
                       <img className="product-image" src={product.imageUrl} />
                       <div className="donut-title">
-                        {product.title} ${(product.price / 100).toFixed(2)}
+                        {fixTitle(product.title)} ${(
+                          product.price / 100
+                        ).toFixed(2)}
                       </div>
                     </div>
                   </Link>

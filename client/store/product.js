@@ -4,6 +4,7 @@ import axios from 'axios'
  * ACTION TYPES
  */
 const GET_ALL_PRODUCTS = 'GET_ALL_PRODUCTS'
+const GET_ALL_PROD_ADMIN = 'GET_ALL_PROD_ADMIN'
 const POST_PRODUCT = 'POST_PRODUCT'
 const PUT_PRODUCT = 'PUT_PRODUCT'
 const SELECT_PRODUCT = 'SELECT_PRODUCT'
@@ -32,6 +33,11 @@ const initialState = {
  */
 const getProducts = products => ({
   type: GET_ALL_PRODUCTS,
+  products
+})
+
+const getProdAdmin = products => ({
+  type: GET_ALL_PROD_ADMIN,
   products
 })
 
@@ -106,6 +112,17 @@ export const fetchProducts = () => async dispatch => {
   }
 }
 
+export const fetchProdAdmin = () => async dispatch => {
+  try {
+    const response = await axios.get('/api/products')
+    const products = response.data
+    const action = getProdAdmin(products)
+    dispatch(action)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 export const addProduct = product => async dispatch => {
   try {
     const {data: added} = await axios.post('/api/products', product)
@@ -172,7 +189,9 @@ export const updateInventory = cartItems => async dispatch => {
 
 export const deleteItemFromCart = id => async dispatch => {
   try {
-    const response = await axios.delete('/api/products/cart')
+    console.log('id inside thunk', id)
+    const response = await axios.delete(`/api/products/cart/${id}`)
+    console.log('response.data', response.data)
     const action = deleteFromCart(id)
     dispatch(action)
   } catch (error) {
@@ -210,6 +229,8 @@ export const productReducer = (state = initialState, action) => {
         product => product.inventory > 0
       )
       return {...state, products: filteredProducts}
+    case GET_ALL_PROD_ADMIN:
+      return {...state, products: action.products}
     case POST_PRODUCT:
       return {...state, products: [...state.products, action.product]}
     case PUT_PRODUCT:
