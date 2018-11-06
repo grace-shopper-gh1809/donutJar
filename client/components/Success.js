@@ -26,37 +26,11 @@ class Success extends React.Component {
 
   render() {
     console.log('success i am success')
-    return this.props.cart[0] ? (
+    return (
       <div className="cart">
         <table className="top-padding">
-          <thead>
-            <tr>
-              <td>Item#</td>
-              <td>Item Name</td>
-              <td>Quantity</td>
-            </tr>
-          </thead>
-
-          {this.props.cart.map((elem, idx) => {
-            return <CartItem key={idx} elem={elem} />
-          })}
-        </table>
-        <div className="checkout">
-          {this.props.isLoggedIn ? (
-           // <Link to="/orderHistory" onClick={this.handleSubmit} >   </Link>
-            <Checkout  name={'Donut Order'} handleSubmit={this.handleSubmit}
-            description={'Yum Donuts'}
-            amount={1}/>
-          ) : (
-          <Link to="/login" className="buttons"> Checkout </Link>
-
-
-          )}
-        </div>
-      </div>
-    ) : (
-      <div className="cart top-padding">
         <p>Thank you for your purchase</p>
+        </table>
       </div>
     )
   }

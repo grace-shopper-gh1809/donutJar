@@ -50,7 +50,15 @@ class CartView extends React.Component {
           {this.props.cart.map((elem, idx) => {
             return <CartItem key={idx} elem={elem} />
           })}
-         {this.props.cart.map(a =>a.product.price)}
+          <div className="donut-title">
+          Order Total: $
+       {((this.props.cart
+            .map(a => a.product.price * a.number)
+            .reduce(function(accumulator, currentValue) {
+              return accumulator + currentValue
+            }, 0))/100).toFixed(2)}
+           </div>
+
 
         </table>
         <div className="checkout">
