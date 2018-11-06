@@ -12,7 +12,6 @@ import {
   CartView,
   AllUsers
 } from './components'
-import OrderHistory from './components/OrderHistory'
 import {me} from './store'
 import {fetchProducts} from './store/product'
 import AllProducts from './components/AllProducts'
@@ -21,7 +20,7 @@ import SingleProduct from './components/SingleProduct'
 import RoundDonuts from './components/RoundDonuts'
 import HoleyDonuts from './components/HoleyDonuts'
 import SearchBarResult from './components/SearchBarResult'
-import {fetchOrders} from './store/order'
+import OrderHistory from './components/OrderHistory'
 
 /**
  * COMPONENT
@@ -33,10 +32,10 @@ class Routes extends Component {
   }
   render() {
     const {isLoggedIn, admin, searchInput} = this.props
-    const filterProducts = this.props.products.filter(
-      product => product.inventory > 0
-    )
-    console.log(filterProducts)
+    // const filterProducts = this.props.products.filter(
+    //   product => product.inventory > 0
+    // )
+    // console.log(filterProducts)
     return (
       <Switch>
         {/* Routes placed here are for all visitors */}

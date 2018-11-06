@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {withRouter, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {fetchProducts} from '../store/product'
+import {fetchProdAdmin} from '../store/product'
 
 export class HoleyDonuts extends Component {
   componentDidMount() {
@@ -44,7 +44,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  fetchProducts: () => dispatch(fetchProducts())
+  fetchProducts: () => dispatch(fetchProdAdmin())
 })
 
 export default withRouter(

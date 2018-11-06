@@ -3,6 +3,7 @@ import {withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {fetchProdAdmin} from '../store/product'
 import {fetchOrders} from '../store/order'
+import {fetchProducts} from '../store/product'
 import ProductList from './ProductList'
 
 export class AllProdAdmin extends Component {
@@ -32,8 +33,10 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  fetchProducts: () => dispatch(fetchProdAdmin()),
+  fetchProducts: () => dispatch(fetchProducts()),
   fetchAllOrders: () => dispatch(fetchOrders())
+  // fetchProducts: () => dispatch(fetchProdAdmin()),
+  // fetchAllOrders: () => dispatch(fetchOrders())
 })
 
 export default withRouter(
