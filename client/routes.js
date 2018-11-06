@@ -50,25 +50,27 @@ class Routes extends Component {
           path="/cart"
           component={props => <CartView {...props} {...this.props} />}
         />
-        <Route path="/products/:id" component={SingleProduct} />
+        <Route exact path="/products/:id" component={SingleProduct} />
         )
-        {!admin && <Route exact path="/" component={AllProducts} />}
+        {admin && (
+          <Switch>
+            {/* Routes placed here are only available after logging in */}
+            <Route path="/products/:id/editProduct" component={EditProduct} />
+            <Route path="/home" component={UserHome} />
+            <Route path="/userList" component={AllUsers} />
+            <Route path="/addProduct" component={AddProduct} />
+            <Route path="/" component={AllProdAdmin} />
+          </Switch>
+        )}
         {isLoggedIn && (
           <Switch>
             <Route path="/home" component={UserHome} />
             <Route path="/orderHistory" component={OrderHistory} />
-          </Switch>
-        )}
-        {admin && (
-          <Switch>
-            {/* Routes placed here are only available after logging in */}
-            <Route path="/userList" component={AllUsers} />
-            <Route path="/addProduct" component={AddProduct} />
-            <Route path="/products/:id/editProduct" component={EditProduct} />
-            <Route exact path="/" component={AllProdAdmin} />
+            <Route exact path="/" component={AllProducts} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
+        <Route exact path="/" component={AllProducts} />
         <Route component={Login} />
       </Switch>
     )
