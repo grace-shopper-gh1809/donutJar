@@ -50,16 +50,24 @@ export class SingleProduct extends Component {
           <p>${(price / 100).toFixed(2)}</p>
           <p>{description}</p>
           <form onSubmit={this.submitHandler}>
-            <select name="number" className="custom-select">
-              {inventoryArray.map((elem, idx) => {
-                return (
-                  <option key={idx} value={elem}>
-                    {elem}
-                  </option>
-                )
-              })}
-            </select>
-            <button className="google buttons">Add to Cart</button>
+            {inventoryArray.length ? (
+              <div>
+                <select name="number" className="custom-select">
+                  {inventoryArray.map((elem, idx) => {
+                    return (
+                      <option key={idx} value={elem}>
+                        {elem}
+                      </option>
+                    )
+                  })}
+                </select>
+                <button type="submit" className="google buttons">
+                  Add to Cart
+                </button>
+              </div>
+            ) : (
+              <div>Out of Stock</div>
+            )}
             {this.props.admin && (
               <h2>
                 <Link
