@@ -14,8 +14,10 @@ class OrderHistory extends React.Component {
   }
 
   render() {
+
     const ordersArr = this.props.orders || []
     const orders = [...ordersArr]
+
 
     const historyObj = {}
     orders.map(elem => {

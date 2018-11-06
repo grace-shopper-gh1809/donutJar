@@ -15,7 +15,6 @@ router.get('/', async (req, res, next) => {
     next(err)
   }
 })
-
 router.get('/orders', async (req, res, next) => {
   try {
     if (req.user) {
@@ -26,6 +25,7 @@ router.get('/orders', async (req, res, next) => {
         },
         include: [{model: Product}]
       })
+
       res.json(orders)
     } else {
       res.sendStatus(404)

@@ -30,6 +30,7 @@ if (process.env.NODE_ENV === 'test') {
  * keys as environment variables, so that they can still be read by the
  * Node process on process.env
  */
+console.log('process.env.NODE_ENV', process.env.NODE_ENV)
 if (process.env.NODE_ENV === 'development') {
   require('../localSecrets')
 }
