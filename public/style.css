@@ -210,6 +210,65 @@ form {
   padding-top: 10em;
 }
 
+.buttons:hover {
+  background-color: hsl(327, 100%, 83%);
+}
+.buttons:focus {
+  outline: none;
+  color: rgba(254, 255, 255, 0.9) !important;
+  text-shadow: rgba(0, 0, 0, 0.2) 0 1px 2px;
+}
+
+.buttons:active {
+  background-image: -webkit-gradient(
+      radial,
+      50% 0,
+      100,
+      50% 0,
+      0,
+      from(rgba(255, 255, 255, 0)),
+      to(rgba(255, 255, 255, 0))
+    ),
+    url(noise.png);
+  background-image: -moz-gradient(
+      radial,
+      50% 0,
+      100,
+      50% 0,
+      0,
+      from(rgba(255, 255, 255, 0)),
+      to(rgba(255, 255, 255, 0))
+    ),
+    url(noise.png);
+  background-image: gradient(
+      radial,
+      50% 0,
+      100,
+      50% 0,
+      0,
+      from(rgba(255, 255, 255, 0)),
+      to(rgba(255, 255, 255, 0))
+    ),
+    url(noise.png);
+
+  -webkit-box-shadow: inset rgba(255, 255, 255, 0.6) 0 0.3em 0.3em,
+    inset rgba(0, 0, 0, 0.2) 0 -0.1em 0.3em,
+    /* inner shadow */ rgba(0, 0, 0, 0.4) 0 0.1em 1px,
+    /* border */ rgba(0, 0, 0, 0.2) 0 0.2em 6px; /* drop shadow */
+  -moz-box-shadow: inset rgba(255, 255, 255, 0.6) 0 0.3em 0.3em,
+    inset rgba(0, 0, 0, 0.2) 0 -0.1em 0.3em,
+    /* inner shadow */ rgba(0, 0, 0, 0.4) 0 0.1em 1px,
+    /* border */ rgba(0, 0, 0, 0.2) 0 0.2em 6px; /* drop shadow */
+  box-shadow: inset rgba(255, 255, 255, 0.6) 0 0.3em 0.3em,
+    inset rgba(0, 0, 0, 0.2) 0 -0.1em 0.3em,
+    /* inner shadow */ rgba(0, 0, 0, 0.4) 0 0.1em 1px,
+    /* border */ rgba(0, 0, 0, 0.2) 0 0.2em 6px; /* drop shadow */
+
+  -webkit-transform: translateY(0.2em);
+  -moz-transform: translateY(0.2em);
+  transform: translateY(0.2em);
+}
+
 .usersb {
   justify-content: center;
   vertical-align: middle;
