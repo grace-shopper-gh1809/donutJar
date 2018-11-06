@@ -25,7 +25,11 @@ router.get('/:id', async (req, res, next) => {
     const donut = await Product.findById(req.params.id, {
       include: [{model: Review, include: User}] //included User in the Review model
     })
-    res.json(donut)
+    if (donut) {
+      res.json(donut)
+    } else {
+      res.sendStatus(404)
+    }
   } catch (err) {
     next(err)
   }
