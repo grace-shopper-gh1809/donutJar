@@ -58,7 +58,8 @@ class Routes extends Component {
             <Route path="/home" component={UserHome} />
             <Route path="/userList" component={AllUsers} />
             <Route path="/addProduct" component={AddProduct} />
-            <Route path="/" component={AllProdAdmin} />
+            <Route path="/orderHistory" component={OrderHistory} />
+            <Route exact path="/" component={AllProdAdmin} />
           </Switch>
         )}
         {isLoggedIn && (

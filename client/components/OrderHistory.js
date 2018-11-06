@@ -9,17 +9,16 @@ class OrderHistory extends React.Component {
   // constructor() {
   //   super()
   // }
-  async componentDidMount() {
-    await this.props.fetchOrders()
+  componentDidMount() {
+    this.props.fetchOrders()
   }
 
   render() {
-
     const ordersArr = this.props.orders || []
     const orders = [...ordersArr]
 
-
     const historyObj = {}
+    console.log('orderssssss', this.props.order)
     orders.map(elem => {
       const date = elem.createdAt
       elem.products.forEach(elem2 => {
