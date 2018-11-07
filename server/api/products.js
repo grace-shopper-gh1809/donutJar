@@ -94,7 +94,8 @@ router.post('/cart/checkout', async (req, res, next) => {
         quantity: product.number,
         price: +product.product.price,
         userId: userId,
-        productId: product.product.id
+        productId: product.product.id,
+        promo: +product.product.promo
       }
     })
     const newItems = []
@@ -115,7 +116,11 @@ router.post('/cart/checkout', async (req, res, next) => {
         through: {
           price: orderInfo[index].price,
           quantity: orderInfo[index].quantity,
-          subtotal: orderInfo[index].quantity * orderInfo[index].price
+          promo: orderInfo[index].promo,
+          subtotal:
+            orderInfo[index].quantity *
+            orderInfo[index].price *
+            orderInfo[index].promo
         }
       })
     })
