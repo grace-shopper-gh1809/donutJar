@@ -25,7 +25,6 @@ export class SingleProduct extends Component {
   }
 
   render() {
-    console.log('this.props', this.props)
     const {title, description, price, inventory, imageUrl} = {
       ...this.props.selectedProduct
     }
@@ -131,7 +130,6 @@ const mapDispatchToProps = dispatch => ({
   selectProductById: id => dispatch(selectProductById(id)),
   addCartItem: item => dispatch(addCartItem(item)),
   postToCart: cart => dispatch(postToCart(cart))
-  //postReview: (id, review) => dispatch(postReview(id, review))
 })
 
 export default withRouter(

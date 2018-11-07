@@ -3,7 +3,6 @@ import React from 'react'
 const UserList = props => {
   const users = props.users || []
   const me = props.me
-  console.log('ULprops', props)
   return (
     <div className="donut-container">
       <h2 className="donut-header">Users</h2>
