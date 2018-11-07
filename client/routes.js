@@ -33,10 +33,6 @@ class Routes extends Component {
   }
   render() {
     const {isLoggedIn, admin, searchInput} = this.props
-    // const filterProducts = this.props.products.filter(
-    //   product => product.inventory > 0
-    // )
-    // console.log(filterProducts)
     return (
       <Switch>
         {/* Routes placed here are for all visitors */}
@@ -84,8 +80,6 @@ class Routes extends Component {
  */
 const mapState = state => {
   return {
-    // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
-    // Otherwise, state.user will be an empty object, and state.user.id will be falsey
     isLoggedIn: !!state.users.user.id,
     admin: state.users.user.adminStatus,
     products: state.products.products,

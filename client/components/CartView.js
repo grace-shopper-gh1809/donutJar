@@ -30,6 +30,7 @@ class CartView extends React.Component {
     this.props.add(this.props.cart)
     this.props.changeInventory(this.props.cart)
     this.props.clearCart()
+    counter = true
   }
   handleChange(e) {
     promoCode = {

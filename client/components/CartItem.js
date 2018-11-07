@@ -34,7 +34,6 @@ class CartItem extends React.Component {
 
   async removeItem(id) {
     try {
-      console.log('id inside remove item', id)
       await this.props.deleteFromCart(id)
       this.props.postToCart(this.props.cart)
     } catch (error) {
@@ -100,13 +99,6 @@ class CartItem extends React.Component {
                 Remove
               </button>
             </form>
-            {/* <EditQuantity
-              product={product}
-              elem={elem}
-              // handleSubmit={this.handleChange}
-            /> */}
-            {/* <button>Update</button>
-            {elem.number} */}
           </td>
         </tr>
       </tbody>

@@ -18,7 +18,6 @@ class OrderHistory extends React.Component {
     const orders = [...ordersArr]
 
     const historyObj = {}
-    console.log('orderssssss', this.props.order)
     orders.map(elem => {
       const date = elem.createdAt
       elem.products.forEach(elem2 => {

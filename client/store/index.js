@@ -9,15 +9,18 @@ import {orderReducer} from './order'
 const reducer = combineReducers({
   products: productReducer,
   orders: orderReducer,
-  users: user,
+  users: user
 })
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 )
-const store = createStore(reducer, middleware)
+
+const store =
+  process.env.NODE_ENV === 'development'
+    ? createStore(reducer, middleware)
+    : createStore(reducer, applyMiddleware(thunkMiddleware))
 
 export default store
 export * from './product'
 export * from './user'
 export * from './order'
-
