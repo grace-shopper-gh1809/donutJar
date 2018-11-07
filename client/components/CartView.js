@@ -56,10 +56,8 @@ class CartView extends React.Component {
   }
 
   render() {
-    console.log('countjerfealfk', counter)
     const carts = this.props.cart
     const cartArr = [...carts]
-    console.log('cartignlkagfj', this.props.products.product)
 
     // let result = cartArr.map(a =>a.product.price*a.number).reduce(function (accumulator, currentValue) {
     //   return accumulator + currentValue;
@@ -121,7 +119,7 @@ class CartView extends React.Component {
             )}
           </div>
         </div>
-        <div>
+        <div className="donut-title">
           <label htmlFor="promoCode">Promo Code:</label>
           <input
             type="text"

@@ -1,5 +1,4 @@
-const PAYMENT_SERVER_URL = process.env.NODE_ENV === 'production'
-  ? 'http://localhost:3000/api/payment'
-  : 'http://localhost:3000/api/payment';
+const PAYMENT_SERVER_URL =
+  process.env.NODE_ENV === 'production' ? '/api/payment' : '/api/payment'
 
-export default PAYMENT_SERVER_URL;
+export default PAYMENT_SERVER_URL
