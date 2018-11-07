@@ -260,15 +260,16 @@ export const productReducer = (state = initialState, action) => {
       } else {
         return {...state, cart: [...cartCopy]}
       }
-    case EDIT_CART_QUANTITY:
+      case EDIT_CART_QUANTITY:
       const updateCartInfo = state.cart.map(item => {
         if (item.product.id === action.id) {
-          return (item.number = action.quantity)
+          item.number = action.quantity
+          return item
         } else {
           return item
         }
       })
-      return {...state, updateCartInfo}
+      return {...state, cart: updateCartInfo}
     case SEARCH_PRODUCTS:
       return {...state, searchInput: action.title}
 

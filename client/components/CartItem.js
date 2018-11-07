@@ -23,13 +23,13 @@ class CartItem extends React.Component {
     this.props.getCart()
   }
 
-  handleSubmit(e) {
+  async handleSubmit(e) {
     e.preventDefault()
     const item = {
       number: +e.target.number.value,
       product: this.props.selectedProduct
     }
-    this.props.postToCart(this.props.cart)
+    await this.props.postToCart(this.props.cart)
   }
 
   async removeItem(id) {
@@ -47,7 +47,12 @@ class CartItem extends React.Component {
       number: +e.target.value,
       product: this.props.elem.product
     }
-    await this.props.editCart(this.props.elem.product.id, item.number)
+      try {
+      await this.props.editCart(this.props.elem.product.id, item.number)
+      this.props.postToCart(this.props.cart)
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   render() {
