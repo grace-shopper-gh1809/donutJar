@@ -95,7 +95,7 @@ router.post('/cart/checkout', async (req, res, next) => {
         price: +product.product.price,
         userId: userId,
         productId: product.product.id,
-        promo: +product.product.promo
+        promo: +product.product.promo || 1
       }
     })
     const newItems = []
