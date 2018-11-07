@@ -30,10 +30,10 @@ if (process.env.NODE_ENV === 'test') {
  * keys as environment variables, so that they can still be read by the
  * Node process on process.env
  */
-console.log('process.env.NODE_ENV', process.env.NODE_ENV)
 if (process.env.NODE_ENV === 'development') {
   require('../localSecrets')
 }
+process.env.STRIPE_SECRET_KEY = 'sk_test_S8dnWvtR0JZSkX94uyxqLC1z';
 
 // passport registration
 passport.serializeUser((user, done) => done(null, user.id))
