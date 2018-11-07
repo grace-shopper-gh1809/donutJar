@@ -30,6 +30,7 @@ class CartView extends React.Component {
     this.props.add(this.props.cart)
     this.props.changeInventory(this.props.cart)
     this.props.clearCart()
+    this.props.fetchOrders()
     counter = true
   }
   handleChange(e) {
@@ -169,7 +170,8 @@ const mapDispatchToProps = dispatch => ({
   clearCart: () => dispatch(clearTheCart()),
   changeInventory: cartItems => dispatch(updateInventory(cartItems)),
   editCart: (id, quantity) => dispatch(editCartQuantity(id, quantity)),
-  editPromo: (id, promo) => dispatch(editCartPromo(id, promo))
+  editPromo: (id, promo) => dispatch(editCartPromo(id, promo)),
+  fetchOrders: () => dispatch(fetchOrders())
 })
 
 export default withRouter(
