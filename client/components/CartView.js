@@ -60,7 +60,6 @@ class CartView extends React.Component {
         </table>
         <div className="checkout">
           {this.props.isLoggedIn ? (
-<<<<<<< HEAD
             <Checkout  name={'Donut Order'} handleSubmit={this.handleSubmit}
             description={'Yum Donuts'}
             amount={this.props.cart.map(a =>a.product.price*a.number).reduce(function (accumulator, currentValue) {
@@ -70,19 +69,6 @@ class CartView extends React.Component {
           <Link to="/login" className="buttons"> Checkout </Link>
 
 
-=======
-            <Link
-              to="/orderHistory"
-              className="google buttons"
-              onClick={this.handleSubmit}
-            >
-              Checkout
-            </Link>
-          ) : (
-            <Link to="/login" className="google buttons">
-              Checkout
-            </Link>
->>>>>>> master
           )}
         </div>
       </div>
