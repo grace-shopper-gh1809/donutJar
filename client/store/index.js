@@ -18,7 +18,7 @@ const middleware = composeWithDevTools(
 const store =
   process.env.NODE_ENV === 'development'
     ? createStore(reducer, middleware)
-    : createStore(reducer)
+    : createStore(reducer, applyMiddleware(thunkMiddleware))
 
 export default store
 export * from './product'

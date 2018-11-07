@@ -12,7 +12,6 @@ import {addOrder, fetchOrders} from '../store/order'
 import CartItem from './CartItem'
 import Checkout from './Checkout'
 
-
 class CartView extends React.Component {
   constructor() {
     super()
@@ -32,10 +31,6 @@ class CartView extends React.Component {
   render() {
     const carts = this.props.cart
     const cartArr = [...carts]
-    console.log("cartignlkagfj", cartArr[0])
-    // let result = cartArr.map(a =>a.product.price*a.number).reduce(function (accumulator, currentValue) {
-    //   return accumulator + currentValue;
-    // }, 0);
     return this.props.cart[0] ? (
       <div className="cart">
         <table className="top-padding">
@@ -51,27 +46,33 @@ class CartView extends React.Component {
             return <CartItem key={idx} elem={elem} />
           })}
           <div className="donut-title">
-          Order Total: $
-       {((this.props.cart
-            .map(a => a.product.price * a.number)
-            .reduce(function(accumulator, currentValue) {
-              return accumulator + currentValue
-            }, 0))/100).toFixed(2)}
-           </div>
-
-
+            Order Total: $
+            {(
+              this.props.cart
+                .map(a => a.product.price * a.number)
+                .reduce(function(accumulator, currentValue) {
+                  return accumulator + currentValue
+                }, 0) / 100
+            ).toFixed(2)}
+          </div>
         </table>
         <div className="checkout">
           {this.props.isLoggedIn ? (
-            <Checkout  name={'Donut Order'} handleSubmit={this.handleSubmit}
-            description={'Yum Donuts'}
-            amount={this.props.cart.map(a =>a.product.price*a.number).reduce(function (accumulator, currentValue) {
-              return accumulator + currentValue;
-            }, 0)}/>
+            <Checkout
+              name={'Donut Order'}
+              handleSubmit={this.handleSubmit}
+              description={'Yum Donuts'}
+              amount={this.props.cart
+                .map(a => a.product.price * a.number)
+                .reduce(function(accumulator, currentValue) {
+                  return accumulator + currentValue
+                }, 0)}
+            />
           ) : (
-          <Link to="/login" className="buttons"> Checkout </Link>
-
-
+            <Link to="/login" className="buttons">
+              {' '}
+              Checkout{' '}
+            </Link>
           )}
         </div>
       </div>
