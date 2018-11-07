@@ -16,6 +16,8 @@ const UPDATE_INVENTORY_AFTER_CART = 'UPDATE_INVENTORY_AFTER_CART'
 const POST_REVIEW = 'POST_REVIEW'
 const EDIT_CART_QUANTITY = 'EDIT_CART_QUANTITY'
 const DELETE_FROM_CART = 'DELETE_FROM_CART'
+const EDIT_CART_PRICE = 'EDIT_CART_PRICE'
+const EDIT_CART_PROMO = 'EDIT_CART_PROMO'
 
 /**
  * INITIAL STATE
@@ -95,6 +97,18 @@ export const editCartQuantity = (id, quantity) => ({
 export const deleteFromCart = id => ({
   type: DELETE_FROM_CART,
   id
+})
+
+export const editCartPrice = (id, price) => ({
+  type: EDIT_CART_PRICE,
+  id,
+  price
+})
+
+export const editCartPromo = (id, promo) => ({
+  type: EDIT_CART_PROMO,
+  id,
+  promo
 })
 
 /**
@@ -216,6 +230,24 @@ export const updateQuantity = (id, quantity) => async dispatch => {
     console.log(err)
   }
 }
+
+export const updatePrice = (id, price) => async dispatch => {
+  try {
+    const {data: updateCartItem} = await axios.put('/api/products/cart', price)
+    dispatch(editCartPrice(id, updateCartItem))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+export const updatePromo = (id, promo) => async dispatch => {
+  try {
+    const {data: updatedPromo} = await axios.put('/api/products/cart', promo)
+    dispatch(editCartPromo(id, updatedPromo))
+  } catch (err) {
+    console.error(err)
+  }
+}
 //when we hit button for add to cart
 //add the item to cart session store
 //add the updated cart to the session store
@@ -260,7 +292,7 @@ export const productReducer = (state = initialState, action) => {
       } else {
         return {...state, cart: [...cartCopy]}
       }
-      case EDIT_CART_QUANTITY:
+    case EDIT_CART_QUANTITY:
       const updateCartInfo = state.cart.map(item => {
         if (item.product.id === action.id) {
           item.number = action.quantity
@@ -270,6 +302,17 @@ export const productReducer = (state = initialState, action) => {
         }
       })
       return {...state, cart: updateCartInfo}
+    case EDIT_CART_PROMO:
+      const updateCartPromoInfo = state.cart.map(item => {
+        if (item.product.id === action.id) {
+          item.product.promo = action.promo
+          return item
+        } else {
+          return item
+        }
+      })
+      return {...state, cart: updateCartPromoInfo}
+
     case SEARCH_PRODUCTS:
       return {...state, searchInput: action.title}
 

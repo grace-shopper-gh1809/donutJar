@@ -40,6 +40,10 @@ const User = db.define(
     },
     passwordChangeDate: {
       type: Sequelize.DATE
+    },
+    promoCode: {
+      type: Sequelize.STRING,
+      defaultValue: 'luigi15'
     }
   },
   {
