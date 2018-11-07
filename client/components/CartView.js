@@ -30,6 +30,7 @@ class CartView extends React.Component {
     this.props.add(this.props.cart)
     this.props.changeInventory(this.props.cart)
     this.props.clearCart()
+    this.props.fetchOrders()
     counter = true
   }
   handleChange(e) {
@@ -97,23 +98,32 @@ class CartView extends React.Component {
 
           <div className="checkout">
             {this.props.isLoggedIn ? (
-              <Checkout
-                name={'Donut Order'}
-                handleSubmit={this.handleSubmit}
-                description={'Yum Donuts'}
-                amount={this.props.cart
-                  .map(
-                    a =>
-                      a.product.price *
-                      a.number *
-                      (a.product.promo ? a.product.promo / 100 : 1)
-                  )
-                  .reduce(function(accumulator, currentValue) {
-                    return accumulator + currentValue
-                  }, 0)}
-              />
+              <div>
+                <Checkout
+                  name={'Donut Order'}
+                  handleSubmit={this.handleSubmit}
+                  description={'Yum Donuts'}
+                  amount={this.props.cart
+                    .map(
+                      a =>
+                        a.product.price *
+                        a.number *
+                        (a.product.promo ? a.product.promo / 100 : 1)
+                    )
+                    .reduce(function(accumulator, currentValue) {
+                      return accumulator + currentValue
+                    }, 0)}
+                />
+                <Link
+                  to="/orderHistory"
+                  className="google buttons"
+                  onClick={this.handleSubmit}
+                >
+                  Checkout
+                </Link>
+              </div>
             ) : (
-              <Link to="/login" className="buttons">
+              <Link to="/login" className="google buttons">
                 {' '}
                 Checkout{' '}
               </Link>
@@ -128,7 +138,11 @@ class CartView extends React.Component {
             className="textbox"
             onChange={this.handleChange}
           />
-          <button type="submit" className="buttons" onClick={this.applyCode}>
+          <button
+            type="submit"
+            className="google buttons"
+            onClick={this.applyCode}
+          >
             Apply
           </button>
         </div>
@@ -156,7 +170,8 @@ const mapDispatchToProps = dispatch => ({
   clearCart: () => dispatch(clearTheCart()),
   changeInventory: cartItems => dispatch(updateInventory(cartItems)),
   editCart: (id, quantity) => dispatch(editCartQuantity(id, quantity)),
-  editPromo: (id, promo) => dispatch(editCartPromo(id, promo))
+  editPromo: (id, promo) => dispatch(editCartPromo(id, promo)),
+  fetchOrders: () => dispatch(fetchOrders())
 })
 
 export default withRouter(
