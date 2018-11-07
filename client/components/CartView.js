@@ -27,15 +27,12 @@ class CartView extends React.Component {
     this.props.add(this.props.cart)
     this.props.changeInventory(this.props.cart)
     this.props.clearCart()
+    this.props.fetchOrders()
   }
 
   render() {
     const carts = this.props.cart
     const cartArr = [...carts]
-    console.log("cartignlkagfj", cartArr[0])
-    // let result = cartArr.map(a =>a.product.price*a.number).reduce(function (accumulator, currentValue) {
-    //   return accumulator + currentValue;
-    // }, 0);
     return this.props.cart[0] ? (
       <div className="cart">
         <table className="top-padding">
@@ -63,6 +60,7 @@ class CartView extends React.Component {
         </table>
         <div className="checkout">
           {this.props.isLoggedIn ? (
+<<<<<<< HEAD
             <Checkout  name={'Donut Order'} handleSubmit={this.handleSubmit}
             description={'Yum Donuts'}
             amount={this.props.cart.map(a =>a.product.price*a.number).reduce(function (accumulator, currentValue) {
@@ -72,6 +70,19 @@ class CartView extends React.Component {
           <Link to="/login" className="buttons"> Checkout </Link>
 
 
+=======
+            <Link
+              to="/orderHistory"
+              className="google buttons"
+              onClick={this.handleSubmit}
+            >
+              Checkout
+            </Link>
+          ) : (
+            <Link to="/login" className="google buttons">
+              Checkout
+            </Link>
+>>>>>>> master
           )}
         </div>
       </div>
@@ -96,7 +107,8 @@ const mapDispatchToProps = dispatch => ({
   getCart: () => dispatch(getCart()),
   clearCart: () => dispatch(clearTheCart()),
   changeInventory: cartItems => dispatch(updateInventory(cartItems)),
-  editCart: (id, quantity) => dispatch(editCartQuantity(id, quantity))
+  editCart: (id, quantity) => dispatch(editCartQuantity(id, quantity)),
+  fetchOrders: () => dispatch(fetchOrders())
 })
 
 export default withRouter(

@@ -25,7 +25,6 @@ export class SingleProduct extends Component {
   }
 
   render() {
-    console.log('this.props', this.props)
     const {title, description, price, inventory, imageUrl} = {
       ...this.props.selectedProduct
     }

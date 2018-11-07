@@ -6,7 +6,6 @@ import StarRatingComponent from 'react-star-rating-component';
 
 const Review = (props) => {
   const review = props.review
-  console.log('review', review)
   return (
 
     <div>

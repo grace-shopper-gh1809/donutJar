@@ -25,7 +25,6 @@ class Success extends React.Component {
   }
 
   render() {
-    console.log('success i am success')
     return (
       <div className="cart">
         <table className="top-padding">

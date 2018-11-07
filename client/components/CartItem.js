@@ -34,7 +34,6 @@ class CartItem extends React.Component {
 
   async removeItem(id) {
     try {
-      console.log('id inside remove item', id)
       await this.props.deleteFromCart(id)
       this.props.postToCart(this.props.cart)
     } catch (error) {

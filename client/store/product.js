@@ -189,9 +189,7 @@ export const updateInventory = cartItems => async dispatch => {
 
 export const deleteItemFromCart = id => async dispatch => {
   try {
-    console.log('id inside thunk', id)
     const response = await axios.delete(`/api/products/cart/${id}`)
-    console.log('response.data', response.data)
     const action = deleteFromCart(id)
     dispatch(action)
   } catch (error) {
