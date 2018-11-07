@@ -13,6 +13,7 @@ import {addOrder, fetchOrders} from '../store/order'
 import CartItem from './CartItem'
 import Checkout from './Checkout'
 let promoCode = {}
+let counter = true
 class CartView extends React.Component {
   constructor() {
     super()
@@ -38,22 +39,28 @@ class CartView extends React.Component {
 
   async applyCode() {
     try {
-      if (promoCode.promoCode.toLowerCase() === this.props.user.promoCode)
-        console.log('you made it')
-      let promiseArr = this.props.cart.map(item => {
-        return this.props.editPromo(item.product.id, 85)
-      })
+      if (
+        counter &&
+        promoCode.promoCode.toLowerCase() === this.props.user.promoCode
+      ) {
+        let promiseArr = this.props.cart.map(item => {
+          return this.props.editPromo(item.product.id, 85)
+        })
 
-      await Promise.all(promiseArr)
+        await Promise.all(promiseArr)
+        counter = false
+      }
     } catch (err) {
       console.error(err)
     }
   }
 
   render() {
+    console.log('countjerfealfk', counter)
     const carts = this.props.cart
     const cartArr = [...carts]
-    console.log('cartignlkagfj', cartArr[0])
+    console.log('cartignlkagfj', this.props.products.product)
+
     // let result = cartArr.map(a =>a.product.price*a.number).reduce(function (accumulator, currentValue) {
     //   return accumulator + currentValue;
     // }, 0);
