@@ -9,8 +9,6 @@ const CURRENCY = 'USD';
 
 const fromEuroToCent = amount => amount;
 
-
-
 const redirect  =(url)  =>{
   var ua        = navigator.userAgent.toLowerCase(),
       isIE      = ua.indexOf('msie') !== -1,
@@ -47,7 +45,6 @@ const onToken = (amount, description) => token =>
       currency: CURRENCY,
       amount: fromEuroToCent(amount)
     })
-    .then(console.log('banana'))
     .then(redirect('/success')) //This is redirection URL
     .catch(errorPayment);
 
