@@ -2,8 +2,8 @@ import React from 'react'
 import axios from 'axios';
 import StripeCheckout from 'react-stripe-checkout';
 
-import STRIPE_PUBLISHABLE from '../constants/stripe';
-import PAYMENT_SERVER_URL from '../constants/server';
+const STRIPE_PUBLISHABLE = 'pk_test_A6hkgr9i3ODS5idW8ovQ9XCW'
+const  PAYMENT_SERVER_URL =  '/api/payment'
 
 const CURRENCY = 'USD';
 
@@ -45,7 +45,10 @@ const onToken = (amount, description) => token =>
       description,
       source: token.id,
       currency: CURRENCY,
-      amount: fromEuroToCent(amount)
+      amount: fromEuroToCent(amount),
+      headers: {
+        'content-type': 'application/json',
+      }
     })
    // .then(redirect('/success')) //This is redirection URL
    .then(successPayment)
