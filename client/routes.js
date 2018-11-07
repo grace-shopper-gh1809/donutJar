@@ -8,6 +8,7 @@ import {
   UserHome,
   AddProduct,
   EditProduct,
+  Success,
   StatelessSingleProduct,
   CartView,
   AllUsers
@@ -36,6 +37,7 @@ class Routes extends Component {
       <Switch>
         {/* Routes placed here are for all visitors */}
         (
+          <Route exact path="/success" component={Success} />
         <Route path="/search" component={SearchBarResult} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
@@ -62,7 +64,8 @@ class Routes extends Component {
           <Switch>
             <Route path="/home" component={UserHome} />
             <Route path="/orderHistory" component={OrderHistory} />
-            <Route exact path="/" component={AllProducts} />
+            <Route path="/" component={AllProducts} />
+
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}

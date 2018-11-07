@@ -10,6 +10,8 @@ import {
 } from '../store/product'
 import {addOrder, fetchOrders} from '../store/order'
 import CartItem from './CartItem'
+import Checkout from './Checkout'
+
 
 class CartView extends React.Component {
   constructor() {
@@ -25,10 +27,15 @@ class CartView extends React.Component {
     this.props.add(this.props.cart)
     this.props.changeInventory(this.props.cart)
     this.props.clearCart()
-    this.props.fetchOrders()
   }
 
   render() {
+    const carts = this.props.cart
+    const cartArr = [...carts]
+    console.log("cartignlkagfj", cartArr[0])
+    // let result = cartArr.map(a =>a.product.price*a.number).reduce(function (accumulator, currentValue) {
+    //   return accumulator + currentValue;
+    // }, 0);
     return this.props.cart[0] ? (
       <div className="cart">
         <table className="top-padding">
@@ -43,20 +50,28 @@ class CartView extends React.Component {
           {this.props.cart.map((elem, idx) => {
             return <CartItem key={idx} elem={elem} />
           })}
+          <div className="donut-title">
+          Order Total: $
+       {((this.props.cart
+            .map(a => a.product.price * a.number)
+            .reduce(function(accumulator, currentValue) {
+              return accumulator + currentValue
+            }, 0))/100).toFixed(2)}
+           </div>
+
+
         </table>
         <div className="checkout">
           {this.props.isLoggedIn ? (
-            <Link
-              to="/orderHistory"
-              className="google buttons"
-              onClick={this.handleSubmit}
-            >
-              Checkout
-            </Link>
+            <Checkout  name={'Donut Order'} handleSubmit={this.handleSubmit}
+            description={'Yum Donuts'}
+            amount={this.props.cart.map(a =>a.product.price*a.number).reduce(function (accumulator, currentValue) {
+              return accumulator + currentValue;
+            }, 0)}/>
           ) : (
-            <Link to="/login" className="google buttons">
-              Checkout
-            </Link>
+          <Link to="/login" className="buttons"> Checkout </Link>
+
+
           )}
         </div>
       </div>
@@ -81,8 +96,7 @@ const mapDispatchToProps = dispatch => ({
   getCart: () => dispatch(getCart()),
   clearCart: () => dispatch(clearTheCart()),
   changeInventory: cartItems => dispatch(updateInventory(cartItems)),
-  editCart: (id, quantity) => dispatch(editCartQuantity(id, quantity)),
-  fetchOrders: () => dispatch(fetchOrders())
+  editCart: (id, quantity) => dispatch(editCartQuantity(id, quantity))
 })
 
 export default withRouter(
