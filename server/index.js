@@ -30,9 +30,19 @@ if (process.env.NODE_ENV === 'test') {
  * keys as environment variables, so that they can still be read by the
  * Node process on process.env
  */
-if (process.env.NODE_ENV === 'development') {
-  require('../localSecrets')
-}
+// if (process.env.NODE_ENV === 'development') {
+//   require('../localSecrets')
+// }
+
+
+process.env.GOOGLE_CLIENT_ID =
+ '890094057964-qdq26q6avjd1os5ihv5rpramf9cki8ac.apps.googleusercontent.com'
+process.env.GOOGLE_CLIENT_SECRET = 'u3EBVK2DSS5jXEAOw3SnJqI8'
+process.env.GOOGLE_CALLBACK = '/auth/google/callback'
+process.env.STRIPE_SECRET_KEY = 'sk_test_S8dnWvtR0JZSkX94uyxqLC1z';
+
+
+
 
 // passport registration
 passport.serializeUser((user, done) => done(null, user.id))
