@@ -47,8 +47,8 @@ const onToken = (amount, description) => token =>
       currency: CURRENCY,
       amount: fromEuroToCent(amount)
     })
-    .then(console.log('banana'))
-    .then(redirect('/success')) //This is redirection URL
+   // .then(redirect('/success')) //This is redirection URL
+   .then(successPayment)
     .catch(errorPayment);
 
 const Checkout = ({ name, description, amount}) =>
