@@ -35,7 +35,7 @@ const products = [
     title: 'Mini Sprinkles',
     description: 'Mini donut with sprinkles',
     price: 200,
-    inventory: 7,
+    inventory: 30,
     imageUrl: '/MiniSprink.png',
     category: 'Holey-Donut'
   },
@@ -43,7 +43,7 @@ const products = [
     title: 'Birthday Batter',
     description: 'Doughtnut cake batter and sprinkles',
     price: 300,
-    inventory: 5,
+    inventory: 30,
     imageUrl: '/Birthday-Batter.png',
     category: 'Round'
   },
@@ -51,7 +51,7 @@ const products = [
     title: 'Blueberry Cake',
     description: 'Blueberry cake in doughnut form',
     price: 300,
-    inventory: 5,
+    inventory: 30,
     imageUrl: '/Blueberry-Cake.png',
     category: 'Holey-Donut'
   },
@@ -59,7 +59,7 @@ const products = [
     title: 'Chocolate Cake',
     description: 'Chocolate cake doughnut',
     price: 300,
-    inventory: 5,
+    inventory: 40,
     imageUrl: '/Chocolate-Cake.png',
     category: 'Holey-Donut'
   },
@@ -67,7 +67,7 @@ const products = [
     title: 'Glazed Kreme',
     description: 'Cream-filled doughnut',
     price: 300,
-    inventory: 5,
+    inventory: 40,
     imageUrl: '/Glazed-Kreme-Filled.png',
     category: 'Round'
   },
@@ -75,7 +75,7 @@ const products = [
     title: 'Chocolate Iced Ring',
     description: 'Chocolate glazed donut',
     price: 300,
-    inventory: 5,
+    inventory: 45,
     imageUrl: '/Choc-Iced-Ring-sprinkles.png',
     category: 'Holey-Donut'
   },
@@ -83,7 +83,7 @@ const products = [
     title: 'New York Cheesecake',
     description: 'World famous cheesecake in doughnut form',
     price: 400,
-    inventory: 12,
+    inventory: 40,
     imageUrl: '/New-York-Cheesecake.png',
     category: 'Round'
   },
@@ -91,7 +91,7 @@ const products = [
     title: 'Strawberry Iced Ring',
     description: 'Strawberry glazed doughnut',
     price: 250,
-    inventory: 10,
+    inventory: 40,
     imageUrl: '/Strawberry-iced-Ring.png',
     category: 'Holey-Donut'
   }

@@ -17,6 +17,9 @@ const ProductList = props => {
                     <img className="product-image" src={product.imageUrl} />
                     <div className="donut-title">
                       {product.title} ${(product.price / 100).toFixed(2)}
+                      {!product.inventory ? (
+                        <div className="donut-title">Out of Stock</div>
+                      ) : null}
                     </div>
                   </div>
                 </Link>

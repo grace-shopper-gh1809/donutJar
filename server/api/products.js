@@ -25,7 +25,11 @@ router.get('/:id', async (req, res, next) => {
     const donut = await Product.findById(req.params.id, {
       include: [{model: Review, include: User}] //included User in the Review model
     })
-    res.json(donut)
+    if (donut) {
+      res.json(donut)
+    } else {
+      res.sendStatus(404)
+    }
   } catch (err) {
     next(err)
   }
@@ -70,12 +74,13 @@ router.put('/:id', async (req, res, next) => {
 //adding info to session store
 router.post('/cart', (req, res, next) => {
   req.session.cart = req.body
-  console.log('postreqsession', req.session.cart)
   res.sendStatus(201)
 })
 
-router.delete('/cart', (req, res, next) => {
-  req.session.cart = req.body
+router.delete('/cart/:id', (req, res, next) => {
+  const id = +req.params.id
+  const newCart = req.session.cart.filter(elem => elem.product.id !== id)
+  req.session.cart = newCart
   res.sendStatus(201)
 })
 
@@ -115,7 +120,7 @@ router.post('/cart/checkout', async (req, res, next) => {
       })
     })
 
-    const newOrder = await Promise.all(...orderInforPromises)
+    const newOrder = await Promise.all(orderInforPromises)
 
     req.session.cart = []
     res.send(newOrder)
@@ -145,7 +150,6 @@ router.post('/:id', async (req, res, next) => {
   try {
     if (req.user.id) {
       const id = req.params.id
-      // const donut = await Product.findById(req.params.id)
       const reviewPosted = await Review.build(req.body)
       reviewPosted.productId = id
       reviewPosted.userId = req.user.id

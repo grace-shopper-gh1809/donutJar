@@ -1,24 +1,25 @@
 import React from 'react'
+import {withRouter, Link} from 'react-router-dom'
+import {connect} from 'react-redux'
 import {StatelessOrderView} from './StatelessOrderView'
-import axios from 'axios'
+import {fetchOrders} from '../store/order'
+import {fetchUsers} from '../store/user'
 
 class OrderHistory extends React.Component {
-  constructor() {
-    super()
-    this.state = {
-      orderHistory: []
-    }
-  }
-  async componentDidMount() {
-    const {data} = await axios.get('/api/users/orders')
-    this.setState({
-      orderHistory: data
-    })
+  // constructor() {
+  //   super()
+  // }
+  componentDidMount() {
+    this.props.fetchOrders()
   }
 
   render() {
+    const ordersArr = this.props.orders || []
+    const orders = [...ordersArr]
+
     const historyObj = {}
-    this.state.orderHistory.map(elem => {
+    console.log('orderssssss', this.props.order)
+    orders.map(elem => {
       const date = elem.createdAt
       elem.products.forEach(elem2 => {
         const product = {
@@ -36,7 +37,7 @@ class OrderHistory extends React.Component {
           historyObj[date].push(product)
         }
       })
-      historyObj[date]
+      // historyObj[date]
     })
     return (
       <div className="top-padding">
@@ -57,4 +58,15 @@ class OrderHistory extends React.Component {
   }
 }
 
-export default OrderHistory
+const mapsStateToProps = state => ({
+  orders: state.orders.orders
+  // products: state.products,
+})
+
+const mapDispatchToProps = dispatch => ({
+  fetchOrders: () => dispatch(fetchOrders())
+})
+
+export default withRouter(
+  connect(mapsStateToProps, mapDispatchToProps)(OrderHistory)
+)
