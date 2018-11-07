@@ -15,11 +15,10 @@ const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 )
 
-if (process.env.NODE_ENV === 'development') {
-  const store = createStore(reducer, middleware)
-} else {
-  const store = createStore(reducer)
-}
+const store =
+  process.env.NODE_ENV === 'development'
+    ? createStore(reducer, middleware)
+    : reateStore(reducer)
 
 export default store
 export * from './product'
